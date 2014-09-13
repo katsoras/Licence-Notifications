@@ -1,0 +1,492 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9AA8B18219C44CB300FAAB30 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA8B18119C44CB300FAAB30 /* Foundation.framework */; };
+		9AA8B18419C44CB300FAAB30 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA8B18319C44CB300FAAB30 /* CoreGraphics.framework */; };
+		9AA8B18619C44CB300FAAB30 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA8B18519C44CB300FAAB30 /* UIKit.framework */; };
+		9AA8B18819C44CB300FAAB30 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA8B18719C44CB300FAAB30 /* CoreData.framework */; };
+		9AA8B18E19C44CB300FAAB30 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9AA8B18C19C44CB300FAAB30 /* InfoPlist.strings */; };
+		9AA8B19019C44CB300FAAB30 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8B18F19C44CB300FAAB30 /* main.m */; };
+		9AA8B19419C44CB300FAAB30 /* ROSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8B19319C44CB300FAAB30 /* ROSAppDelegate.m */; };
+		9AA8B19719C44CB300FAAB30 /* Licence_Notifications.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8B19519C44CB300FAAB30 /* Licence_Notifications.xcdatamodeld */; };
+		9AA8B19919C44CB300FAAB30 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AA8B19819C44CB300FAAB30 /* Images.xcassets */; };
+		9AA8B1A019C44CB300FAAB30 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA8B19F19C44CB300FAAB30 /* XCTest.framework */; };
+		9AA8B1A119C44CB300FAAB30 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA8B18119C44CB300FAAB30 /* Foundation.framework */; };
+		9AA8B1A219C44CB300FAAB30 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA8B18519C44CB300FAAB30 /* UIKit.framework */; };
+		9AA8B1A319C44CB300FAAB30 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA8B18719C44CB300FAAB30 /* CoreData.framework */; };
+		9AA8B1AB19C44CB300FAAB30 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9AA8B1A919C44CB300FAAB30 /* InfoPlist.strings */; };
+		9AA8B1AD19C44CB300FAAB30 /* Licence_NotificationsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8B1AC19C44CB300FAAB30 /* Licence_NotificationsTests.m */; };
+		9AA8B1B719C44D0300FAAB30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AA8B1B619C44D0300FAAB30 /* Main.storyboard */; };
+		9AA8B1BA19C44D7C00FAAB30 /* ROSvehicleLicenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8B1B919C44D7C00FAAB30 /* ROSvehicleLicenceViewController.m */; };
+		9AA8B1BD19C4569800FAAB30 /* ROSAddVehicleLicenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8B1BC19C4569800FAAB30 /* ROSAddVehicleLicenceViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9AA8B1A419C44CB300FAAB30 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9AA8B17619C44CB300FAAB30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9AA8B17D19C44CB300FAAB30;
+			remoteInfo = "Licence Notifications";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9AA8B17E19C44CB300FAAB30 /* Licence Notifications.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Licence Notifications.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AA8B18119C44CB300FAAB30 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9AA8B18319C44CB300FAAB30 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9AA8B18519C44CB300FAAB30 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9AA8B18719C44CB300FAAB30 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		9AA8B18B19C44CB300FAAB30 /* Licence Notifications-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Licence Notifications-Info.plist"; sourceTree = "<group>"; };
+		9AA8B18D19C44CB300FAAB30 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9AA8B18F19C44CB300FAAB30 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9AA8B19119C44CB300FAAB30 /* Licence Notifications-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Licence Notifications-Prefix.pch"; sourceTree = "<group>"; };
+		9AA8B19219C44CB300FAAB30 /* ROSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ROSAppDelegate.h; sourceTree = "<group>"; };
+		9AA8B19319C44CB300FAAB30 /* ROSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ROSAppDelegate.m; sourceTree = "<group>"; };
+		9AA8B19619C44CB300FAAB30 /* Licence_Notifications.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Licence_Notifications.xcdatamodel; sourceTree = "<group>"; };
+		9AA8B19819C44CB300FAAB30 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		9AA8B19E19C44CB300FAAB30 /* Licence NotificationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Licence NotificationsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AA8B19F19C44CB300FAAB30 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		9AA8B1A819C44CB300FAAB30 /* Licence NotificationsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Licence NotificationsTests-Info.plist"; sourceTree = "<group>"; };
+		9AA8B1AA19C44CB300FAAB30 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9AA8B1AC19C44CB300FAAB30 /* Licence_NotificationsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Licence_NotificationsTests.m; sourceTree = "<group>"; };
+		9AA8B1B619C44D0300FAAB30 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		9AA8B1B819C44D7C00FAAB30 /* ROSvehicleLicenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROSvehicleLicenceViewController.h; sourceTree = "<group>"; };
+		9AA8B1B919C44D7C00FAAB30 /* ROSvehicleLicenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROSvehicleLicenceViewController.m; sourceTree = "<group>"; };
+		9AA8B1BB19C4569800FAAB30 /* ROSAddVehicleLicenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROSAddVehicleLicenceViewController.h; sourceTree = "<group>"; };
+		9AA8B1BC19C4569800FAAB30 /* ROSAddVehicleLicenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROSAddVehicleLicenceViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9AA8B17B19C44CB300FAAB30 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AA8B18419C44CB300FAAB30 /* CoreGraphics.framework in Frameworks */,
+				9AA8B18819C44CB300FAAB30 /* CoreData.framework in Frameworks */,
+				9AA8B18619C44CB300FAAB30 /* UIKit.framework in Frameworks */,
+				9AA8B18219C44CB300FAAB30 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AA8B19B19C44CB300FAAB30 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AA8B1A019C44CB300FAAB30 /* XCTest.framework in Frameworks */,
+				9AA8B1A319C44CB300FAAB30 /* CoreData.framework in Frameworks */,
+				9AA8B1A219C44CB300FAAB30 /* UIKit.framework in Frameworks */,
+				9AA8B1A119C44CB300FAAB30 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9AA8B17519C44CB300FAAB30 = {
+			isa = PBXGroup;
+			children = (
+				9AA8B18919C44CB300FAAB30 /* Licence Notifications */,
+				9AA8B1A619C44CB300FAAB30 /* Licence NotificationsTests */,
+				9AA8B18019C44CB300FAAB30 /* Frameworks */,
+				9AA8B17F19C44CB300FAAB30 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9AA8B17F19C44CB300FAAB30 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9AA8B17E19C44CB300FAAB30 /* Licence Notifications.app */,
+				9AA8B19E19C44CB300FAAB30 /* Licence NotificationsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9AA8B18019C44CB300FAAB30 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9AA8B18119C44CB300FAAB30 /* Foundation.framework */,
+				9AA8B18319C44CB300FAAB30 /* CoreGraphics.framework */,
+				9AA8B18519C44CB300FAAB30 /* UIKit.framework */,
+				9AA8B18719C44CB300FAAB30 /* CoreData.framework */,
+				9AA8B19F19C44CB300FAAB30 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9AA8B18919C44CB300FAAB30 /* Licence Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				9AA8B19219C44CB300FAAB30 /* ROSAppDelegate.h */,
+				9AA8B19319C44CB300FAAB30 /* ROSAppDelegate.m */,
+				9AA8B1B619C44D0300FAAB30 /* Main.storyboard */,
+				9AA8B1B819C44D7C00FAAB30 /* ROSvehicleLicenceViewController.h */,
+				9AA8B1B919C44D7C00FAAB30 /* ROSvehicleLicenceViewController.m */,
+				9AA8B1BB19C4569800FAAB30 /* ROSAddVehicleLicenceViewController.h */,
+				9AA8B1BC19C4569800FAAB30 /* ROSAddVehicleLicenceViewController.m */,
+				9AA8B19819C44CB300FAAB30 /* Images.xcassets */,
+				9AA8B19519C44CB300FAAB30 /* Licence_Notifications.xcdatamodeld */,
+				9AA8B18A19C44CB300FAAB30 /* Supporting Files */,
+			);
+			path = "Licence Notifications";
+			sourceTree = "<group>";
+		};
+		9AA8B18A19C44CB300FAAB30 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9AA8B18B19C44CB300FAAB30 /* Licence Notifications-Info.plist */,
+				9AA8B18C19C44CB300FAAB30 /* InfoPlist.strings */,
+				9AA8B18F19C44CB300FAAB30 /* main.m */,
+				9AA8B19119C44CB300FAAB30 /* Licence Notifications-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9AA8B1A619C44CB300FAAB30 /* Licence NotificationsTests */ = {
+			isa = PBXGroup;
+			children = (
+				9AA8B1AC19C44CB300FAAB30 /* Licence_NotificationsTests.m */,
+				9AA8B1A719C44CB300FAAB30 /* Supporting Files */,
+			);
+			path = "Licence NotificationsTests";
+			sourceTree = "<group>";
+		};
+		9AA8B1A719C44CB300FAAB30 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9AA8B1A819C44CB300FAAB30 /* Licence NotificationsTests-Info.plist */,
+				9AA8B1A919C44CB300FAAB30 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9AA8B17D19C44CB300FAAB30 /* Licence Notifications */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9AA8B1B019C44CB300FAAB30 /* Build configuration list for PBXNativeTarget "Licence Notifications" */;
+			buildPhases = (
+				9AA8B17A19C44CB300FAAB30 /* Sources */,
+				9AA8B17B19C44CB300FAAB30 /* Frameworks */,
+				9AA8B17C19C44CB300FAAB30 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Licence Notifications";
+			productName = "Licence Notifications";
+			productReference = 9AA8B17E19C44CB300FAAB30 /* Licence Notifications.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9AA8B19D19C44CB300FAAB30 /* Licence NotificationsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9AA8B1B319C44CB300FAAB30 /* Build configuration list for PBXNativeTarget "Licence NotificationsTests" */;
+			buildPhases = (
+				9AA8B19A19C44CB300FAAB30 /* Sources */,
+				9AA8B19B19C44CB300FAAB30 /* Frameworks */,
+				9AA8B19C19C44CB300FAAB30 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9AA8B1A519C44CB300FAAB30 /* PBXTargetDependency */,
+			);
+			name = "Licence NotificationsTests";
+			productName = "Licence NotificationsTests";
+			productReference = 9AA8B19E19C44CB300FAAB30 /* Licence NotificationsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9AA8B17619C44CB300FAAB30 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = ROS;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = home;
+				TargetAttributes = {
+					9AA8B19D19C44CB300FAAB30 = {
+						TestTargetID = 9AA8B17D19C44CB300FAAB30;
+					};
+				};
+			};
+			buildConfigurationList = 9AA8B17919C44CB300FAAB30 /* Build configuration list for PBXProject "Licence Notifications" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9AA8B17519C44CB300FAAB30;
+			productRefGroup = 9AA8B17F19C44CB300FAAB30 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9AA8B17D19C44CB300FAAB30 /* Licence Notifications */,
+				9AA8B19D19C44CB300FAAB30 /* Licence NotificationsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9AA8B17C19C44CB300FAAB30 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AA8B1B719C44D0300FAAB30 /* Main.storyboard in Resources */,
+				9AA8B18E19C44CB300FAAB30 /* InfoPlist.strings in Resources */,
+				9AA8B19919C44CB300FAAB30 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AA8B19C19C44CB300FAAB30 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AA8B1AB19C44CB300FAAB30 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9AA8B17A19C44CB300FAAB30 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AA8B19019C44CB300FAAB30 /* main.m in Sources */,
+				9AA8B19419C44CB300FAAB30 /* ROSAppDelegate.m in Sources */,
+				9AA8B1BA19C44D7C00FAAB30 /* ROSvehicleLicenceViewController.m in Sources */,
+				9AA8B19719C44CB300FAAB30 /* Licence_Notifications.xcdatamodeld in Sources */,
+				9AA8B1BD19C4569800FAAB30 /* ROSAddVehicleLicenceViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AA8B19A19C44CB300FAAB30 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AA8B1AD19C44CB300FAAB30 /* Licence_NotificationsTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9AA8B1A519C44CB300FAAB30 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9AA8B17D19C44CB300FAAB30 /* Licence Notifications */;
+			targetProxy = 9AA8B1A419C44CB300FAAB30 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9AA8B18C19C44CB300FAAB30 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9AA8B18D19C44CB300FAAB30 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9AA8B1A919C44CB300FAAB30 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9AA8B1AA19C44CB300FAAB30 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9AA8B1AE19C44CB300FAAB30 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9AA8B1AF19C44CB300FAAB30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9AA8B1B119C44CB300FAAB30 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Licence Notifications/Licence Notifications-Prefix.pch";
+				INFOPLIST_FILE = "Licence Notifications/Licence Notifications-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		9AA8B1B219C44CB300FAAB30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Licence Notifications/Licence Notifications-Prefix.pch";
+				INFOPLIST_FILE = "Licence Notifications/Licence Notifications-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		9AA8B1B419C44CB300FAAB30 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Licence Notifications.app/Licence Notifications";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Licence Notifications/Licence Notifications-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Licence NotificationsTests/Licence NotificationsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		9AA8B1B519C44CB300FAAB30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Licence Notifications.app/Licence Notifications";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Licence Notifications/Licence Notifications-Prefix.pch";
+				INFOPLIST_FILE = "Licence NotificationsTests/Licence NotificationsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9AA8B17919C44CB300FAAB30 /* Build configuration list for PBXProject "Licence Notifications" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9AA8B1AE19C44CB300FAAB30 /* Debug */,
+				9AA8B1AF19C44CB300FAAB30 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9AA8B1B019C44CB300FAAB30 /* Build configuration list for PBXNativeTarget "Licence Notifications" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9AA8B1B119C44CB300FAAB30 /* Debug */,
+				9AA8B1B219C44CB300FAAB30 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		9AA8B1B319C44CB300FAAB30 /* Build configuration list for PBXNativeTarget "Licence NotificationsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9AA8B1B419C44CB300FAAB30 /* Debug */,
+				9AA8B1B519C44CB300FAAB30 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9AA8B19519C44CB300FAAB30 /* Licence_Notifications.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9AA8B19619C44CB300FAAB30 /* Licence_Notifications.xcdatamodel */,
+			);
+			currentVersion = 9AA8B19619C44CB300FAAB30 /* Licence_Notifications.xcdatamodel */;
+			path = Licence_Notifications.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 9AA8B17619C44CB300FAAB30 /* Project object */;
+}
