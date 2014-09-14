@@ -85,6 +85,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="7Nu-ry-qsB" kind="push" identifier="pickType" id="r4v-gJ-EsL"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -115,13 +118,63 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="jMe-VK-PFK">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="jtF-RY-eWD"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="xe5-la-iPn"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="jtF-RY-eWD">
+                            <connections>
+                                <action selector="cancel:" destination="WC7-eC-p57" id="VQU-9b-E5g"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="xe5-la-iPn">
+                            <connections>
+                                <action selector="save:" destination="WC7-eC-p57" id="YRL-vv-Q8M"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="detailLabel" destination="5Yp-3f-a5S" id="sY9-sG-36T"/>
+                        <outlet property="licenceNameTextField" destination="sza-Pw-Pbq" id="h86-zo-ZgN"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Bk-uQ-XvT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="638" y="486"/>
+        </scene>
+        <!--Type Picker View Controller - Choose Type-->
+        <scene sceneID="Mag-Qp-olB">
+            <objects>
+                <tableViewController id="7Nu-ry-qsB" customClass="ROSTypePickerViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lkb-Uk-iRD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TypeCell" textLabel="L5M-Pd-phb" style="IBUITableViewCellStyleDefault" id="Kwb-NF-9kl">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kwb-NF-9kl" id="GX9-qN-7cw">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="L5M-Pd-phb">
+                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="7Nu-ry-qsB" id="fKy-2R-hTX"/>
+                            <outlet property="delegate" destination="7Nu-ry-qsB" id="tzr-Zg-HQx"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Choose Type" id="pm9-ME-ki5"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="giN-Kq-rsg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1120" y="486"/>
         </scene>
         <!--Svehicle Licence View Controller-->
         <scene sceneID="0ei-Xo-mPZ">
@@ -469,7 +522,9 @@
                             <outlet property="delegate" destination="VBu-bM-lLd" id="Xrf-I3-WLn"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="5Nw-Sh-SpH"/>
+                    <navigationItem key="navigationItem" id="5Nw-Sh-SpH">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="HWJ-X9-E4P"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZhJ-tR-hYT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

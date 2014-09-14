@@ -13,6 +13,7 @@
 @implementation Licence
 
 @dynamic licenceName;
+@dynamic type;
 @dynamic vehicles;
 
 @end

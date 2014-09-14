@@ -14,6 +14,7 @@
 @interface Licence : NSManagedObject
 
 @property (nonatomic, retain) NSString * licenceName;
+@property (nonatomic, retain) NSNumber * type;
 @property (nonatomic, retain) NSSet *vehicles;
 @end
 
