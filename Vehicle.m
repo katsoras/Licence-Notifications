@@ -7,7 +7,7 @@
 //
 
 #import "Vehicle.h"
-#import "VehicleLicence.h"
+#import "Licence.h"
 
 
 @implementation Vehicle

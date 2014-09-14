@@ -1,17 +1,13 @@
 //
-//  VehicleLicence.m
+//  ROSLicenceViewController.h
 //  Licence Notifications
 //
 //  Created by rose on 14/9/14.
 //  Copyright (c) 2014 home. All rights reserved.
 //
 
-#import "VehicleLicence.h"
+#import <UIKit/UIKit.h>
 
-
-@implementation VehicleLicence
-
-@dynamic licenceName;
-@dynamic vehicles;
+@interface ROSLicenceViewController : UITableViewController
 
 @end

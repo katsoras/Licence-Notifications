@@ -1,5 +1,5 @@
 //
-//  VehicleLicence.h
+//  Licence.h
 //  Licence Notifications
 //
 //  Created by rose on 14/9/14.
@@ -9,17 +9,18 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Vehicle;
 
-@interface VehicleLicence : NSManagedObject
+@interface Licence : NSManagedObject
 
 @property (nonatomic, retain) NSString * licenceName;
 @property (nonatomic, retain) NSSet *vehicles;
 @end
 
-@interface VehicleLicence (CoreDataGeneratedAccessors)
+@interface Licence (CoreDataGeneratedAccessors)
 
-- (void)addVehiclesObject:(NSManagedObject *)value;
-- (void)removeVehiclesObject:(NSManagedObject *)value;
+- (void)addVehiclesObject:(Vehicle *)value;
+- (void)removeVehiclesObject:(Vehicle *)value;
 - (void)addVehicles:(NSSet *)values;
 - (void)removeVehicles:(NSSet *)values;
 

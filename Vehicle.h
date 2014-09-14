@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class VehicleLicence;
+@class Licence;
 
 @interface Vehicle : NSManagedObject
 
@@ -20,8 +20,8 @@
 
 @interface Vehicle (CoreDataGeneratedAccessors)
 
-- (void)addVehicleLicensesObject:(VehicleLicence *)value;
-- (void)removeVehicleLicensesObject:(VehicleLicence *)value;
+- (void)addVehicleLicensesObject:(Licence *)value;
+- (void)removeVehicleLicensesObject:(Licence *)value;
 - (void)addVehicleLicenses:(NSSet *)values;
 - (void)removeVehicleLicenses:(NSSet *)values;
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A7ED57919C614AB009A132A /* ROSAddLicenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7ED57819C614AB009A132A /* ROSAddLicenceViewController.m */; };
+		9A7ED57C19C617AC009A132A /* ROSLicenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7ED57B19C617AC009A132A /* ROSLicenceViewController.m */; };
 		9AA8B18219C44CB300FAAB30 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA8B18119C44CB300FAAB30 /* Foundation.framework */; };
 		9AA8B18419C44CB300FAAB30 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA8B18319C44CB300FAAB30 /* CoreGraphics.framework */; };
 		9AA8B18619C44CB300FAAB30 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA8B18519C44CB300FAAB30 /* UIKit.framework */; };
@@ -26,8 +28,9 @@
 		9AA8B1BA19C44D7C00FAAB30 /* ROSvehicleLicenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8B1B919C44D7C00FAAB30 /* ROSvehicleLicenceViewController.m */; };
 		9AA8B1BD19C4569800FAAB30 /* ROSAddVehicleLicenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8B1BC19C4569800FAAB30 /* ROSAddVehicleLicenceViewController.m */; };
 		9ACA0D4619C5B99C00C9E41E /* ROSEditVehicleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACA0D4519C5B99C00C9E41E /* ROSEditVehicleViewController.m */; };
-		9ACA0D4919C5C55000C9E41E /* VehicleLicence.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACA0D4819C5C55000C9E41E /* VehicleLicence.m */; };
-		9ACA0D4C19C5C55000C9E41E /* Vehicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACA0D4B19C5C55000C9E41E /* Vehicle.m */; };
+		9AE886CE19C61A6F00B519AA /* ROSEditLicenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AE886CD19C61A6F00B519AA /* ROSEditLicenceViewController.m */; };
+		9AE886E019C61EAB00B519AA /* Licence.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AE886DF19C61EAB00B519AA /* Licence.m */; };
+		9AE886E319C61EAB00B519AA /* Vehicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AE886E219C61EAB00B519AA /* Vehicle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9A7ED57719C614AB009A132A /* ROSAddLicenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROSAddLicenceViewController.h; sourceTree = "<group>"; };
+		9A7ED57819C614AB009A132A /* ROSAddLicenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROSAddLicenceViewController.m; sourceTree = "<group>"; };
+		9A7ED57A19C617AC009A132A /* ROSLicenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROSLicenceViewController.h; sourceTree = "<group>"; };
+		9A7ED57B19C617AC009A132A /* ROSLicenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROSLicenceViewController.m; sourceTree = "<group>"; };
 		9AA8B17E19C44CB300FAAB30 /* Licence Notifications.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Licence Notifications.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AA8B18119C44CB300FAAB30 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9AA8B18319C44CB300FAAB30 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -66,10 +73,12 @@
 		9AA8B1BC19C4569800FAAB30 /* ROSAddVehicleLicenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROSAddVehicleLicenceViewController.m; sourceTree = "<group>"; };
 		9ACA0D4419C5B99C00C9E41E /* ROSEditVehicleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROSEditVehicleViewController.h; sourceTree = "<group>"; };
 		9ACA0D4519C5B99C00C9E41E /* ROSEditVehicleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROSEditVehicleViewController.m; sourceTree = "<group>"; };
-		9ACA0D4719C5C55000C9E41E /* VehicleLicence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VehicleLicence.h; sourceTree = "<group>"; };
-		9ACA0D4819C5C55000C9E41E /* VehicleLicence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VehicleLicence.m; sourceTree = "<group>"; };
-		9ACA0D4A19C5C55000C9E41E /* Vehicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vehicle.h; sourceTree = "<group>"; };
-		9ACA0D4B19C5C55000C9E41E /* Vehicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vehicle.m; sourceTree = "<group>"; };
+		9AE886CC19C61A6E00B519AA /* ROSEditLicenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROSEditLicenceViewController.h; sourceTree = "<group>"; };
+		9AE886CD19C61A6F00B519AA /* ROSEditLicenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROSEditLicenceViewController.m; sourceTree = "<group>"; };
+		9AE886DE19C61EAB00B519AA /* Licence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Licence.h; sourceTree = "<group>"; };
+		9AE886DF19C61EAB00B519AA /* Licence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Licence.m; sourceTree = "<group>"; };
+		9AE886E119C61EAB00B519AA /* Vehicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vehicle.h; sourceTree = "<group>"; };
+		9AE886E219C61EAB00B519AA /* Vehicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vehicle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +110,10 @@
 		9AA8B17519C44CB300FAAB30 = {
 			isa = PBXGroup;
 			children = (
+				9AE886E119C61EAB00B519AA /* Vehicle.h */,
+				9AE886E219C61EAB00B519AA /* Vehicle.m */,
+				9AE886DE19C61EAB00B519AA /* Licence.h */,
+				9AE886DF19C61EAB00B519AA /* Licence.m */,
 				9AA8B18919C44CB300FAAB30 /* Licence Notifications */,
 				9AA8B1A619C44CB300FAAB30 /* Licence NotificationsTests */,
 				9AA8B18019C44CB300FAAB30 /* Frameworks */,
@@ -135,6 +148,12 @@
 				9AA8B19219C44CB300FAAB30 /* ROSAppDelegate.h */,
 				9AA8B19319C44CB300FAAB30 /* ROSAppDelegate.m */,
 				9AA8B1B619C44D0300FAAB30 /* Main.storyboard */,
+				9AE886CC19C61A6E00B519AA /* ROSEditLicenceViewController.h */,
+				9AE886CD19C61A6F00B519AA /* ROSEditLicenceViewController.m */,
+				9A7ED57A19C617AC009A132A /* ROSLicenceViewController.h */,
+				9A7ED57B19C617AC009A132A /* ROSLicenceViewController.m */,
+				9A7ED57719C614AB009A132A /* ROSAddLicenceViewController.h */,
+				9A7ED57819C614AB009A132A /* ROSAddLicenceViewController.m */,
 				9AA8B1B819C44D7C00FAAB30 /* ROSvehicleLicenceViewController.h */,
 				9AA8B1B919C44D7C00FAAB30 /* ROSvehicleLicenceViewController.m */,
 				9AA8B1BB19C4569800FAAB30 /* ROSAddVehicleLicenceViewController.h */,
@@ -143,10 +162,6 @@
 				9ACA0D4519C5B99C00C9E41E /* ROSEditVehicleViewController.m */,
 				9AA8B19819C44CB300FAAB30 /* Images.xcassets */,
 				9AA8B19519C44CB300FAAB30 /* Licence_Notifications.xcdatamodeld */,
-				9ACA0D4A19C5C55000C9E41E /* Vehicle.h */,
-				9ACA0D4B19C5C55000C9E41E /* Vehicle.m */,
-				9ACA0D4719C5C55000C9E41E /* VehicleLicence.h */,
-				9ACA0D4819C5C55000C9E41E /* VehicleLicence.m */,
 				9AA8B18A19C44CB300FAAB30 /* Supporting Files */,
 			);
 			path = "Licence Notifications";
@@ -281,11 +296,14 @@
 				9AA8B19019C44CB300FAAB30 /* main.m in Sources */,
 				9AA8B19419C44CB300FAAB30 /* ROSAppDelegate.m in Sources */,
 				9AA8B1BA19C44D7C00FAAB30 /* ROSvehicleLicenceViewController.m in Sources */,
+				9AE886E019C61EAB00B519AA /* Licence.m in Sources */,
+				9A7ED57C19C617AC009A132A /* ROSLicenceViewController.m in Sources */,
 				9AA8B19719C44CB300FAAB30 /* Licence_Notifications.xcdatamodeld in Sources */,
-				9ACA0D4C19C5C55000C9E41E /* Vehicle.m in Sources */,
+				9A7ED57919C614AB009A132A /* ROSAddLicenceViewController.m in Sources */,
 				9ACA0D4619C5B99C00C9E41E /* ROSEditVehicleViewController.m in Sources */,
-				9ACA0D4919C5C55000C9E41E /* VehicleLicence.m in Sources */,
+				9AE886CE19C61A6F00B519AA /* ROSEditLicenceViewController.m in Sources */,
 				9AA8B1BD19C4569800FAAB30 /* ROSAddVehicleLicenceViewController.m in Sources */,
+				9AE886E319C61EAB00B519AA /* Vehicle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
