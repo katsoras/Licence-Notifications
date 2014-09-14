@@ -1,18 +1,18 @@
 //
-//  ROSAddVehicleLicenceViewController.m
+//  ROSEditVehicleViewController.m
 //  Licence Notifications
 //
-//  Created by rose on 13/9/14.
+//  Created by rose on 14/9/14.
 //  Copyright (c) 2014 home. All rights reserved.
 //
 
-#import "ROSAddVehicleLicenceViewController.h"
+#import "ROSEditVehicleViewController.h"
 #import "Vehicle.h"
-@interface ROSAddVehicleLicenceViewController ()
+@interface ROSEditVehicleViewController ()
 
 @end
 
-@implementation ROSAddVehicleLicenceViewController
+@implementation ROSEditVehicleViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -26,55 +26,44 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    if(self.record){
+        
+        [self.modelTextField setText: self.record.model];
+        [self.registrationPlateTextField setText: self.record.registrationPlate];
+    }
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)cancel:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-
 - (IBAction)save:(id)sender {
     // Helpers
     NSString *model = self.modelTextField.text;
     NSString *registrationPlate=self.registrationPlateTextField.text;
     
-    
     if (model && registrationPlate && model.length && registrationPlate.length) {
         
-        // Create Entity
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Vehicle" inManagedObjectContext:self.managedObjectContext];
-        
-        // Initialize Record
-        Vehicle *record = [[Vehicle alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
-        
         // Populate Record
-        
-        record.model=model;
-        record.registrationPlate=registrationPlate;
-        
+        self.record.model=model;
+        self.record.registrationPlate=registrationPlate;
+        //
         // Save Record
         NSError *error = nil;
         if ([self.managedObjectContext save:&error]) {
-            // Dismiss View Controller
-            [self dismissViewControllerAnimated:YES completion:nil];
-            
+            // Pop View Controller
+            [self.navigationController popViewControllerAnimated:YES];
         } else {
-            
             if (error) {
                 NSLog(@"Unable to save record.");
                 NSLog(@"%@, %@", error, error.localizedDescription);
             }
-            
             // Show Alert View
             [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do could not be saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
         }
@@ -84,5 +73,4 @@
         [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do needs a name." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
     }
 }
-
 @end

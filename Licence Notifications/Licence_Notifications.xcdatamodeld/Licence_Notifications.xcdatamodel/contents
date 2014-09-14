@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Vehicle" syncable="YES">
+    <entity name="Vehicle" representedClassName="Vehicle" syncable="YES">
         <attribute name="model" attributeType="String" syncable="YES"/>
         <attribute name="registrationPlate" attributeType="String" syncable="YES"/>
         <relationship name="vehicleLicenses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="VehicleLicence" inverseName="vehicles" inverseEntity="VehicleLicence" syncable="YES"/>
     </entity>
-    <entity name="VehicleLicence" syncable="YES">
+    <entity name="VehicleLicence" representedClassName="VehicleLicence" syncable="YES">
         <attribute name="licenceName" attributeType="String" syncable="YES"/>
         <relationship name="vehicles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="vehicleLicenses" inverseEntity="Vehicle" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Vehicle" positionX="-54" positionY="0" width="128" height="90"/>
         <element name="VehicleLicence" positionX="259" positionY="-234" width="128" height="73"/>
-        <element name="Vehicle" positionX="-54" positionY="0" width="128" height="88"/>
     </elements>
 </model>

@@ -25,6 +25,9 @@
 		9AA8B1B719C44D0300FAAB30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AA8B1B619C44D0300FAAB30 /* Main.storyboard */; };
 		9AA8B1BA19C44D7C00FAAB30 /* ROSvehicleLicenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8B1B919C44D7C00FAAB30 /* ROSvehicleLicenceViewController.m */; };
 		9AA8B1BD19C4569800FAAB30 /* ROSAddVehicleLicenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8B1BC19C4569800FAAB30 /* ROSAddVehicleLicenceViewController.m */; };
+		9ACA0D4619C5B99C00C9E41E /* ROSEditVehicleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACA0D4519C5B99C00C9E41E /* ROSEditVehicleViewController.m */; };
+		9ACA0D4919C5C55000C9E41E /* VehicleLicence.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACA0D4819C5C55000C9E41E /* VehicleLicence.m */; };
+		9ACA0D4C19C5C55000C9E41E /* Vehicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACA0D4B19C5C55000C9E41E /* Vehicle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,12 @@
 		9AA8B1B919C44D7C00FAAB30 /* ROSvehicleLicenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROSvehicleLicenceViewController.m; sourceTree = "<group>"; };
 		9AA8B1BB19C4569800FAAB30 /* ROSAddVehicleLicenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROSAddVehicleLicenceViewController.h; sourceTree = "<group>"; };
 		9AA8B1BC19C4569800FAAB30 /* ROSAddVehicleLicenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROSAddVehicleLicenceViewController.m; sourceTree = "<group>"; };
+		9ACA0D4419C5B99C00C9E41E /* ROSEditVehicleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROSEditVehicleViewController.h; sourceTree = "<group>"; };
+		9ACA0D4519C5B99C00C9E41E /* ROSEditVehicleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROSEditVehicleViewController.m; sourceTree = "<group>"; };
+		9ACA0D4719C5C55000C9E41E /* VehicleLicence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VehicleLicence.h; sourceTree = "<group>"; };
+		9ACA0D4819C5C55000C9E41E /* VehicleLicence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VehicleLicence.m; sourceTree = "<group>"; };
+		9ACA0D4A19C5C55000C9E41E /* Vehicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vehicle.h; sourceTree = "<group>"; };
+		9ACA0D4B19C5C55000C9E41E /* Vehicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vehicle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,8 +139,14 @@
 				9AA8B1B919C44D7C00FAAB30 /* ROSvehicleLicenceViewController.m */,
 				9AA8B1BB19C4569800FAAB30 /* ROSAddVehicleLicenceViewController.h */,
 				9AA8B1BC19C4569800FAAB30 /* ROSAddVehicleLicenceViewController.m */,
+				9ACA0D4419C5B99C00C9E41E /* ROSEditVehicleViewController.h */,
+				9ACA0D4519C5B99C00C9E41E /* ROSEditVehicleViewController.m */,
 				9AA8B19819C44CB300FAAB30 /* Images.xcassets */,
 				9AA8B19519C44CB300FAAB30 /* Licence_Notifications.xcdatamodeld */,
+				9ACA0D4A19C5C55000C9E41E /* Vehicle.h */,
+				9ACA0D4B19C5C55000C9E41E /* Vehicle.m */,
+				9ACA0D4719C5C55000C9E41E /* VehicleLicence.h */,
+				9ACA0D4819C5C55000C9E41E /* VehicleLicence.m */,
 				9AA8B18A19C44CB300FAAB30 /* Supporting Files */,
 			);
 			path = "Licence Notifications";
@@ -267,6 +282,9 @@
 				9AA8B19419C44CB300FAAB30 /* ROSAppDelegate.m in Sources */,
 				9AA8B1BA19C44D7C00FAAB30 /* ROSvehicleLicenceViewController.m in Sources */,
 				9AA8B19719C44CB300FAAB30 /* Licence_Notifications.xcdatamodeld in Sources */,
+				9ACA0D4C19C5C55000C9E41E /* Vehicle.m in Sources */,
+				9ACA0D4619C5B99C00C9E41E /* ROSEditVehicleViewController.m in Sources */,
+				9ACA0D4919C5C55000C9E41E /* VehicleLicence.m in Sources */,
 				9AA8B1BD19C4569800FAAB30 /* ROSAddVehicleLicenceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,6 +482,7 @@
 				9AA8B1B219C44CB300FAAB30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9AA8B1B319C44CB300FAAB30 /* Build configuration list for PBXNativeTarget "Licence NotificationsTests" */ = {
 			isa = XCConfigurationList;
@@ -472,6 +491,7 @@
 				9AA8B1B519C44CB300FAAB30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
