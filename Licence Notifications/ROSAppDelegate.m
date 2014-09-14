@@ -7,6 +7,7 @@
 //
 
 #import "ROSAppDelegate.h"
+#import "ROSvehicleLicenceViewController.h"
 
 @implementation ROSAppDelegate
 
@@ -16,9 +17,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    return YES;
+    //
+    //set managedObject context to ROSVehicleLicence controller.
+    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+    
+    UINavigationController *navigationController = (UINavigationController *)tabBarController.viewControllers[0];
+    
+     ROSvehicleLicenceViewController *controller = (ROSvehicleLicenceViewController *)navigationController.topViewController;
+    
+     controller.managedObjectContext = self.managedObjectContext;
+     return YES;
 }
-
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

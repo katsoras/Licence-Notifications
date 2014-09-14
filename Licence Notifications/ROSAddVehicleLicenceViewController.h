@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ROSAddVehicleLicenceViewController : UITableViewController
-
+@property (weak, nonatomic) IBOutlet UITextField *modelTextField;
+@property (weak, nonatomic) IBOutlet UITextField *registrationPlateTextField;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @end

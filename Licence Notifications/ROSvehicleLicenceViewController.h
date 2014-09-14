@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ROSvehicleLicenceViewController : UITableViewController
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>718D6F12-3F9B-4A2A-86A9-4F71C18D43E8</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Licence Notifications</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>084E854C-4F00-47C8-B994-467553680E67</key>
+		<string>https://github.com/katsoras/Licence-Notifications.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Licence Notifications.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>084E854C-4F00-47C8-B994-467553680E67</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/katsoras/Licence-Notifications.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>084E854C-4F00-47C8-B994-467553680E67</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>084E854C-4F00-47C8-B994-467553680E67</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Licence Notifications</string>
+		</dict>
+	</array>
+</dict>
+</plist>
