@@ -28,7 +28,7 @@
     [super viewDidLoad];
     if(self.record){
         
-        [self.modelTextField setText: self.record.model];
+        [self.modelTextField setText:self.record.model];
         [self.registrationPlateTextField setText: self.record.registrationPlate];
     }
     // Uncomment the following line to preserve selection between presentations.

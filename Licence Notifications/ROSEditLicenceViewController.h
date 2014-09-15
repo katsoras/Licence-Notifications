@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Licence;
 
 @interface ROSEditLicenceViewController : UITableViewController
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) Licence *record;
 
+
+@property (weak, nonatomic) IBOutlet UITextField *licenceNameTextField;
+@property (weak,nonatomic) IBOutlet UILabel *TypeLabel;;
 @end

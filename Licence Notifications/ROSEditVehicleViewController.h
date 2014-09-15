@@ -15,8 +15,6 @@
 registrationPlateTextField;
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-
 @property (strong, nonatomic) Vehicle *record;
-
 
 @end

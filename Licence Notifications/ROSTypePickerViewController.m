@@ -8,6 +8,9 @@
 
 #import "ROSTypePickerViewController.h"
 
+NSString * const VEHICLE = @"Vehicle";
+NSString * const DRIVER = @"Driver";
+
 @interface ROSTypePickerViewController ()
 
 @end
@@ -29,8 +32,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _types=@[@"Vehicle",
-             @"Driver"];
+    _types=@[VEHICLE,
+             DRIVER];
+    
     _selectedIndex = [_types indexOfObject:self.type];
 }
 
@@ -47,6 +51,9 @@
 {
     return [_types count];
 }
+
+//
+//cell configuration
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TypeCell"];
@@ -65,19 +72,20 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    //
+    //remove checkmark from the cell tha previous selected
     if (_selectedIndex != NSNotFound) {
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:
                                  [NSIndexPath indexPathForRow:_selectedIndex inSection:0]];
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
+    //
+    //set new checkmark
     _selectedIndex = indexPath.row;
-    
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    
     NSString *type = _types[indexPath.row];
+    //make callback
     [self.delegate typePickerViewController:self didSelectType:type];
 }
-
 @end

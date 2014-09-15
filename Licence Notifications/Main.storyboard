@@ -17,13 +17,14 @@
                     <connections>
                         <segue destination="xhH-vA-O23" kind="relationship" relationship="viewControllers" id="GRo-Vi-izu"/>
                         <segue destination="vXf-mL-3lS" kind="relationship" relationship="viewControllers" id="KTz-2G-l6I"/>
+                        <segue destination="C2H-4w-q1R" kind="relationship" relationship="viewControllers" id="qg1-49-f9b"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="347-Md-KUc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1401" y="175"/>
+            <point key="canvasLocation" x="-2143" y="-185"/>
         </scene>
-        <!--Licence View Controller-->
+        <!--Licence View Controller - Licences-->
         <scene sceneID="n2K-nf-5Ti">
             <objects>
                 <tableViewController id="yHc-eA-LeJ" customClass="ROSLicenceViewController" sceneMemberID="viewController">
@@ -36,20 +37,25 @@
                             <outlet property="delegate" destination="yHc-eA-LeJ" id="3XO-Ek-SCn"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="zPD-FD-3d7">
+                    <navigationItem key="navigationItem" title="Licences" id="zPD-FD-3d7">
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="gIb-vs-9XR">
                             <connections>
                                 <segue destination="gE8-Zw-Nku" kind="modal" identifier="AddLicenceViewController" id="XBm-yh-LyS"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="QRz-VL-fXB">
+                            <connections>
+                                <action selector="editVehicleLicence:" destination="yHc-eA-LeJ" id="DgY-F8-iwe"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="VBu-bM-lLd" kind="push" id="NQi-1b-v1A"/>
+                        <segue destination="VBu-bM-lLd" kind="push" identifier="EditLicenceViewController" id="NQi-1b-v1A"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aB3-u4-xCG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-344" y="486"/>
+            <point key="canvasLocation" x="-384" y="-190"/>
         </scene>
         <!--Add Licence View Controller-->
         <scene sceneID="vc8-53-eh9">
@@ -86,7 +92,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="7Nu-ry-qsB" kind="push" identifier="pickType" id="r4v-gJ-EsL"/>
+                                            <segue destination="7Nu-ry-qsB" kind="push" identifier="PickType" id="r4v-gJ-EsL"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -136,7 +142,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Bk-uQ-XvT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="638" y="486"/>
+            <point key="canvasLocation" x="1198" y="-190"/>
         </scene>
         <!--Type Picker View Controller - Choose Type-->
         <scene sceneID="Mag-Qp-olB">
@@ -174,9 +180,9 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="giN-Kq-rsg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1120" y="486"/>
+            <point key="canvasLocation" x="1724" y="542"/>
         </scene>
-        <!--Svehicle Licence View Controller-->
+        <!--Svehicle Licence View Controller - Vehicles-->
         <scene sceneID="0ei-Xo-mPZ">
             <objects>
                 <tableViewController id="GMZ-mO-kZM" customClass="ROSvehicleLicenceViewController" sceneMemberID="viewController">
@@ -189,7 +195,7 @@
                             <outlet property="delegate" destination="GMZ-mO-kZM" id="nNU-fA-MFk"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="T5p-hQ-3ac">
+                    <navigationItem key="navigationItem" title="Vehicles" id="T5p-hQ-3ac">
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="pDM-yC-CQ3">
                             <connections>
                                 <segue destination="ZJO-GR-BlF" kind="modal" identifier="AddVehicleLicenceViewController" id="7Fz-Ld-Rys"/>
@@ -207,7 +213,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U3P-aP-dGD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="42" y="-451"/>
+            <point key="canvasLocation" x="-918" y="-1363"/>
         </scene>
         <!--Edit Vehicle View Controller-->
         <scene sceneID="Mi0-Wi-ffh">
@@ -278,7 +284,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ArD-sF-IUh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="538" y="-1133"/>
+            <point key="canvasLocation" x="-38" y="-1545"/>
         </scene>
         <!--Add Vehicle Licence View Controller-->
         <scene sceneID="gJw-BS-nmX">
@@ -382,7 +388,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AHv-W8-zjg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="992" y="-451"/>
+            <point key="canvasLocation" x="628" y="-891"/>
         </scene>
         <!--Navigation Controller - Vehicles-->
         <scene sceneID="kSo-dy-8BA">
@@ -401,7 +407,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O56-Z0-UN8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-388" y="-451"/>
+            <point key="canvasLocation" x="-1476" y="-1363"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rdf-Hj-m6A">
@@ -419,7 +425,36 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LIP-GZ-Pqz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="538" y="-451"/>
+            <point key="canvasLocation" x="-38" y="-891"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="LoL-28-YPg">
+            <objects>
+                <tableViewController id="IkS-up-hyi" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="h7y-h1-EMG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="lSU-yp-7Nn">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lSU-yp-7Nn" id="cOg-Ij-vcL">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="IkS-up-hyi" id="iLo-Ja-brX"/>
+                            <outlet property="delegate" destination="IkS-up-hyi" id="pSG-ah-Gp5"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Oh4-ed-UVa"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OMd-jC-k1T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-964" y="639"/>
         </scene>
         <!--Navigation Controller - Licences-->
         <scene sceneID="nsn-uZ-XLw">
@@ -438,7 +473,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MFB-mE-c18" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-818" y="486"/>
+            <point key="canvasLocation" x="-974" y="-190"/>
         </scene>
         <!--Navigation Controller - Licences-->
         <scene sceneID="WoJ-Hs-73C">
@@ -457,12 +492,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lhu-gy-G4N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="486"/>
+            <point key="canvasLocation" x="284" y="-185"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Edit Licence View Controller-->
         <scene sceneID="NqZ-o6-4rf">
             <objects>
-                <tableViewController id="VBu-bM-lLd" sceneMemberID="viewController">
+                <tableViewController id="VBu-bM-lLd" customClass="ROSEditLicenceViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="DCr-so-tOw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -477,8 +512,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Fr-fl-7pq">
-                                                    <rect key="frame" x="15" y="11" width="33" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="TYPE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Fr-fl-7pq">
+                                                    <rect key="frame" x="15" y="11" width="43" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -493,6 +528,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="7Nu-ry-qsB" kind="push" identifier="PickTypeEdit" id="AAW-mI-3yD"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -525,10 +563,33 @@
                     <navigationItem key="navigationItem" id="5Nw-Sh-SpH">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="HWJ-X9-E4P"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="TypeLabel" destination="kNQ-vH-1LS" id="AN9-Jq-OiL"/>
+                        <outlet property="licenceNameTextField" destination="vxK-UR-Mtv" id="hqT-Nf-iNk"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZhJ-tR-hYT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="1250"/>
+            <point key="canvasLocation" x="830" y="542"/>
+        </scene>
+        <!--Navigation Controller - Drivers-->
+        <scene sceneID="Uca-mA-Rqp">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="C2H-4w-q1R" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Drivers" id="6di-BQ-Jm8"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cSd-NR-qK9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="IkS-up-hyi" kind="relationship" relationship="rootViewController" id="Cxh-4U-2AP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JN6-wt-gQO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1490" y="639"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -536,4 +597,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="AAW-mI-3yD"/>
+    </inferredMetricsTieBreakers>
 </document>

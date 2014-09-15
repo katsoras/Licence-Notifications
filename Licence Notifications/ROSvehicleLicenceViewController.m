@@ -102,16 +102,15 @@ static NSString *CellIdentifier = @"Cell Identifier";
     [super didReceiveMemoryWarning];
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-
-
 - (IBAction) editVehicleLicence:(id)sender {
     [self.tableView setEditing:![self.tableView isEditing] animated:YES];
 }
 //
 //implementing UItableview datasource
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -163,13 +162,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
     // Perform Segue
     [self performSegueWithIdentifier:@"EditVehicleLicenceViewController" sender:self];
 }
-/*
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //[tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    // Store Selection
-    [self setSelection:indexPath];
-}*/
+
 
     //
     //prepare for segue and set properties to addVehicle and editVehicle controllers

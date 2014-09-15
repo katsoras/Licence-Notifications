@@ -8,7 +8,7 @@
 
 #import "ROSAppDelegate.h"
 #import "ROSvehicleLicenceViewController.h"
-
+#import "ROSLicenceViewController.h"
 @implementation ROSAppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -17,16 +17,23 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    //
-    //set managedObject context to ROSVehicleLicence controller.
     UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
     
+    //
+    //set managedObject context to ROSVehicleLicence controller.
     UINavigationController *navigationController = (UINavigationController *)tabBarController.viewControllers[0];
+
+     ROSvehicleLicenceViewController *vehicleController = (ROSvehicleLicenceViewController *)navigationController.topViewController;
+     vehicleController.managedObjectContext = self.managedObjectContext;
     
-     ROSvehicleLicenceViewController *controller = (ROSvehicleLicenceViewController *)navigationController.topViewController;
+    //
+    //set managedObject context to ROSLicenceLicence controller.
+    UINavigationController *navigationControllerSecond=
+    (UINavigationController *)tabBarController.viewControllers[1];
+    ROSLicenceViewController *licenceController = (ROSLicenceViewController *)navigationControllerSecond.topViewController;
+    licenceController.managedObjectContext = self.managedObjectContext;
     
-     controller.managedObjectContext = self.managedObjectContext;
-     return YES;
+    return YES;
 }
 - (void)applicationWillResignActive:(UIApplication *)application
 {

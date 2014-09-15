@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface ROSLicenceViewController : UITableViewController
+
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end
