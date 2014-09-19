@@ -1,27 +1,29 @@
 //
-//  ROSLicenceViewController.m
+//  ROSDriverViewController.m
 //  Licence Notifications
 //
-//  Created by rose on 14/9/14.
+//  Created by rose on 17/9/14.
 //  Copyright (c) 2014 home. All rights reserved.
 //
-#import "Licence.h"
-#import "ROSLicenceViewController.h"
-#import "ROSAddLicenceViewController.h"
-#import "ROSEditLicenceViewController.h"
-#import "ROSTypePickerViewController.h"
 
-@interface ROSLicenceViewController ()<NSFetchedResultsControllerDelegate>
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+#import "ROSDriverViewController.h"
+#import "ROSAddDriverViewController.h"
+#import "ROSEditDriverViewController.h"
+#import "Driver.h"
 
+
+@interface ROSDriverViewController ()<NSFetchedResultsControllerDelegate>
+@property (strong, nonatomic) NSFetchedResultsController *
+fetchedResultsController;
 //
 //holds selected index path
 @property (strong, nonatomic) NSIndexPath *selection;
+
 @end
 
-@implementation ROSLicenceViewController
-static NSString *CellIdentifier = @"Cell Identifier";
 
+@implementation ROSDriverViewController
+static NSString *CellIdentifier = @"Cell Identifier";
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -35,20 +37,18 @@ static NSString *CellIdentifier = @"Cell Identifier";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"%@",self.managedObjectContext);
     //
     // Initialize Fetch Request
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Licence"];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Driver"];
     
-   [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"type" ascending:YES]]];
+    [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES]]];
     
     //
     // Initialize Fetched Results Controller
-    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"type" cacheName:nil];
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     
     // Configure Fetched Results Controller
     [self.fetchedResultsController setDelegate:self];
-    
     
     NSError *error = nil;
     [self.fetchedResultsController performFetch:&error];
@@ -81,7 +81,6 @@ static NSString *CellIdentifier = @"Cell Identifier";
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
-    
     switch (type) {
         case NSFetchedResultsChangeInsert: {
             [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -100,7 +99,6 @@ static NSString *CellIdentifier = @"Cell Identifier";
             [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             
             [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            
             break;
         }
     }
@@ -113,34 +111,26 @@ static NSString *CellIdentifier = @"Cell Identifier";
     return YES;
 }
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
+    if(editingStyle == UITableViewCellEditingStyleDelete) {
         NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
         if (record) {
             [self.fetchedResultsController.managedObjectContext deleteObject:record];
         }
     }
 }
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return DRIVER;
-        case 1:
-            return VEHICLE;
-        default:
-            return @"UKV?";
-    }
-}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [[self.fetchedResultsController sections]count];
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSArray *sections=[self.fetchedResultsController sections];
     id<NSFetchedResultsSectionInfo> sectionInfo=[sections objectAtIndex:section];
     return [sectionInfo numberOfObjects];
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Dequeue Reusable Cell
@@ -152,15 +142,16 @@ static NSString *CellIdentifier = @"Cell Identifier";
     return cell;
 }
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    
+    //
     // Fetch Record
-    Licence *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
+    Driver *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
+
+    //
     // Update Cell
-    [cell.textLabel setText:record.licenceName];
+    [cell.textLabel setText:[[record.firstName stringByAppendingString:@" "] stringByAppendingString:record.lastName]];
+    
     [cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
 }
-
 
 //
 //implementing table view delegate
@@ -168,44 +159,47 @@ static NSString *CellIdentifier = @"Cell Identifier";
 //
 //notify when the detailed disclosure button is tapped
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    
     [self setSelection:indexPath];
-    
     //
     // Perform Segue
-    [self performSegueWithIdentifier:@"EditLicenceViewController" sender:self];
+    [self performSegueWithIdentifier:@"EditDriverViewController" sender:self];
 }
+
 //
 //prepare for segue and set properties to addVehicle and editVehicle controllers
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:@"AddLicenceViewController"]) {
+    if ([segue.identifier isEqualToString:@"AddDriverViewController"]) {
         
         // Obtain Reference to View Controller
         UINavigationController *nc = (UINavigationController *)[segue destinationViewController];
         
-        ROSAddLicenceViewController *vc = (ROSAddLicenceViewController *)[nc topViewController];
-        NSLog(@"%@",[vc managedObjectContext]);
+        ROSAddDriverViewController *vc = (ROSAddDriverViewController *)
+        [nc topViewController];
+        //
         // Configure View Controller
         [vc setManagedObjectContext:self.managedObjectContext];
     }
-    else if([segue.identifier isEqualToString:@"EditLicenceViewController"]){
+    else if([segue.identifier
+              isEqualToString:@"EditDriverViewController"]){
         //
         // Obtain Reference to View Controller
-        ROSEditLicenceViewController *vcEdit = (ROSEditLicenceViewController *)[segue destinationViewController];
+        ROSEditDriverViewController *vc = (ROSEditDriverViewController *)[segue destinationViewController];
         
-        NSLog(@"%@",[vcEdit managedObjectContext]);
         //
         // Configure View Controller
-        //[vc setManagedObjectContext:self.managedObjectContext];
-        [vcEdit setManagedObjectContext:self.managedObjectContext];
-        
+        [vc setManagedObjectContext:self.managedObjectContext];
         if (self.selection) {
+            //
             // Fetch Record
-            Licence *record = [self.fetchedResultsController objectAtIndexPath:self.selection];
+            Driver *record = [self.fetchedResultsController objectAtIndexPath:self.selection];
+            
             if (record) {
-                [vcEdit setRecord:record];
+                [vc setRecord:record];
             }
+            
+            
+            //
             // Reset Selection
             [self setSelection:nil];
         }
