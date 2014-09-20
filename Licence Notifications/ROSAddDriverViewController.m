@@ -97,6 +97,9 @@
 -(void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker{
     [_addressBookController dismissViewControllerAnimated:YES completion:nil];
 }
+-(BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier{
+    return NO;
+}
 
 -(BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person{
     
@@ -119,10 +122,9 @@
         
         [contactInfoDict setObject:(__bridge NSString *)generalCFObject forKey:@"lastName"];
         CFRelease(generalCFObject);
-    
+
     }
     [_addressBookController dismissViewControllerAnimated:YES completion:nil];
-    
     
     firstName=[contactInfoDict objectForKey:@"firstName"];
     lastName=[contactInfoDict objectForKey:@"lastName"];
@@ -132,13 +134,4 @@
     self.detailLabel.text = concatFullName;
     return NO;
 }
-
-
-
-
-
-
-
-
-
 @end
