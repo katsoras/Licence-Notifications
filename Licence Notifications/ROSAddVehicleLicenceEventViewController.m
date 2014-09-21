@@ -6,19 +6,19 @@
 //  Copyright (c) 2014 home. All rights reserved.
 //
 
-#import "ROSAddLicenceEventViewController.h"
+#import "ROSAddVehicleLicenceEventViewController.h"
 #import "ROSPickLicenceViewController.h"
 #import "ROSTypePickerViewController.h"
 #define kDatePickerIndex 2
 #define kDatePickerCellHeight 164
 
-@interface ROSAddLicenceEventViewController ()
+@interface ROSAddVehicleLicenceEventViewController ()
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 @property (strong, nonatomic) NSDate *selectedExpireDate;
 @property (assign) BOOL datePickerIsShowing;
 @end
 
-@implementation ROSAddLicenceEventViewController
+@implementation ROSAddVehicleLicenceEventViewController
 //static NSString *CellIdentifier = @"LicenceCell";
 - (id)initWithStyle:(UITableViewStyle)style
 {

@@ -6,20 +6,20 @@
 //  Copyright (c) 2014 home. All rights reserved.
 //
 
-#import "ROSAddVehicleLicenceViewController.h"
+#import "ROSAddVehicleViewController.h"
 #import "Vehicle.h"
-#import "ROSAddLicenceEventViewController.h"
+#import "ROSAddVehicleLicenceEventViewController.h"
 
 #import "ROSAddButtonLicenceViewCell.h"
 #import "ROSRegistrationPlateViewCell.h"
 #import "ROSModelViewCell.h"
 
 #import "ROSTypePickerViewController.h"
-@interface ROSAddVehicleLicenceViewController ()
+@interface ROSAddVehicleViewController ()
 
 @end
 
-@implementation ROSAddVehicleLicenceViewController
+@implementation ROSAddVehicleViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -115,7 +115,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"AddLicenceEvent"]) {
-        ROSAddLicenceEventViewController *typePickerViewController = segue.destinationViewController;
+        ROSAddVehicleLicenceEventViewController *typePickerViewController = segue.destinationViewController;
         typePickerViewController.managedObjectContext=self.managedObjectContext;
         
         typePickerViewController.delegate = self;
@@ -124,7 +124,7 @@
     }
 }
 
--(void) eventPickerViewController:(ROSAddLicenceEventViewController *)controller didSelectType:(NSString *)type{
+-(void) eventPickerViewController:(ROSAddVehicleLicenceEventViewController *)controller didSelectType:(NSString *)type{
     
 }
 @end

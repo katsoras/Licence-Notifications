@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "ROSPickLicenceViewController.h"
 
-@class ROSAddLicenceEventViewController;
+@class ROSAddVehicleLicenceEventViewController;
 @protocol ROSEventPickerViewControllerDelegate<NSObject>
--(void) eventPickerViewController:(ROSAddLicenceEventViewController *)controller didSelectType:(NSString *)type;
+-(void) eventPickerViewController:(ROSAddVehicleLicenceEventViewController *)controller didSelectType:(NSString *)type;
 @end
 
 
-@interface ROSAddLicenceEventViewController : UITableViewController<ROSLicencePickerViewControllerDelegate>
+@interface ROSAddVehicleLicenceEventViewController : UITableViewController<ROSLicencePickerViewControllerDelegate>
 
 @property (nonatomic,weak) id<ROSEventPickerViewControllerDelegate> delegate;
 

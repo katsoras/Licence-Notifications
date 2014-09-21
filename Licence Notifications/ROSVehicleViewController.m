@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 home. All rights reserved.
 //
 
-#import "ROSvehicleLicenceViewController.h"
-#import "ROSAddVehicleLicenceViewController.h"
+#import "ROSVehicleViewController.h"
+#import "ROSAddVehicleViewController.h"
 
 #import "ROSEditVehicleViewController.h"
 #import "Vehicle.h"
 //
 //class extension
-@interface ROSvehicleLicenceViewController ()<NSFetchedResultsControllerDelegate>
+@interface ROSVehicleViewController ()<NSFetchedResultsControllerDelegate>
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 //
 //holds selected index path
@@ -22,7 +22,7 @@
 
 
 
-@implementation ROSvehicleLicenceViewController
+@implementation ROSVehicleViewController
 static NSString *CellIdentifier = @"Cell Identifier";
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -144,7 +144,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
     
     // Fetch Record
     Vehicle *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
-
+    
     // Update Cell
     [cell.textLabel setText:record.model];
     [cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
@@ -164,8 +164,8 @@ static NSString *CellIdentifier = @"Cell Identifier";
 }
 
 
-    //
-    //prepare for segue and set properties to addVehicle and editVehicle controllers
+//
+//prepare for segue and set properties to addVehicle and editVehicle controllers
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"AddVehicleLicenceViewController"]) {
@@ -173,7 +173,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
         // Obtain Reference to View Controller
         UINavigationController *nc = (UINavigationController *)[segue destinationViewController];
         
-        ROSAddVehicleLicenceViewController *vc = (ROSAddVehicleLicenceViewController *)[nc topViewController];
+        ROSAddVehicleViewController *vc = (ROSAddVehicleViewController *)[nc topViewController];
         
         // Configure View Controller
         [vc setManagedObjectContext:self.managedObjectContext];

@@ -182,10 +182,10 @@
             </objects>
             <point key="canvasLocation" x="2250" y="542"/>
         </scene>
-        <!--Svehicle Licence View Controller - Vehicles-->
+        <!--Vehicle View Controller - Vehicles-->
         <scene sceneID="0ei-Xo-mPZ">
             <objects>
-                <tableViewController id="GMZ-mO-kZM" customClass="ROSvehicleLicenceViewController" sceneMemberID="viewController">
+                <tableViewController id="GMZ-mO-kZM" customClass="ROSVehicleViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="EzF-8v-aaT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -286,10 +286,10 @@
             </objects>
             <point key="canvasLocation" x="-38" y="-1545"/>
         </scene>
-        <!--Add Vehicle Licence View Controller-->
+        <!--Add Vehicle View Controller-->
         <scene sceneID="gJw-BS-nmX">
             <objects>
-                <tableViewController id="zHb-6w-0DO" customClass="ROSAddVehicleLicenceViewController" sceneMemberID="viewController">
+                <tableViewController id="zHb-6w-0DO" customClass="ROSAddVehicleViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4PJ-uQ-rBx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -404,10 +404,10 @@
             </objects>
             <point key="canvasLocation" x="628" y="-891"/>
         </scene>
-        <!--Add Licence Event View Controller-->
+        <!--Add Vehicle Licence Event View Controller-->
         <scene sceneID="N9O-XE-v67">
             <objects>
-                <tableViewController id="eND-hS-ajB" customClass="ROSAddLicenceEventViewController" sceneMemberID="viewController">
+                <tableViewController id="eND-hS-ajB" customClass="ROSAddVehicleLicenceEventViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" id="BCZ-vH-aBI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -479,7 +479,7 @@
                                                         <!--2014-09-21 13:02:53 +0000-->
                                                     </date>
                                                     <timeZone key="timeZone" name="America/Los_Angeles">
-                                                        <mutableData key="data">
+                                                        <data key="data">
 VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
 y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
 5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
@@ -497,7 +497,7 @@ f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</mutableData>
+</data>
                                                     </timeZone>
                                                     <connections>
                                                         <action selector="pickerDateChanged:" destination="eND-hS-ajB" eventType="valueChanged" id="Ga7-YH-kAv"/>

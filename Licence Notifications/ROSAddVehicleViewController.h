@@ -1,5 +1,5 @@
 //
-//  ROSvehicleLicenceViewController.h
+//  ROSAddVehicleLicenceViewController.h
 //  Licence Notifications
 //
 //  Created by rose on 13/9/14.
@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ROSAddVehicleLicenceEventViewController.h"
 
-@interface ROSvehicleLicenceViewController : UITableViewController
+@interface ROSAddVehicleViewController : UITableViewController<ROSEventPickerViewControllerDelegate>
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-
 @end

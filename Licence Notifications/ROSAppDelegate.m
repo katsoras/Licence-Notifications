@@ -7,7 +7,7 @@
 //
 
 #import "ROSAppDelegate.h"
-#import "ROSvehicleLicenceViewController.h"
+#import "ROSVehicleViewController.h"
 #import "ROSLicenceViewController.h"
 #import "ROSDriverViewController.h"
 
@@ -25,7 +25,7 @@
     //set managedObject context to ROSVehicleLicence controller.
     UINavigationController *navigationController = (UINavigationController *)tabBarController.viewControllers[0];
 
-     ROSvehicleLicenceViewController *vehicleController = (ROSvehicleLicenceViewController *)navigationController.topViewController;
+     ROSVehicleViewController *vehicleController = (ROSVehicleViewController *)navigationController.topViewController;
      vehicleController.managedObjectContext = self.managedObjectContext;
     
     //
