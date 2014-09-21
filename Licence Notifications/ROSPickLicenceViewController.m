@@ -91,6 +91,8 @@
     Licence *licence = self.licences[indexPath.row];
     //
     //make callback
-    [self.delegate typePickerViewController:self didSelectType:licence];
+    [self.delegate eventPickerViewController:self
+                               didSelectType: licence];
 }
+
 @end

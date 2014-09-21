@@ -8,15 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "Licence.h"
+#import "ROSAddVehicleLicenceEventViewController.h"
 
-@class ROSPickLicenceViewController;
-@protocol ROSLicencePickerViewControllerDelegate<NSObject>
--(void) typePickerViewController:(ROSPickLicenceViewController *)controller didSelectType:(Licence *)type;
-@end
+//@class ROSPickLicenceViewController;
+//@protocol ROSLicencePickerViewControllerDelegate<NSObject>
+//-(void) typePickerViewController:(ROSPickLicenceViewController *)controller /didSelectType:(Licence *)type;
+//@end
+
 
 @interface ROSPickLicenceViewController : UITableViewController
 @property (nonatomic,weak) id<ROSLicencePickerViewControllerDelegate> delegate;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic,strong) NSNumber *type;
 @end

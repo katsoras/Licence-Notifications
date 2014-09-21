@@ -16,8 +16,9 @@
 
 #import "ROSTypePickerViewController.h"
 @interface ROSAddVehicleViewController ()
-
+    @property (strong) NSMutableArray *vehicleLicences;
 @end
+
 
 @implementation ROSAddVehicleViewController
 
@@ -88,9 +89,10 @@
 {
     return 1;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return 3+self.vehicleLicences.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -124,7 +126,7 @@
     }
 }
 
--(void) eventPickerViewController:(ROSAddVehicleLicenceEventViewController *)controller didSelectType:(NSString *)type{
+-(void) eventPickerViewController:(id *)controller didSelectType:(Licence *) licence{
     
 }
 @end

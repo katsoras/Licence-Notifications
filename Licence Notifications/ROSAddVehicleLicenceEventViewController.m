@@ -36,6 +36,12 @@
     [self hideDatePickerCell];
 }
 
+
+- (void) done{
+    [self.delegate eventPickerViewController:self
+                               didSelectType: nil];
+}
+
 - (void)setupExpireDate {
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
@@ -122,8 +128,13 @@
         typePickerViewController.type = [NSNumber numberWithInt:1];
     }
 }
--(void) typePickerViewController:(ROSPickLicenceViewController *)controller didSelectType:(Licence *)type{
-    self.licenceNameLabel.text =type.licenceName;
+//-(void) typePickerViewController:(id *)controller didSelectType:(Licence /*)type{
+    //self.licenceNameLabel.text =type.licenceName;
+    //[self.navigationController popViewControllerAnimated:YES];
+//}
+
+-(void) eventPickerViewController:(id *)controller didSelectType:(Licence *) licence{
+    self.licenceNameLabel.text =licence.licenceName;
     [self.navigationController popViewControllerAnimated:YES];
 }
 @end
