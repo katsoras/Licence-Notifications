@@ -1,22 +1,18 @@
 //
-//  ROSTypePickerViewController.m
+//  ROSPickLicenceViewController.m
 //  Licence Notifications
 //
-//  Created by rose on 14/9/14.
+//  Created by rose on 21/9/14.
 //  Copyright (c) 2014 home. All rights reserved.
 //
 
-#import "ROSTypePickerViewController.h"
-
-NSString * const VEHICLE = @"Vehicle";
-NSString * const DRIVER = @"Driver";
-
-@interface ROSTypePickerViewController ()
-
+#import "ROSPickLicenceViewController.h"
+#import "Licence.h"
+@interface ROSPickLicenceViewController ()
+    @property (strong) NSMutableArray *licences;
 @end
 
-@implementation ROSTypePickerViewController {
-    NSArray *_types;
+@implementation ROSPickLicenceViewController{
     NSUInteger _selectedIndex;
 }
 
@@ -32,9 +28,18 @@ NSString * const DRIVER = @"Driver";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _types=@[VEHICLE,
-             DRIVER];
-    _selectedIndex = [_types indexOfObject:self.type];
+    // Fetch the devices from persistent data store
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Licence"];
+    
+    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"type == %@",self.type];
+    
+    NSLog(@"%@ ----------",self.type);
+    [fetchRequest setPredicate:predicate];
+    
+    self.licences = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,35 +47,34 @@ NSString * const DRIVER = @"Driver";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    // Return the number of sections.
     return 1;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_types count];
+    // Return the number of rows in the section.
+    return self.licences.count;
 }
 
-//
-//cell configuration
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TypeCell"];
-    cell.textLabel.text = _types[indexPath.row];
+    static NSString *CellIdentifier = @"LicenceCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+
+    // Configure the cell...
+    Licence *licence = [self.licences objectAtIndex:indexPath.row];
     
-    
-    if (indexPath.row == _selectedIndex) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
-    
+    [cell.textLabel setText:licence.licenceName];
     return cell;
 }
 
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     //
     //remove checkmark from the cell tha previous selected
@@ -79,14 +83,14 @@ NSString * const DRIVER = @"Driver";
                                  [NSIndexPath indexPathForRow:_selectedIndex inSection:0]];
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    
     //
     //set new checkmark
     _selectedIndex = indexPath.row;
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    NSString *type = _types[indexPath.row];
+    Licence *licence = self.licences[indexPath.row];
+    //
     //make callback
-    [self.delegate typePickerViewController:self didSelectType:type];
+    [self.delegate typePickerViewController:self didSelectType:licence];
 }
 @end

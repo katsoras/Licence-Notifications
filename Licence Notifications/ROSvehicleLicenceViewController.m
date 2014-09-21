@@ -51,9 +51,9 @@ static NSString *CellIdentifier = @"Cell Identifier";
     // Configure Fetched Results Controller
     [self.fetchedResultsController setDelegate:self];
     
-    
     NSError *error = nil;
     [self.fetchedResultsController performFetch:&error];
+    
     if (error) {
         NSLog(@"Unable to perform fetch.");
         NSLog(@"%@, %@", error, error.localizedDescription);

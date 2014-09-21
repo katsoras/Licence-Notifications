@@ -1,13 +1,14 @@
 //
-//  LicenceCell.m
+//  ROSAddButtonLicenceViewCell.m
 //  Licence Notifications
 //
-//  Created by rose on 20/9/14.
+//  Created by rose on 21/9/14.
 //  Copyright (c) 2014 home. All rights reserved.
 //
 
-#import "LicenceCell.h"
-@implementation LicenceCell
+#import "ROSAddButtonLicenceViewCell.h"
+
+@implementation ROSAddButtonLicenceViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

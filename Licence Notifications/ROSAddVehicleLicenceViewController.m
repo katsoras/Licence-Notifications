@@ -10,6 +10,10 @@
 #import "Vehicle.h"
 #import "ROSAddLicenceEventViewController.h"
 
+#import "ROSAddButtonLicenceViewCell.h"
+#import "ROSRegistrationPlateViewCell.h"
+#import "ROSModelViewCell.h"
+
 #import "ROSTypePickerViewController.h"
 @interface ROSAddVehicleLicenceViewController ()
 
@@ -29,12 +33,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 - (void)didReceiveMemoryWarning
 {
@@ -46,27 +44,29 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+
+
 - (IBAction)save:(id)sender {
-    // Helpers
-    NSString *model = self.modelTextField.text;
+   /* NSString *model = self.modelTextField.text;
     NSString *registrationPlate=self.registrationPlateTextField.text;
     
     if (model && registrationPlate && model.length && registrationPlate.length) {
-        // Create Entity
+      
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"Vehicle" inManagedObjectContext:self.managedObjectContext];
         
-        // Initialize Record
+   
         Vehicle *record = [[Vehicle alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
         
-        // Populate Record
+       
         
         record.model=model;
         record.registrationPlate=registrationPlate;
         
-        // Save Record
+        
         NSError *error = nil;
         if ([self.managedObjectContext save:&error]) {
-            // Dismiss View Controller
+           
             [self dismissViewControllerAnimated:YES completion:nil];
             
         } else {
@@ -75,24 +75,55 @@
                 NSLog(@"Unable to save record.");
                 NSLog(@"%@, %@", error, error.localizedDescription);
             }
-            // Show Alert View
+            
             [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do could not be saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
         }
     } else {
-        // Show Alert View
+        
         [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do needs a name." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    }*/
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 20;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row==0){
+        ROSModelViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"modelAVLIdentifier"];
+        return cell;
+    }
+    else if(indexPath.row==1){
+        ROSRegistrationPlateViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"plateAVLIdentifier"];
+        return cell;
+    }else if(indexPath.row==2){
+        ROSAddButtonLicenceViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"addAVLCellIdentifier"];
+        return cell;
+    }else {
+        
+        UITableViewCell *cell = [tableView
+            dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
+        return cell;
     }
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"PickEvent"]) {
+    if ([segue.identifier isEqualToString:@"AddLicenceEvent"]) {
         ROSAddLicenceEventViewController *typePickerViewController = segue.destinationViewController;
         typePickerViewController.managedObjectContext=self.managedObjectContext;
+        
         typePickerViewController.delegate = self;
         typePickerViewController.type =VEHICLE;
         
     }
 }
+
 -(void) eventPickerViewController:(ROSAddLicenceEventViewController *)controller didSelectType:(NSString *)type{
     
 }
