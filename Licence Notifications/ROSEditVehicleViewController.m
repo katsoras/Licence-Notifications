@@ -25,7 +25,9 @@
 @property (strong, nonatomic) NSIndexPath *selection;
 @end
 
-@implementation ROSEditVehicleViewController
+@implementation ROSEditVehicleViewController{
+    NSMutableArray *toDeleteNotifications;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -40,12 +42,12 @@
 {
     [super viewDidLoad];
     if(self.record){
-        
         self.vehicleNotifications = [NSMutableArray arrayWithArray:[self.record.notifications allObjects]];
     }
     self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    [self.dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    [self.dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    toDeleteNotifications=[[NSMutableArray alloc]init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,17 +79,27 @@
         self.record.registrationPlate=registrationPlate;
         
         //
+        //log notification
+        for(Notification * i in self.vehicleNotifications){
+            NSLog(@"Start to import notif %@",i.expireDate);
+        }
+        
+        //
+        //delete removed notification
+        for (Notification *managedObject in toDeleteNotifications) {
+            [self.managedObjectContext deleteObject:managedObject];
+        }
+        
+        //
         //link with record
         [self.record addNotifications:
-             [NSSet setWithArray:self.vehicleNotifications]];
+         [NSSet setWithArray:self.vehicleNotifications]];
         
         NSError *error = nil;
-    
+        
         if ([self.managedObjectContext save:&error]) {
             [self dismissViewControllerAnimated:YES completion:nil];
-            
         }
-    
         else
         {
             if (error) {
@@ -132,37 +144,55 @@
     }else {
         
         UITableViewCell *cell = [tableView
-        dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
-        
+                                 dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
         Notification *item = [self.vehicleNotifications objectAtIndex:[indexPath row]-3];
+        
         cell.textLabel.text=item.licence.licenceName;
         NSDate *defaultDate = item.expireDate;
+        
         cell.detailTextLabel.text = [self.dateFormatter stringFromDate:defaultDate];
+        
         [cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
         return cell;
     }
 }
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.row>2)
+        return YES;
+    else
+        return NO;
+}
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         //
         //delete notfication from data source
+        Notification *toMoveNotification=[self.vehicleNotifications objectAtIndex:[indexPath row]-3];
+        
+        //
+        //add to array contains the objects to be deleted.
+        [toDeleteNotifications addObject:toMoveNotification];
+        NSLog(@"%@",toMoveNotification.expireDate);
+        
         [self.vehicleNotifications
          removeObjectAtIndex:[indexPath row]-3];
+        
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
+    
 }
 //
 //notify when the detailed disclosure button is tapped
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
     [self setSelection:indexPath];
+    
     //
     // Perform Segue
     [self performSegueWithIdentifier:@"AddLicenceEvent" sender:self];
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    
     if ([segue.identifier isEqualToString:@"AddLicenceEvent"]) {
         //
         // Obtain Reference to View Controller

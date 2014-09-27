@@ -7,6 +7,7 @@
 //
 
 #import "Licence.h"
+#import "Notification.h"
 
 
 @implementation Licence

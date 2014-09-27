@@ -20,13 +20,17 @@
 #import "ROSTypePickerViewController.h"
 
 @interface ROSAddVehicleViewController ()
+
+
+@property (strong) NSMutableArray *vehicleNotifications;
+
 //
 //contains selected licences
-@property (strong) NSMutableArray *vehicleLicences;
+//@property (strong) NSMutableArray *vehicleLicences;
 
 //
 //contains expiredates per licence
-@property (strong) NSMutableDictionary *licenceDates;
+//@property (strong) NSMutableDictionary *licenceDates;
 
 //
 //formatter for licence dates
@@ -48,12 +52,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.vehicleLicences = [NSMutableArray array];
-    self.licenceDates=[NSMutableDictionary dictionary];
+    
+    self.vehicleNotifications=[NSMutableArray array];
+    
+    //self.vehicleLicences = [NSMutableArray array];
+    //self.licenceDates=[NSMutableDictionary dictionary];
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    [self.dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    [self.dateFormatter setDateFormat:@"yyyy-MM-dd"];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -67,17 +73,17 @@
 - (IBAction)save:(id)sender {
     
     ROSModelViewCell * cell = (ROSModelViewCell *)[self.tableView
-        cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+                                                   cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     NSString * model = cell.modelTextField.text;
     
     ROSRegistrationPlateViewCell * cell2 = (ROSRegistrationPlateViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     NSString * registrationPlate = cell2.registrationPlateTextField.text;
     
     if (model && registrationPlate && model.length && registrationPlate.length) {
-      
+        
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"Vehicle" inManagedObjectContext:self.managedObjectContext];
         
-   
+        
         Vehicle *vehicle = [[Vehicle alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
         
         //
@@ -90,27 +96,12 @@
         //
         //registration
         vehicle.registrationPlate=registrationPlate;
-        
         //
-        //notifications
-        for (Licence * licence in self.vehicleLicences) {
-            NSEntityDescription *entityNotification = [NSEntityDescription entityForName:@"Notification" inManagedObjectContext:self.managedObjectContext];
-            
-            Notification *notification = [[Notification alloc] initWithEntity:entityNotification insertIntoManagedObjectContext:self.managedObjectContext];
-            //
-            //
-            notification.expireDate=
-            [self.licenceDates objectForKey:[licence licenceName]];
-            notification.licence=licence;
-            
-            //
-            //link with record
-            [vehicle addNotificationsObject:notification];
-        }
+        //link with record
+        [vehicle addNotifications:
+         [NSSet setWithArray:self.vehicleNotifications]];
+        
         NSError *error = nil;
-        
-        
-        
         if ([self.managedObjectContext save:&error]) {
             [self dismissViewControllerAnimated:YES completion:nil];
             
@@ -135,16 +126,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-    return 3+ self.vehicleLicences.count;
+    return 3+ self.vehicleNotifications.count;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.row==0){
         ROSModelViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"modelAVLIdentifier"];
         return cell;
     }
-    
     else if(indexPath.row==1){
         ROSRegistrationPlateViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"plateAVLIdentifier"];
         return cell;
@@ -154,16 +144,17 @@
         return cell;
     }else {
         UITableViewCell *cell = [tableView
-            dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
+                                 dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
         
-        Licence *item = [self.vehicleLicences objectAtIndex:[indexPath row]-3];
-         cell.textLabel.text=[item licenceName];
+        Notification *item = [self.vehicleNotifications objectAtIndex:[indexPath row]-3];
+        cell.textLabel.text=item.licence.licenceName;
+        NSDate *defaultDate = item.expireDate;
         
-        NSDate *defaultDate = [self.licenceDates objectForKey:[item licenceName]];
         cell.detailTextLabel.text = [self.dateFormatter stringFromDate:defaultDate];
         return cell;
     }
 }
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"AddLicenceEvent"]) {
@@ -176,11 +167,15 @@
 -(void) eventPickerViewController:(UITableViewController *)controller didSelectType:(Licence *) licence andDate:(NSDate *)date andNotification:(Notification *)notification{
     
     //
-    //contains selected licences;
-    [self.vehicleLicences addObject:licence];
-    //
-    //map licence expire date with licence
-    [self.licenceDates setObject:date forKey:licence.licenceName];
+    //new notification
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Notification" inManagedObjectContext:self.managedObjectContext];
+    
+    Notification *unassociatedObject = [[Notification alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
+    
+    unassociatedObject.licence=licence;
+    unassociatedObject.expireDate=date;
+    
+    [self.vehicleNotifications addObject:unassociatedObject];
     [self.tableView reloadData];
 }
 @end

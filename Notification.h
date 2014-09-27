@@ -14,8 +14,8 @@
 @interface Notification : NSManagedObject
 
 @property (nonatomic, retain) NSDate * expireDate;
-@property (nonatomic, retain) Licence *licence;
 @property (nonatomic, retain) Driver *driver;
+@property (nonatomic, retain) Licence *licence;
 @property (nonatomic, retain) Vehicle *vehicle;
 
 @end

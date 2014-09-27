@@ -59,7 +59,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
         NSLog(@"%@, %@", error, error.localizedDescription);
     }
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
+    
 }
 
 //
@@ -103,9 +103,9 @@ static NSString *CellIdentifier = @"Cell Identifier";
     [super didReceiveMemoryWarning];
 }
 
-- (IBAction) editVehicleLicence:(id)sender {
+/*- (IBAction) editVehicleLicence:(id)sender {
     [self.tableView setEditing:![self.tableView isEditing] animated:YES];
-}
+}*/
 //
 //implementing UItableview datasource
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -148,10 +148,8 @@ static NSString *CellIdentifier = @"Cell Identifier";
     
     // Update Cell
     [cell.textLabel setText:record.model];
-    [cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
-    
+    [cell.detailTextLabel setText:record.registrationPlate];
 }
-
 //
 //implementing table view delegate
 
@@ -163,19 +161,13 @@ static NSString *CellIdentifier = @"Cell Identifier";
     // Perform Segue
     [self performSegueWithIdentifier:@"EditVehicleLicenceViewController" sender:self];
 }
-
-
 //
 //prepare for segue and set properties to addVehicle and editVehicle controllers
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
     if ([segue.identifier isEqualToString:@"AddVehicleLicenceViewController"]) {
-        
         // Obtain Reference to View Controller
         UINavigationController *nc = (UINavigationController *)[segue destinationViewController];
-        
         ROSAddVehicleViewController *vc = (ROSAddVehicleViewController *)[nc topViewController];
-        
         // Configure View Controller
         [vc setManagedObjectContext:self.managedObjectContext];
     }else if([segue.identifier isEqualToString:@"EditVehicleLicenceViewController"]){

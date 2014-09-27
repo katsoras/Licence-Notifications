@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Notification;
 
 @interface Licence : NSManagedObject
 
@@ -19,8 +20,8 @@
 
 @interface Licence (CoreDataGeneratedAccessors)
 
-- (void)addNotificationsObject:(NSManagedObject *)value;
-- (void)removeNotificationsObject:(NSManagedObject *)value;
+- (void)addNotificationsObject:(Notification *)value;
+- (void)removeNotificationsObject:(Notification *)value;
 - (void)addNotifications:(NSSet *)values;
 - (void)removeNotifications:(NSSet *)values;
 

@@ -62,9 +62,10 @@
 - (void)setupExpireDate {
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    [self.dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    [self.dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
     self.expireDateLabel.text = [self.dateFormatter stringFromDate:self.selectedExpireDate];
+    
     self.expireDateLabel.textColor = [self.tableView tintColor];
 }
 - (void)didReceiveMemoryWarning
@@ -153,5 +154,4 @@
     self.licenceNameLabel.text =licence.licenceName;
     [self.navigationController popViewControllerAnimated:YES];
 }
-
 @end

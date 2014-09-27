@@ -15,8 +15,8 @@
 @implementation Notification
 
 @dynamic expireDate;
-@dynamic licence;
 @dynamic driver;
+@dynamic licence;
 @dynamic vehicle;
 
 @end

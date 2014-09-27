@@ -3,7 +3,7 @@
     <entity name="Driver" representedClassName="Driver" syncable="YES">
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Notification" inverseName="driver" inverseEntity="Notification" syncable="YES"/>
+        <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Notification" inverseName="driver" inverseEntity="Notification" syncable="YES"/>
     </entity>
     <entity name="Licence" representedClassName="Licence" syncable="YES">
         <attribute name="licenceName" attributeType="String" syncable="YES"/>
@@ -19,12 +19,12 @@
     <entity name="Vehicle" representedClassName="Vehicle" syncable="YES">
         <attribute name="model" attributeType="String" syncable="YES"/>
         <attribute name="registrationPlate" attributeType="String" syncable="YES"/>
-        <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Notification" inverseName="vehicle" inverseEntity="Notification" syncable="YES"/>
+        <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Notification" inverseName="vehicle" inverseEntity="Notification" syncable="YES"/>
     </entity>
     <elements>
         <element name="Driver" positionX="-468" positionY="-180" width="128" height="88"/>
         <element name="Licence" positionX="304" positionY="-297" width="128" height="88"/>
-        <element name="Vehicle" positionX="-443" positionY="-423" width="128" height="88"/>
         <element name="Notification" positionX="-29" positionY="-256" width="128" height="103"/>
+        <element name="Vehicle" positionX="-443" positionY="-423" width="128" height="88"/>
     </elements>
 </model>
