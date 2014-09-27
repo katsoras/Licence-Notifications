@@ -15,4 +15,6 @@
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic,strong) NSNumber *type;
+
+@property (nonatomic,strong) Licence *licence;
 @end

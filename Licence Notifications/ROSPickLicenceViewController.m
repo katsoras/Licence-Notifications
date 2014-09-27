@@ -24,21 +24,30 @@
     }
     return self;
 }
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
     // Fetch the devices from persistent data store
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Licence"];
     
     NSPredicate *predicate=[NSPredicate predicateWithFormat:@"type == %@",self.type];
-    
     NSLog(@"%@ ----------",self.type);
     [fetchRequest setPredicate:predicate];
-    
     self.licences = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    
+    //
+    //previous selection
+    if(self.licence){
+        _selectedIndex=[self.licences indexOfObject:self.licence];
+    }
+    //
+    //no previous selections, first add action
+    else {
+        _selectedIndex=-1;
+    }
     [self.tableView reloadData];
 }
 
@@ -67,8 +76,13 @@
 
     // Configure the cell...
     Licence *licence = [self.licences objectAtIndex:indexPath.row];
-    
     [cell.textLabel setText:licence.licenceName];
+    
+    if (indexPath.row == _selectedIndex) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     return cell;
 }
 
@@ -92,7 +106,6 @@
     //
     //make callback
     [self.delegate eventPickerViewController:self
-                               didSelectType: licence andDate:nil];
+                               didSelectType: licence andDate:nil andNotification:nil];
 }
-
 @end

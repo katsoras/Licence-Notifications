@@ -38,7 +38,7 @@
     
     [super viewDidLoad];
     //
-    //edit mode
+    //EDIT MODE: extract notification values
     if(self.notification){
         _licence=self.notification.licence;
         self.licenceNameLabel.text=_licence.licenceName;
@@ -56,7 +56,7 @@
 
 - (IBAction) done{
     [self.delegate eventPickerViewController:self
-                               didSelectType: _licence andDate:self.selectedExpireDate];
+                               didSelectType: _licence andDate:self.selectedExpireDate andNotification:self.notification];
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)setupExpireDate {
@@ -64,13 +64,8 @@
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [self.dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-    
-    //NSDate *defaultDate = [NSDate date];
-    
     self.expireDateLabel.text = [self.dateFormatter stringFromDate:self.selectedExpireDate];
-    
     self.expireDateLabel.textColor = [self.tableView tintColor];
-    //self.selectedExpireDate = defaultDate;
 }
 - (void)didReceiveMemoryWarning
 {
@@ -143,14 +138,20 @@
         typePickerViewController.managedObjectContext=self.managedObjectContext;
         
         typePickerViewController.delegate = self;
+        //
+        //
+        if(_licence){
+            typePickerViewController.licence=_licence;
+        }
         typePickerViewController.type = [NSNumber numberWithInt:1];
     }
 }
--(void) eventPickerViewController:(UITableViewController *)controller didSelectType:(Licence *) licence andDate:(NSDate *)date{
+
+-(void) eventPickerViewController:(UITableViewController *)controller didSelectType:(Licence *) licence andDate:(NSDate *)date andNotification:(Notification *)notification{
     
     _licence=licence;
     self.licenceNameLabel.text =licence.licenceName;
     [self.navigationController popViewControllerAnimated:YES];
-    
 }
+
 @end

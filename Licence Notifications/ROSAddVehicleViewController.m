@@ -171,11 +171,10 @@
         typePickerViewController.managedObjectContext=self.managedObjectContext;
         typePickerViewController.delegate = self;
         typePickerViewController.type =VEHICLE;
-        
     }
 }
-
--(void) eventPickerViewController:(UITableViewController *)controller didSelectType:(Licence *) licence andDate:(NSDate *)date{
+-(void) eventPickerViewController:(UITableViewController *)controller didSelectType:(Licence *) licence andDate:(NSDate *)date andNotification:(Notification *)notification{
+    
     //
     //contains selected licences;
     [self.vehicleLicences addObject:licence];

@@ -12,7 +12,7 @@
 
 @class ROSAddVehicleLicenceEventViewController;
 @protocol ROSLicencePickerViewControllerDelegate<NSObject>
--(void) eventPickerViewController:(UITableViewController *)controller didSelectType:(Licence *) licence andDate:(NSDate *)date;
+-(void) eventPickerViewController:(UITableViewController *)controller didSelectType:(Licence *) licence andDate:(NSDate *)date andNotification:(Notification *)notification;
 @end
 
 
