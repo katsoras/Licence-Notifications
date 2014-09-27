@@ -12,6 +12,12 @@
 		9A766B6919D6F74F006FD3E4 /* Notification.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A766B6819D6F74F006FD3E4 /* Notification.m */; };
 		9A766B6C19D6F74F006FD3E4 /* Vehicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A766B6B19D6F74F006FD3E4 /* Vehicle.m */; };
 		9A766B6F19D7000B006FD3E4 /* ROSVehicleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A766B6E19D7000A006FD3E4 /* ROSVehicleCell.m */; };
+		9A766B7219D733B8006FD3E4 /* Vehicle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A766B7019D733B8006FD3E4 /* Vehicle.png */; };
+		9A766B7319D733B8006FD3E4 /* Vehicle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A766B7119D733B8006FD3E4 /* Vehicle@2x.png */; };
+		9A766B7A19D736B3006FD3E4 /* Driver.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A766B7819D736B3006FD3E4 /* Driver.png */; };
+		9A766B7B19D736B3006FD3E4 /* Driver@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A766B7919D736B3006FD3E4 /* Driver@2x.png */; };
+		9A766B7E19D7371D006FD3E4 /* Licence.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A766B7C19D7371D006FD3E4 /* Licence.png */; };
+		9A766B7F19D7371D006FD3E4 /* Licence@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A766B7D19D7371D006FD3E4 /* Licence@2x.png */; };
 		9A7C82AC19CA0E0700B14F14 /* ROSDriverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7C82AB19CA0E0700B14F14 /* ROSDriverViewController.m */; };
 		9A7C82AF19CA0E5700B14F14 /* ROSAddDriverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7C82AE19CA0E5700B14F14 /* ROSAddDriverViewController.m */; };
 		9A7ED57919C614AB009A132A /* ROSAddLicenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7ED57819C614AB009A132A /* ROSAddLicenceViewController.m */; };
@@ -66,6 +72,12 @@
 		9A766B6B19D6F74F006FD3E4 /* Vehicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Vehicle.m; path = ../Vehicle.m; sourceTree = "<group>"; };
 		9A766B6D19D7000A006FD3E4 /* ROSVehicleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROSVehicleCell.h; sourceTree = "<group>"; };
 		9A766B6E19D7000A006FD3E4 /* ROSVehicleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROSVehicleCell.m; sourceTree = "<group>"; };
+		9A766B7019D733B8006FD3E4 /* Vehicle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Vehicle.png; sourceTree = "<group>"; };
+		9A766B7119D733B8006FD3E4 /* Vehicle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Vehicle@2x.png"; sourceTree = "<group>"; };
+		9A766B7819D736B3006FD3E4 /* Driver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Driver.png; sourceTree = "<group>"; };
+		9A766B7919D736B3006FD3E4 /* Driver@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Driver@2x.png"; sourceTree = "<group>"; };
+		9A766B7C19D7371D006FD3E4 /* Licence.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Licence.png; sourceTree = "<group>"; };
+		9A766B7D19D7371D006FD3E4 /* Licence@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Licence@2x.png"; sourceTree = "<group>"; };
 		9A7C82AA19CA0E0700B14F14 /* ROSDriverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROSDriverViewController.h; sourceTree = "<group>"; };
 		9A7C82AB19CA0E0700B14F14 /* ROSDriverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROSDriverViewController.m; sourceTree = "<group>"; };
 		9A7C82AD19CA0E5700B14F14 /* ROSAddDriverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROSAddDriverViewController.h; sourceTree = "<group>"; };
@@ -182,11 +194,15 @@
 				9AA8B1B619C44D0300FAAB30 /* Main.storyboard */,
 				9AC621B019CEF4E700F51075 /* ROSModelViewCell.h */,
 				9AC621B319CEF50700F51075 /* ROSRegistrationPlateViewCell.h */,
+				9A766B7819D736B3006FD3E4 /* Driver.png */,
+				9A766B7919D736B3006FD3E4 /* Driver@2x.png */,
 				9AC621B419CEF50700F51075 /* ROSRegistrationPlateViewCell.m */,
 				9AC621B619CEF52200F51075 /* ROSAddButtonLicenceViewCell.h */,
 				9AC621B719CEF52200F51075 /* ROSAddButtonLicenceViewCell.m */,
 				9AC621B119CEF4E700F51075 /* ROSModelViewCell.m */,
 				9A7C82AD19CA0E5700B14F14 /* ROSAddDriverViewController.h */,
+				9A766B7019D733B8006FD3E4 /* Vehicle.png */,
+				9A766B7119D733B8006FD3E4 /* Vehicle@2x.png */,
 				9A7C82AE19CA0E5700B14F14 /* ROSAddDriverViewController.m */,
 				9A7C82AA19CA0E0700B14F14 /* ROSDriverViewController.h */,
 				9A7C82AB19CA0E0700B14F14 /* ROSDriverViewController.m */,
@@ -198,6 +214,8 @@
 				9AC621B919CF19C000F51075 /* ROSPickLicenceViewController.h */,
 				9AC621BA19CF19C000F51075 /* ROSPickLicenceViewController.m */,
 				9AE886EB19C629B200B519AA /* ROSTypePickerViewController.m */,
+				9A766B7C19D7371D006FD3E4 /* Licence.png */,
+				9A766B7D19D7371D006FD3E4 /* Licence@2x.png */,
 				9AE886CC19C61A6E00B519AA /* ROSEditLicenceViewController.h */,
 				9AE886CD19C61A6F00B519AA /* ROSEditLicenceViewController.m */,
 				9A7ED57A19C617AC009A132A /* ROSLicenceViewController.h */,
@@ -332,8 +350,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A766B7F19D7371D006FD3E4 /* Licence@2x.png in Resources */,
 				9AA8B1B719C44D0300FAAB30 /* Main.storyboard in Resources */,
+				9A766B7E19D7371D006FD3E4 /* Licence.png in Resources */,
 				9AA8B18E19C44CB300FAAB30 /* InfoPlist.strings in Resources */,
+				9A766B7219D733B8006FD3E4 /* Vehicle.png in Resources */,
+				9A766B7B19D736B3006FD3E4 /* Driver@2x.png in Resources */,
+				9A766B7A19D736B3006FD3E4 /* Driver.png in Resources */,
+				9A766B7319D733B8006FD3E4 /* Vehicle@2x.png in Resources */,
 				9AA8B19919C44CB300FAAB30 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

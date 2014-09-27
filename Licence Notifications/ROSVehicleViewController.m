@@ -38,6 +38,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
 {
     [super viewDidLoad];
     NSLog(@"%@",self.managedObjectContext);
+    // Change status bar
     
     // Initialize Fetch Request
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Vehicle"];
