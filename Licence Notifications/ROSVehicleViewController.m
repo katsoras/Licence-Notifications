@@ -123,6 +123,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
 {
     return [[self.fetchedResultsController sections]count];
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSArray *sections=[self.fetchedResultsController sections];
@@ -178,15 +179,14 @@ static NSString *CellIdentifier = @"Cell Identifier";
         // Configure View Controller
         [vc setManagedObjectContext:self.managedObjectContext];
     }else if([segue.identifier isEqualToString:@"EditVehicleLicenceViewController"]){
-        
-        //
         // Obtain Reference to View Controller
-        ROSEditVehicleViewController *vc = (ROSEditVehicleViewController *)[segue destinationViewController];
+        UINavigationController *nc = (UINavigationController *)[segue destinationViewController];
+        
+        ROSEditVehicleViewController *vc = (ROSEditVehicleViewController *)[nc topViewController];
         
         //
         // Configure View Controller
         [vc setManagedObjectContext:self.managedObjectContext];
-        
         
         if (self.selection) {
             // Fetch Record

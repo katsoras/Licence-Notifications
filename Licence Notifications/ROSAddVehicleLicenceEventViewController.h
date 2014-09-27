@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Notification.h"
 #import "Licence.h"
 
 @class ROSAddVehicleLicenceEventViewController;
 @protocol ROSLicencePickerViewControllerDelegate<NSObject>
--(void) eventPickerViewController:(UITableViewController *)controller didSelectType:(Licence *) licence;
+-(void) eventPickerViewController:(UITableViewController *)controller didSelectType:(Licence *) licence andDate:(NSDate *)date;
 @end
+
 
 @interface ROSAddVehicleLicenceEventViewController : UITableViewController<ROSLicencePickerViewControllerDelegate>
 
@@ -23,5 +25,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *licenceNameLabel;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UILabel *expireDateLabel;
+
+
+@property (strong, nonatomic) Notification *notification;
 
 @end

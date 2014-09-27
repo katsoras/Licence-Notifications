@@ -7,14 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-@class Vehicle;
+#import "ROSAddVehicleLicenceEventViewController.h"
+#import "Vehicle.h"
 
-@interface ROSEditVehicleViewController : UITableViewController
-@property (weak, nonatomic) IBOutlet UITextField *modelTextField;
-@property (weak, nonatomic) IBOutlet UITextField *
-registrationPlateTextField;
+@interface ROSEditVehicleViewController : UITableViewController<ROSLicencePickerViewControllerDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
 @property (strong, nonatomic) Vehicle *record;
 
 @end

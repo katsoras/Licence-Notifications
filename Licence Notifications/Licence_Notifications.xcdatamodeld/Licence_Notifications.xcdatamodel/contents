@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Driver" representedClassName="Driver" syncable="YES">
-        <attribute name="firstName" attributeType="String" syncable="YES"/>
-        <attribute name="lastName" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Notification" inverseName="driver" inverseEntity="Notification" syncable="YES"/>
     </entity>
     <entity name="Licence" representedClassName="Licence" syncable="YES">
         <attribute name="licenceName" attributeType="String" syncable="YES"/>
         <attribute name="type" attributeType="Boolean" syncable="YES"/>
-        <relationship name="vehicles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="vehicleLicenses" inverseEntity="Vehicle" syncable="YES"/>
+        <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Notification" inverseName="licence" inverseEntity="Notification" syncable="YES"/>
+    </entity>
+    <entity name="Notification" representedClassName="Notification" syncable="YES">
+        <attribute name="expireDate" attributeType="Date" syncable="YES"/>
+        <relationship name="driver" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Driver" inverseName="notifications" inverseEntity="Driver" syncable="YES"/>
+        <relationship name="licence" maxCount="1" deletionRule="Nullify" destinationEntity="Licence" inverseName="notifications" inverseEntity="Licence" syncable="YES"/>
+        <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="notifications" inverseEntity="Vehicle" syncable="YES"/>
     </entity>
     <entity name="Vehicle" representedClassName="Vehicle" syncable="YES">
         <attribute name="model" attributeType="String" syncable="YES"/>
         <attribute name="registrationPlate" attributeType="String" syncable="YES"/>
-        <relationship name="vehicleLicenses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Licence" inverseName="vehicles" inverseEntity="Licence" syncable="YES"/>
+        <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Notification" inverseName="vehicle" inverseEntity="Notification" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Licence" positionX="259" positionY="-234" width="128" height="88"/>
-        <element name="Vehicle" positionX="-54" positionY="0" width="128" height="90"/>
-        <element name="Driver" positionX="99" positionY="-90" width="128" height="73"/>
+        <element name="Driver" positionX="-468" positionY="-180" width="128" height="88"/>
+        <element name="Licence" positionX="304" positionY="-297" width="128" height="88"/>
+        <element name="Vehicle" positionX="-443" positionY="-423" width="128" height="88"/>
+        <element name="Notification" positionX="-29" positionY="-256" width="128" height="103"/>
     </elements>
 </model>

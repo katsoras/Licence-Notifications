@@ -16,9 +16,13 @@
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 @property (strong, nonatomic) NSDate *selectedExpireDate;
 @property (assign) BOOL datePickerIsShowing;
+
 @end
 
-@implementation ROSAddVehicleLicenceEventViewController
+@implementation ROSAddVehicleLicenceEventViewController{
+    Licence * _licence;
+}
+
 //static NSString *CellIdentifier = @"LicenceCell";
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -31,28 +35,42 @@
 
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
+    //
+    //edit mode
+    if(self.notification){
+        _licence=self.notification.licence;
+        self.licenceNameLabel.text=_licence.licenceName;
+        self.selectedExpireDate=self.notification.expireDate;
+    }
+    //
+    //add mode
+    else{
+        self.selectedExpireDate=[NSDate date];
+    }
+    
     [self setupExpireDate];
     [self hideDatePickerCell];
 }
 
-
-- (void) done{
+- (IBAction) done{
     [self.delegate eventPickerViewController:self
-                               didSelectType: nil];
+                               didSelectType: _licence andDate:self.selectedExpireDate];
+    [self.navigationController popViewControllerAnimated:YES];
 }
-
 - (void)setupExpireDate {
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [self.dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     
-    NSDate *defaultDate = [NSDate date];
+    //NSDate *defaultDate = [NSDate date];
     
-    self.expireDateLabel.text = [self.dateFormatter stringFromDate:defaultDate];
+    self.expireDateLabel.text = [self.dateFormatter stringFromDate:self.selectedExpireDate];
+    
     self.expireDateLabel.textColor = [self.tableView tintColor];
-    self.selectedExpireDate = defaultDate;
+    //self.selectedExpireDate = defaultDate;
 }
 - (void)didReceiveMemoryWarning
 {
@@ -128,13 +146,11 @@
         typePickerViewController.type = [NSNumber numberWithInt:1];
     }
 }
-//-(void) typePickerViewController:(id *)controller didSelectType:(Licence /*)type{
-    //self.licenceNameLabel.text =type.licenceName;
-    //[self.navigationController popViewControllerAnimated:YES];
-//}
-
--(void) eventPickerViewController:(id *)controller didSelectType:(Licence *) licence{
+-(void) eventPickerViewController:(UITableViewController *)controller didSelectType:(Licence *) licence andDate:(NSDate *)date{
+    
+    _licence=licence;
     self.licenceNameLabel.text =licence.licenceName;
     [self.navigationController popViewControllerAnimated:YES];
+    
 }
 @end

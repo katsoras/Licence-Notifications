@@ -92,7 +92,7 @@
     //
     //make callback
     [self.delegate eventPickerViewController:self
-                               didSelectType: licence];
+                               didSelectType: licence andDate:nil];
 }
 
 @end

@@ -10,12 +10,6 @@
 #import "Licence.h"
 #import "ROSAddVehicleLicenceEventViewController.h"
 
-//@class ROSPickLicenceViewController;
-//@protocol ROSLicencePickerViewControllerDelegate<NSObject>
-//-(void) typePickerViewController:(ROSPickLicenceViewController *)controller /didSelectType:(Licence *)type;
-//@end
-
-
 @interface ROSPickLicenceViewController : UITableViewController
 @property (nonatomic,weak) id<ROSLicencePickerViewControllerDelegate> delegate;
 

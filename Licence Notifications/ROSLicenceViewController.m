@@ -36,6 +36,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
 {
     [super viewDidLoad];
     NSLog(@"%@",self.managedObjectContext);
+    
     //
     // Initialize Fetch Request
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Licence"];
@@ -106,7 +107,6 @@ static NSString *CellIdentifier = @"Cell Identifier";
     }
     
 }
-
 //
 //implementing UItableview datasource
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -136,12 +136,14 @@ static NSString *CellIdentifier = @"Cell Identifier";
 {
     return [[self.fetchedResultsController sections]count];
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSArray *sections=[self.fetchedResultsController sections];
     id<NSFetchedResultsSectionInfo> sectionInfo=[sections objectAtIndex:section];
     return [sectionInfo numberOfObjects];
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Dequeue Reusable Cell
