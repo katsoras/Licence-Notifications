@@ -8,7 +8,7 @@
 
 #import "ROSVehicleViewController.h"
 #import "ROSAddVehicleViewController.h"
-
+#import "ROSVehicleViewCell.h"
 #import "ROSEditVehicleViewController.h"
 #import "Vehicle.h"
 //
@@ -85,7 +85,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
             break;
         }
         case NSFetchedResultsChangeUpdate: {
-            [self configureCell:(UITableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            [self configureCell:(ROSVehicleViewCell *)[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
         }
         case NSFetchedResultsChangeMove: {
@@ -124,7 +124,6 @@ static NSString *CellIdentifier = @"Cell Identifier";
 {
     return [[self.fetchedResultsController sections]count];
 }
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSArray *sections=[self.fetchedResultsController sections];
@@ -135,21 +134,21 @@ static NSString *CellIdentifier = @"Cell Identifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Dequeue Reusable Cell
-    UITableViewCell *cell = [tableView
-                             dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    ROSVehicleViewCell *cell = [tableView
+    dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     //
     // Configure Table View Cell
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(ROSVehicleViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     // Fetch Record
     Vehicle *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     // Update Cell
-    [cell.textLabel setText:record.model];
-    [cell.detailTextLabel setText:record.registrationPlate];
+    [cell.registerPlateLabelField setText:record.registrationPlate];
+    [cell.modelLabelField setText:record.model];
 }
 //
 //implementing table view delegate

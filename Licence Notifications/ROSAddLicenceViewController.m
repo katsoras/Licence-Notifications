@@ -68,6 +68,7 @@
             record.type=[NSNumber numberWithBool:YES];
         else
             record.type=[NSNumber numberWithBool:NO];
+       
         //
         // Save Record
         NSError *error = nil;

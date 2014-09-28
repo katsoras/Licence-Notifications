@@ -8,7 +8,7 @@
 
 #import "ROSAddVehicleViewController.h"
 #import "Vehicle.h"
-
+#import "ROSNotificationDateViewCell.h"
 #import "Notification.h"
 
 #import "ROSAddVehicleLicenceEventViewController.h"
@@ -143,18 +143,28 @@
         ROSAddButtonLicenceViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"addAVLCellIdentifier"];
         return cell;
     }else {
-        UITableViewCell *cell = [tableView
-                                 dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
+        
+        ROSNotificationDateViewCell *cell = [tableView
+dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
         
         Notification *item = [self.vehicleNotifications objectAtIndex:[indexPath row]-3];
-        cell.textLabel.text=item.licence.licenceName;
+        cell.licenceDateLabelField.text=item.licence.licenceName;
         NSDate *defaultDate = item.expireDate;
         
-        cell.detailTextLabel.text = [self.dateFormatter stringFromDate:defaultDate];
+        cell.notificateDateField.text = [self.dateFormatter stringFromDate:defaultDate];
         return cell;
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row>2){
+        return 62;
+    }
+    else {
+        return 44;
+    }
+}
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"AddLicenceEvent"]) {

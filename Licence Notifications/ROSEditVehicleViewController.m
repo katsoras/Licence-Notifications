@@ -7,6 +7,7 @@
 //
 #import "ROSAddButtonLicenceViewCell.h"
 #import "ROSRegistrationPlateViewCell.h"
+#import "ROSNotificationDateViewCell.h"
 #import "ROSModelViewCell.h"
 #import "ROSEditVehicleViewController.h"
 #import "Licence.h"
@@ -143,19 +144,30 @@
         return cell;
     }else {
         
-        UITableViewCell *cell = [tableView
-                                 dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
+        ROSNotificationDateViewCell *cell = [tableView
+        dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
+        
         Notification *item = [self.vehicleNotifications objectAtIndex:[indexPath row]-3];
         
-        cell.textLabel.text=item.licence.licenceName;
+        cell.licenceDateLabelField.text=item.licence.licenceName;
         NSDate *defaultDate = item.expireDate;
         
-        cell.detailTextLabel.text = [self.dateFormatter stringFromDate:defaultDate];
+        cell.notificateDateField.text = [self.dateFormatter stringFromDate:defaultDate];
         
         [cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
         return cell;
     }
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row>2){
+        return 62;
+    }
+    else {
+        return 44;
+    }
+}
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.row>2)
         return YES;

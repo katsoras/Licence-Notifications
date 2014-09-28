@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ROSVehicleCell : UITableViewCell
-@property (nonatomic, weak) IBOutlet UILabel *modelLabel;
-@property (nonatomic, weak) IBOutlet UILabel *registrationPlateLabel;
+
 @end
