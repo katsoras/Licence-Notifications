@@ -14,13 +14,13 @@
 //
 //class extension
 @interface ROSVehicleViewController ()<NSFetchedResultsControllerDelegate>
+
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+
 //
 //holds selected index path
 @property (strong, nonatomic) NSIndexPath *selection;
 @end
-
-
 
 @implementation ROSVehicleViewController
 static NSString *CellIdentifier = @"Cell Identifier";

@@ -11,6 +11,8 @@
 #import "ROSEditDriverViewController.h"
 #import "Driver.h"
 
+#import "ROSDriverViewCell.h"
+
 
 @interface ROSDriverViewController ()<NSFetchedResultsControllerDelegate>
 @property (strong, nonatomic) NSFetchedResultsController *
@@ -56,8 +58,6 @@ static NSString *CellIdentifier = @"Cell Identifier";
         NSLog(@"Unable to perform fetch.");
         NSLog(@"%@, %@", error, error.localizedDescription);
     }
-    
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,6 +81,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    
     switch (type) {
         case NSFetchedResultsChangeInsert: {
             [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -91,7 +92,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
             break;
         }
         case NSFetchedResultsChangeUpdate: {
-            [self configureCell:(UITableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            [self configureCell:(ROSDriverViewCell *)[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
         }
         case NSFetchedResultsChangeMove: {
@@ -99,10 +100,10 @@ static NSString *CellIdentifier = @"Cell Identifier";
             [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             
             [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            
             break;
         }
     }
-    
 }
 
 //
@@ -134,27 +135,26 @@ static NSString *CellIdentifier = @"Cell Identifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Dequeue Reusable Cell
-    UITableViewCell *cell = [tableView
+    ROSDriverViewCell *cell = [tableView
                              dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     //
     // Configure Table View Cell
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    //
+- (void)configureCell:(ROSDriverViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    
+    
     // Fetch Record
     Driver *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
-
-    //
-    // Update Cell
-    [cell.textLabel setText:[[record.firstName stringByAppendingString:@" "] stringByAppendingString:record.lastName]];
     
-    [cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+    // Update Cell
+    [cell.lastNameLabelField setText:record.lastName];
+    [cell.firstNameLabelField setText:record.firstName];
 }
-
 //
 //implementing table view delegate
+
 
 //
 //notify when the detailed disclosure button is tapped
@@ -162,44 +162,36 @@ static NSString *CellIdentifier = @"Cell Identifier";
     [self setSelection:indexPath];
     //
     // Perform Segue
-    [self performSegueWithIdentifier:@"EditDriverViewController" sender:self];
+    [self performSegueWithIdentifier:@"EditDriverLicenceViewController" sender:self];
 }
-
 //
 //prepare for segue and set properties to addVehicle and editVehicle controllers
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"AddDriverViewController"]) {
-        
         // Obtain Reference to View Controller
         UINavigationController *nc = (UINavigationController *)[segue destinationViewController];
-        
-        ROSAddDriverViewController *vc = (ROSAddDriverViewController *)
-        [nc topViewController];
-        //
+        ROSAddDriverViewController *vc = (ROSAddDriverViewController *)[nc topViewController];
         // Configure View Controller
         [vc setManagedObjectContext:self.managedObjectContext];
     }
-    else if([segue.identifier
-              isEqualToString:@"EditDriverViewController"]){
-        //
+    
+    else if([segue.identifier isEqualToString:@"EditDriverLicenceViewController"]){
         // Obtain Reference to View Controller
-        ROSEditDriverViewController *vc = (ROSEditDriverViewController *)[segue destinationViewController];
+        UINavigationController *nc = (UINavigationController *)[segue destinationViewController];
+        
+        ROSEditDriverViewController *vc = (ROSEditDriverViewController *)[nc topViewController];
         
         //
         // Configure View Controller
         [vc setManagedObjectContext:self.managedObjectContext];
+        
         if (self.selection) {
-            //
             // Fetch Record
             Driver *record = [self.fetchedResultsController objectAtIndexPath:self.selection];
-            
             if (record) {
                 [vc setRecord:record];
             }
-            
-            
-            //
             // Reset Selection
             [self setSelection:nil];
         }

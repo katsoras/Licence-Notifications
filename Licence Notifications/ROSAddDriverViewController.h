@@ -10,8 +10,8 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 
-@interface ROSAddDriverViewController : UITableViewController<ABPeoplePickerNavigationControllerDelegate>
-
+#import "ROSAddVehicleLicenceEventViewController.h"
+@interface ROSAddDriverViewController : UITableViewController<ABPeoplePickerNavigationControllerDelegate,ROSLicencePickerViewControllerDelegate>
 
 @property (weak,nonatomic) IBOutlet UILabel *detailLabel;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
