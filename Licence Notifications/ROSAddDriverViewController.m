@@ -117,21 +117,32 @@
         CFRelease(generalCFObject);
 
     }
+    
+    // Initialize the array if it's not yet initialized.
+    if (_arrContactsData == nil) {
+        _arrContactsData = [[NSMutableArray alloc] init];
+    }
+    // Add the dictionary to the array.
+    [_arrContactsData addObject:contactInfoDict];
     [_addressBookController dismissViewControllerAnimated:YES completion:nil];
     
-    firstName=[contactInfoDict objectForKey:@"firstName"];
-    lastName=[contactInfoDict objectForKey:@"lastName"];
-    
-    NSString *concatFullName=[[firstName stringByAppendingString:@" "] stringByAppendingString:lastName];
-    
-    self.detailLabel.text = concatFullName;
+    [self.tableView reloadData];
     return NO;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.row==0){
+        NSDictionary *contactInfoDict = [_arrContactsData objectAtIndex:indexPath.row];
+        
+        firstName=[contactInfoDict objectForKey:@"firstName"];
+        lastName=[contactInfoDict objectForKey:@"lastName"];
+        
+        NSString *concatFullName=[[firstName stringByAppendingString:@" "] stringByAppendingString:lastName];
+        
         UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"addContactCellIdentifier"];
+        
+        cell.detailTextLabel.text=concatFullName;
         return cell;
     }
     else if(indexPath.row==1){
@@ -165,10 +176,12 @@
         ROSAddVehicleLicenceEventViewController *typePickerViewController = segue.destinationViewController;
         typePickerViewController.managedObjectContext=self.managedObjectContext;
         typePickerViewController.delegate = self;
-        typePickerViewController.type = DRIVER;
+        typePickerViewController.type = [NSNumber numberWithInt:0];
     }
 }
+
 -(void) eventPickerViewController:(UITableViewController *)controller didSelectType:(Licence *) licence andDate:(NSDate *)date andNotification:(Notification *)notification{
+    
     //
     //new notification
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Notification" inManagedObjectContext:self.managedObjectContext];

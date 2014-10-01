@@ -14,9 +14,9 @@
 
 @interface ROSAddVehicleLicenceEventViewController ()
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
+
 @property (strong, nonatomic) NSDate *selectedExpireDate;
 @property (assign) BOOL datePickerIsShowing;
-
 @end
 
 @implementation ROSAddVehicleLicenceEventViewController{
@@ -44,12 +44,12 @@
         self.licenceNameLabel.text=_licence.licenceName;
         self.selectedExpireDate=self.notification.expireDate;
     }
+    
     //
     //add mode
-    else{
+    else {
         self.selectedExpireDate=[NSDate date];
     }
-    
     [self setupExpireDate];
     [self hideDatePickerCell];
 }
@@ -144,7 +144,7 @@
         if(_licence){
             typePickerViewController.licence=_licence;
         }
-        typePickerViewController.type = [NSNumber numberWithInt:1];
+        typePickerViewController.type = self.type;
     }
 }
 

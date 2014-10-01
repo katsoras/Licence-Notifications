@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-@class Driver;
-
+#import "ROSAddVehicleLicenceEventViewController.h"
+#import "Driver.h"
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
 @interface ROSEditDriverViewController : UITableViewController
+<ROSLicencePickerViewControllerDelegate,ABPeoplePickerNavigationControllerDelegate>
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (weak,nonatomic) IBOutlet UILabel *detailLabel;
 @property (strong, nonatomic) Driver *record;
 
 

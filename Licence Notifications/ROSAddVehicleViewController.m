@@ -166,10 +166,12 @@ dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"AddLicenceEvent"]) {
+        
         ROSAddVehicleLicenceEventViewController *typePickerViewController = segue.destinationViewController;
         typePickerViewController.managedObjectContext=self.managedObjectContext;
+        
         typePickerViewController.delegate = self;
-        typePickerViewController.type =VEHICLE;
+        typePickerViewController.type =[NSNumber numberWithInt:1];
     }
 }
 -(void) eventPickerViewController:(UITableViewController *)controller didSelectType:(Licence *) licence andDate:(NSDate *)date andNotification:(Notification *)notification{

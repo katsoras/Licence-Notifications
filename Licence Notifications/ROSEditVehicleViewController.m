@@ -199,17 +199,20 @@
 //notify when the detailed disclosure button is tapped
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
     [self setSelection:indexPath];
-    
     //
     // Perform Segue
     [self performSegueWithIdentifier:@"AddLicenceEvent" sender:self];
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
     if ([segue.identifier isEqualToString:@"AddLicenceEvent"]) {
         //
         // Obtain Reference to View Controller
         ROSAddVehicleLicenceEventViewController *vc = (ROSAddVehicleLicenceEventViewController *)[segue destinationViewController];
         vc.delegate = self;
+        //
+        //
+        vc.type =[NSNumber numberWithInt:1];
         //
         // Configure View Controller
         [vc setManagedObjectContext:self.managedObjectContext];

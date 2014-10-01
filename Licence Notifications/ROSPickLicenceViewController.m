@@ -8,6 +8,7 @@
 
 #import "ROSPickLicenceViewController.h"
 #import "Licence.h"
+
 @interface ROSPickLicenceViewController ()
     @property (strong) NSMutableArray *licences;
 @end

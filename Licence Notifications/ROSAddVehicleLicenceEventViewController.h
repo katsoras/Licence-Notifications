@@ -20,8 +20,9 @@
 
 @property (nonatomic,weak) id<ROSLicencePickerViewControllerDelegate> delegate;
 
-@property (nonatomic,strong) NSString *type;
+@property (nonatomic,strong) NSNumber *type;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
 @property (weak, nonatomic) IBOutlet UILabel *licenceNameLabel;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UILabel *expireDateLabel;
