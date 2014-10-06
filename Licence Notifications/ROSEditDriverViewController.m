@@ -12,6 +12,8 @@
 #import "Notification.h"
 #import "ROSPickLicenceViewController.h"
 #import "ROSEditDriverViewController.h"
+#import "ROSDriverViewCell.h"
+
 @interface ROSEditDriverViewController ()
 @property (nonatomic, strong) ABPeoplePickerNavigationController *addressBookController;
 @property (nonatomic, strong) NSMutableArray *arrContactsData;
@@ -59,7 +61,58 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)save:(id)sender {
+    ROSDriverViewCell * cell = (ROSDriverViewCell *)[self.tableView
+                                                     cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    NSString *firstNameLabelField = cell.firstNameLabelField.text;
+    NSString *lastNameLabelField=cell.lastNameLabelField.text;
     
+    if (firstNameLabelField && lastNameLabelField &&
+        firstNameLabelField.length && lastNameLabelField.length) {
+        
+        //
+        //set driver values
+        
+        
+        //
+        //
+        self.record.firstName=firstNameLabelField;
+        self.record.lastName=lastNameLabelField;
+        
+        //
+        //log notification
+        for(Notification * i in self.driverNotifications){
+            NSLog(@"Start to import notif %@",i.expireDate);
+        }
+        
+        //
+        //delete removed notification
+        for (Notification *managedObject in toDeleteNotifications) {
+            [self.managedObjectContext deleteObject:managedObject];
+        }
+        
+        //
+        //link with record
+        [self.record addNotifications:
+         [NSSet setWithArray:self.driverNotifications]];
+        
+        NSError *error = nil;
+        if ([self.managedObjectContext save:&error]) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+        else
+        {
+            if (error) {
+                NSLog(@"Unable to save record.");
+                NSLog(@"%@, %@", error, error.localizedDescription);
+            }
+            
+            [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do could not be saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        }
+    }
+    else {
+        
+        [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do needs a name." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    }
 }
 - (void)didReceiveMemoryWarning
 {
@@ -134,14 +187,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.row==0){
-         NSDictionary *contactInfoDict = [_arrContactsData objectAtIndex:indexPath.row];
+        NSDictionary *contactInfoDict = [_arrContactsData objectAtIndex:indexPath.row];
+        
         firstName=[contactInfoDict objectForKey:@"firstName"];
         lastName=[contactInfoDict objectForKey:@"lastName"];
         
-        NSString *concatFullName=[[firstName stringByAppendingString:@" "] stringByAppendingString:lastName];
         //self.detailLabel.text = concatFullName;
-        UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"addContactCellIdentifier"];
-        cell.detailTextLabel.text=concatFullName;
+        ROSDriverViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"addContactCellIdentifier"];
+        
+        cell.lastNameLabelField.text=lastName;
+        cell.firstNameLabelField.text=firstName;
+        
         return cell;
     }
     
@@ -153,22 +209,24 @@
     else
     {
         ROSNotificationDateViewCell *cell = [tableView
-        dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
+                                             dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
         
         Notification *item = [self.driverNotifications objectAtIndex:[indexPath row]-2];
         cell.licenceDateLabelField.text=item.licence.licenceName;
+        
         NSDate *defaultDate = item.expireDate;
+        
         cell.notificateDateField.text = [self.dateFormatter stringFromDate:defaultDate];
         return cell;
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row>1){
-        return 62;
+    if(indexPath.row==1){
+        return 44;
     }
     else {
-        return 44;
+        return 62;
     }
 }
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

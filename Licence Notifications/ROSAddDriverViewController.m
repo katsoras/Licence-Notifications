@@ -1,16 +1,16 @@
 //
 //  ROSAddDriverViewController.m
 //  Licence Notifications
+
 //
 //  Created by rose on 17/9/14.
 //  Copyright (c) 2014 home. All rights reserved.
-//
-
 #import "ROSAddDriverViewController.h"
 #import "ROSNotificationDateViewCell.h"
 #import "ROSAddButtonLicenceViewCell.h"
 #import "Driver.h"
 #import "ROSTypePickerViewController.h"
+#import "ROSDriverViewCell.h"
 @interface ROSAddDriverViewController ()
 @property (nonatomic, strong) ABPeoplePickerNavigationController *addressBookController;
 @property (nonatomic, strong) NSMutableArray *arrContactsData;
@@ -28,6 +28,7 @@
     NSString *firstName;
     NSString *lastName;
 }
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -54,9 +55,45 @@
 - (IBAction)cancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
 - (IBAction)save:(id)sender {
     
+    ROSDriverViewCell * cell = (ROSDriverViewCell *)[self.tableView
+                                                     cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    
+    NSString * firstNameLabelText = cell.firstNameLabelField.text;
+    NSString *lastNameLabelText=cell.lastNameLabelField.text;
+    
+    
+    if (firstNameLabelText && lastNameLabelText && firstNameLabelText.length && lastNameLabelText.length) {
+        
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Driver" inManagedObjectContext:self.managedObjectContext];
+        
+        Driver *driver = [[Driver alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
+        
+        //
+        //set driver values
+        driver.lastName=lastNameLabelText;
+        driver.firstName=firstNameLabelText;
+        
+        //
+        //link with record
+        [driver addNotifications:
+         [NSSet setWithArray:self.driverNotifications]];
+        
+        NSError *error = nil;
+        if ([self.managedObjectContext save:&error]) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            if (error) {
+                NSLog(@"Unable to save record.");
+                NSLog(@"%@, %@", error, error.localizedDescription);
+            }
+            [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do could not be saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        }
+    } else {
+        
+        [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do needs a name." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    }
 }
 
 -(void)showAddressBook{
@@ -96,8 +133,8 @@
 -(BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person{
     
     NSMutableDictionary *contactInfoDict = [[NSMutableDictionary alloc]
-                initWithObjects:@[@"", @"", @""]
-                forKeys:@[@"firstName", @"lastName", @"mobileNumber"]];
+                                            initWithObjects:@[@"", @"", @""]
+                                            forKeys:@[@"firstName", @"lastName", @"mobileNumber"]];
     
     
     CFTypeRef generalCFObject;
@@ -106,7 +143,7 @@
         
         [contactInfoDict setObject:(__bridge NSString *)generalCFObject forKey:@"firstName"];
         CFRelease(generalCFObject);
-    
+        
     }
     generalCFObject = ABRecordCopyValue(person, kABPersonLastNameProperty);
     
@@ -114,7 +151,7 @@
         
         [contactInfoDict setObject:(__bridge NSString *)generalCFObject forKey:@"lastName"];
         CFRelease(generalCFObject);
-
+        
     }
     
     // Initialize the array if it's not yet initialized.
@@ -137,11 +174,11 @@
         firstName=[contactInfoDict objectForKey:@"firstName"];
         lastName=[contactInfoDict objectForKey:@"lastName"];
         
-        NSString *concatFullName=[[firstName stringByAppendingString:@" "] stringByAppendingString:lastName];
+        ROSDriverViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"addContactCellIdentifier"];
         
-        UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"addContactCellIdentifier"];
+        cell.lastNameLabelField.text=lastName;
+        cell.firstNameLabelField.text=firstName;
         
-        cell.detailTextLabel.text=concatFullName;
         return cell;
     }
     else if(indexPath.row==1){
@@ -151,7 +188,7 @@
     else
     {
         ROSNotificationDateViewCell *cell = [tableView
-    dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
+                                             dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
         Notification *item = [self.driverNotifications objectAtIndex:[indexPath row]-2];
         cell.licenceDateLabelField.text=item.licence.licenceName;
         NSDate *defaultDate = item.expireDate;
@@ -161,11 +198,11 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row>1){
-        return 62;
+    if(indexPath.row==1){
+        return 44;
     }
     else {
-        return 44;
+        return 62;
     }
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

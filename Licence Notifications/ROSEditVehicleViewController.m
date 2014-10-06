@@ -66,8 +66,8 @@
     
     ROSRegistrationPlateViewCell * cell2 = (ROSRegistrationPlateViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     NSString * registrationPlate = cell2.registrationPlateTextField.text;
-    
-    if (model && registrationPlate && model.length && registrationPlate.length) {
+    if (model && registrationPlate &&
+        model.length && registrationPlate.length) {
         //
         //set vehicle values
         
