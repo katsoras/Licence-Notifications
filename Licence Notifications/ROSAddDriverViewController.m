@@ -15,7 +15,6 @@
 @property (nonatomic, strong) ABPeoplePickerNavigationController *addressBookController;
 @property (nonatomic, strong) NSMutableArray *arrContactsData;
 -(void)showAddressBook;
-
 //
 //holds driver notifications
 @property (strong) NSMutableArray *driverNotifications;
@@ -162,14 +161,13 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row>2){
+    if(indexPath.row>1){
         return 62;
     }
     else {
         return 44;
     }
 }
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"AddLicenceEvent"]) {

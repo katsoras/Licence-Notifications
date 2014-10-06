@@ -88,11 +88,9 @@
     if (indexPath.row == 1){
         
         if (self.datePickerIsShowing){
-            
+
             [self hideDatePickerCell];
-            
         }else {
-            
           //[self.activeTextField resignFirstResponder];
             
             [self showDatePickerCell];
