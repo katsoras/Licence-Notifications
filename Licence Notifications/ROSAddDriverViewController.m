@@ -13,7 +13,7 @@
 #import "ROSDriverViewCell.h"
 @interface ROSAddDriverViewController ()
 @property (nonatomic, strong) ABPeoplePickerNavigationController *addressBookController;
-@property (nonatomic, strong) NSMutableArray *arrContactsData;
+//@property (nonatomic, strong) NSMutableArray *arrContactsData;
 -(void)showAddressBook;
 //
 //holds driver notifications
@@ -154,25 +154,23 @@
         
     }
     
-    // Initialize the array if it's not yet initialized.
-    if (_arrContactsData == nil) {
-        _arrContactsData = [[NSMutableArray alloc] init];
-    }
-    // Add the dictionary to the array.
-    [_arrContactsData addObject:contactInfoDict];
-    [_addressBookController dismissViewControllerAnimated:YES completion:nil];
+    //
+    //set driver first and last name
+    firstName=[contactInfoDict objectForKey:@"firstName"];
+    lastName=[contactInfoDict objectForKey:@"lastName"];
     
     [self.tableView reloadData];
+    [_addressBookController dismissViewControllerAnimated:YES completion:nil];
     return NO;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.row==0){
-        NSDictionary *contactInfoDict = [_arrContactsData objectAtIndex:indexPath.row];
+        //NSDictionary *contactInfoDict = [_arrContactsData objectAtIndex:indexPath.row];
         
-        firstName=[contactInfoDict objectForKey:@"firstName"];
-        lastName=[contactInfoDict objectForKey:@"lastName"];
+        //firstName=[contactInfoDict objectForKey:@"firstName"];
+       // lastName=[contactInfoDict objectForKey:@"lastName"];
         
         ROSDriverViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"addContactCellIdentifier"];
         

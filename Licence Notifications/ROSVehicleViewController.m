@@ -68,6 +68,9 @@ static NSString *CellIdentifier = @"Cell Identifier";
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
 }
+- (IBAction) editVehicleLicence:(id)sender {
+    [self.tableView setEditing:![self.tableView isEditing] animated:YES];
+}
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];

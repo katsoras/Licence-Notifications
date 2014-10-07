@@ -48,6 +48,7 @@
 		9AC621B519CEF50700F51075 /* ROSRegistrationPlateViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC621B419CEF50700F51075 /* ROSRegistrationPlateViewCell.m */; };
 		9AC621B819CEF52200F51075 /* ROSAddButtonLicenceViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC621B719CEF52200F51075 /* ROSAddButtonLicenceViewCell.m */; };
 		9AC621BB19CF19C000F51075 /* ROSPickLicenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC621BA19CF19C000F51075 /* ROSPickLicenceViewController.m */; };
+		9AC83A2419E47713001B844B /* ROSLicenceViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC83A2319E47713001B844B /* ROSLicenceViewCell.m */; };
 		9ACA0D4619C5B99C00C9E41E /* ROSEditVehicleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACA0D4519C5B99C00C9E41E /* ROSEditVehicleViewController.m */; };
 		9ACCB06719CB654F009825D2 /* ROSEditDriverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACCB06619CB654F009825D2 /* ROSEditDriverViewController.m */; };
 		9ACCB06D19CDCAF7009825D2 /* ROSAddVehicleLicenceEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACCB06C19CDCAF7009825D2 /* ROSAddVehicleLicenceEventViewController.m */; };
@@ -129,6 +130,8 @@
 		9AC621B719CEF52200F51075 /* ROSAddButtonLicenceViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROSAddButtonLicenceViewCell.m; sourceTree = "<group>"; };
 		9AC621B919CF19C000F51075 /* ROSPickLicenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROSPickLicenceViewController.h; sourceTree = "<group>"; };
 		9AC621BA19CF19C000F51075 /* ROSPickLicenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROSPickLicenceViewController.m; sourceTree = "<group>"; };
+		9AC83A2219E47713001B844B /* ROSLicenceViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROSLicenceViewCell.h; sourceTree = "<group>"; };
+		9AC83A2319E47713001B844B /* ROSLicenceViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROSLicenceViewCell.m; sourceTree = "<group>"; };
 		9ACA0D4419C5B99C00C9E41E /* ROSEditVehicleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROSEditVehicleViewController.h; sourceTree = "<group>"; };
 		9ACA0D4519C5B99C00C9E41E /* ROSEditVehicleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROSEditVehicleViewController.m; sourceTree = "<group>"; };
 		9ACCB06519CB654F009825D2 /* ROSEditDriverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROSEditDriverViewController.h; sourceTree = "<group>"; };
@@ -239,6 +242,8 @@
 				9AE886CC19C61A6E00B519AA /* ROSEditLicenceViewController.h */,
 				9AE886CD19C61A6F00B519AA /* ROSEditLicenceViewController.m */,
 				9A7ED57A19C617AC009A132A /* ROSLicenceViewController.h */,
+				9AC83A2219E47713001B844B /* ROSLicenceViewCell.h */,
+				9AC83A2319E47713001B844B /* ROSLicenceViewCell.m */,
 				9A7ED57B19C617AC009A132A /* ROSLicenceViewController.m */,
 				9A7ED57719C614AB009A132A /* ROSAddLicenceViewController.h */,
 				9A7ED57819C614AB009A132A /* ROSAddLicenceViewController.m */,
@@ -410,6 +415,7 @@
 				9A7C82AF19CA0E5700B14F14 /* ROSAddDriverViewController.m in Sources */,
 				9ACA0D4619C5B99C00C9E41E /* ROSEditVehicleViewController.m in Sources */,
 				9A766B6C19D6F74F006FD3E4 /* Vehicle.m in Sources */,
+				9AC83A2419E47713001B844B /* ROSLicenceViewCell.m in Sources */,
 				9AE886CE19C61A6F00B519AA /* ROSEditLicenceViewController.m in Sources */,
 				9A7C82AC19CA0E0700B14F14 /* ROSDriverViewController.m in Sources */,
 				9A766B8219D88745006FD3E4 /* ROSVehicleViewCell.m in Sources */,

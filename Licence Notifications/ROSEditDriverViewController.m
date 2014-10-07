@@ -16,7 +16,7 @@
 
 @interface ROSEditDriverViewController ()
 @property (nonatomic, strong) ABPeoplePickerNavigationController *addressBookController;
-@property (nonatomic, strong) NSMutableArray *arrContactsData;
+//@property (nonatomic, strong) NSMutableArray *arrContactsData;
 -(void)showAddressBook;
 //
 //contains selected licences
@@ -52,6 +52,8 @@
     [super viewDidLoad];
     if(self.record){
         self.driverNotifications = [NSMutableArray arrayWithArray:[self.record.notifications allObjects]];
+        firstName=self.record.firstName;
+        lastName=self.record.lastName;
     }
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -156,17 +158,16 @@
         CFRelease(generalCFObject);
         
     }
-    // Initialize the array if it's not yet initialized.
-    if (_arrContactsData == nil) {
-        _arrContactsData = [[NSMutableArray alloc] init];
-    }
-    // Add the dictionary to the array.
-    [_arrContactsData addObject:contactInfoDict];
+    //
+    //set driver name and last name
+    firstName=[contactInfoDict objectForKey:@"firstName"];
+    lastName=[contactInfoDict objectForKey:@"lastName"];
     
+    [self.tableView reloadData];
     [_addressBookController dismissViewControllerAnimated:YES completion:nil];
-    
     return NO;
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section ==0 && indexPath.row == 0)
@@ -187,13 +188,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.row==0){
-        NSDictionary *contactInfoDict = [_arrContactsData objectAtIndex:indexPath.row];
         
-        firstName=[contactInfoDict objectForKey:@"firstName"];
-        lastName=[contactInfoDict objectForKey:@"lastName"];
-        
-        //self.detailLabel.text = concatFullName;
         ROSDriverViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"addContactCellIdentifier"];
+        
         
         cell.lastNameLabelField.text=lastName;
         cell.firstNameLabelField.text=firstName;

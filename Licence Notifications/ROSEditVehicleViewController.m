@@ -130,6 +130,7 @@
 {
     if(indexPath.row==0){
         ROSModelViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"modelAVLIdentifier"];
+       
         cell.modelTextField.text=self.record.model;
         return cell;
     }
