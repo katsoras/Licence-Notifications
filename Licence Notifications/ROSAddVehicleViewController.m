@@ -10,7 +10,7 @@
 #import "Vehicle.h"
 #import "ROSNotificationDateViewCell.h"
 //#import "Notification.h"
-
+#import "ROSUtility.h"
 #import "ROSAddVehicleLicenceEventViewController.h"
 
 #import "ROSAddButtonLicenceViewCell.h"
@@ -75,8 +75,8 @@
     NSString * model = cell.modelTextField.text;
     
     ROSRegistrationPlateViewCell * cell2 = (ROSRegistrationPlateViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-    NSString * registrationPlate = cell2.registrationPlateTextField.text;
     
+    NSString * registrationPlate = cell2.registrationPlateTextField.text;
     if (model && registrationPlate && model.length && registrationPlate.length) {
         
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"Vehicle" inManagedObjectContext:self.managedObjectContext];
@@ -94,17 +94,21 @@
         //
         //registration
         vehicle.registrationPlate=registrationPlate;
+        
+        
+        
         //
         //link with record
         [vehicle addNotifications:
-         [NSSet setWithArray:self.vehicleNotifications]];
+        [NSSet setWithArray:self.vehicleNotifications]];
         
         NSError *error = nil;
         if ([self.managedObjectContext save:&error]) {
+            
+            [ROSUtility createLocalNotification:self.vehicleNotifications];
+            
             [self dismissViewControllerAnimated:YES completion:nil];
-            
         } else {
-            
             if (error) {
                 NSLog(@"Unable to save record.");
                 NSLog(@"%@, %@", error, error.localizedDescription);
@@ -184,6 +188,8 @@ dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
     
     unassociatedObject.licence=licence;
     unassociatedObject.expireDate=date;
+    
+    unassociatedObject.notificationRefId=[ROSUtility createUUID];
     
     [self.vehicleNotifications addObject:unassociatedObject];
     [self.tableView reloadData];

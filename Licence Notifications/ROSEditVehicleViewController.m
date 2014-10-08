@@ -153,7 +153,10 @@
         cell.licenceDateLabelField.text=item.licence.licenceName;
         NSDate *defaultDate = item.expireDate;
         
+        //
+        //cell.licenceDateLabelField.textColor = [UIColor redColor];
         cell.notificateDateField.text = [self.dateFormatter stringFromDate:defaultDate];
+        
         
         [cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
         return cell;

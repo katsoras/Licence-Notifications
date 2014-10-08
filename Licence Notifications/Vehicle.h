@@ -1,8 +1,8 @@
 //
-//  Licence.h
+//  Vehicle.h
 //  Licence Notifications
 //
-//  Created by rose on 27/9/14.
+//  Created by rose on 8/10/14.
 //  Copyright (c) 2014 home. All rights reserved.
 //
 
@@ -11,14 +11,14 @@
 
 @class Notification;
 
-@interface Licence : NSManagedObject
+@interface Vehicle : NSManagedObject
 
-@property (nonatomic, retain) NSString * licenceName;
-@property (nonatomic, retain) NSNumber * type;
+@property (nonatomic, retain) NSString * model;
+@property (nonatomic, retain) NSString * registrationPlate;
 @property (nonatomic, retain) NSSet *notifications;
 @end
 
-@interface Licence (CoreDataGeneratedAccessors)
+@interface Vehicle (CoreDataGeneratedAccessors)
 
 - (void)addNotificationsObject:(Notification *)value;
 - (void)removeNotificationsObject:(Notification *)value;

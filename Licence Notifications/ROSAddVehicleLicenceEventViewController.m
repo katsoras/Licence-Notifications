@@ -11,7 +11,6 @@
 #import "ROSTypePickerViewController.h"
 #define kDatePickerIndex 2
 #define kDatePickerCellHeight 164
-
 @interface ROSAddVehicleLicenceEventViewController ()
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 
@@ -44,7 +43,6 @@
         self.licenceNameLabel.text=_licence.licenceName;
         self.selectedExpireDate=self.notification.expireDate;
     }
-    
     //
     //add mode
     else {
@@ -62,7 +60,7 @@
 - (void)setupExpireDate {
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [self.dateFormatter setDateFormat:@"MMM dd, yyyy HH:mm"];
     
     self.expireDateLabel.text = [self.dateFormatter stringFromDate:self.selectedExpireDate];
     
@@ -80,27 +78,19 @@
     if (indexPath.row == kDatePickerIndex){
         height = self.datePickerIsShowing ? kDatePickerCellHeight : 0.0f;
     }
-    
     return height;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     if (indexPath.row == 1){
-        
         if (self.datePickerIsShowing){
-
             [self hideDatePickerCell];
         }else {
-          //[self.activeTextField resignFirstResponder];
-            
             [self showDatePickerCell];
         }
     }
-    
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 - (void)hideDatePickerCell {
-    
     self.datePickerIsShowing = NO;
     
     [self.tableView beginUpdates];
@@ -115,7 +105,6 @@
                      }];
 }
 - (void)showDatePickerCell {
-    
     self.datePickerIsShowing = YES;
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
@@ -126,7 +115,9 @@
     }];
 }
 - (IBAction)pickerDateChanged:(UIDatePicker *)sender {
+    
     self.expireDateLabel.text =  [self.dateFormatter stringFromDate:sender.date];
+    
     self.selectedExpireDate = sender.date;
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -11,4 +11,5 @@
 @interface ROSNotificationDateViewCell : UITableViewCell
 @property (nonatomic, weak) IBOutlet UILabel *licenceDateLabelField;
 @property (nonatomic, weak) IBOutlet UILabel *notificateDateField;
+
 @end

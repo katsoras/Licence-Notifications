@@ -2,7 +2,7 @@
 //  Notification.h
 //  Licence Notifications
 //
-//  Created by rose on 27/9/14.
+//  Created by rose on 8/10/14.
 //  Copyright (c) 2014 home. All rights reserved.
 //
 
@@ -14,6 +14,7 @@
 @interface Notification : NSManagedObject
 
 @property (nonatomic, retain) NSDate * expireDate;
+@property (nonatomic, retain) NSString * notificationRefId;
 @property (nonatomic, retain) Driver *driver;
 @property (nonatomic, retain) Licence *licence;
 @property (nonatomic, retain) Vehicle *vehicle;

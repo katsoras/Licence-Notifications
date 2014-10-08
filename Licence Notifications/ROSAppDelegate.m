@@ -20,7 +20,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
-    
     //
     //set managedObject context to ROSVehicleLicence controller.
     UINavigationController *navigationController = (UINavigationController *)tabBarController.viewControllers[0];
