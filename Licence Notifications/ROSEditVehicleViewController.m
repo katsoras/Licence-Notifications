@@ -145,18 +145,22 @@
         return cell;
     }else {
         
-        ROSNotificationDateViewCell *cell = [tableView
-        dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
+        
+        ROSNotificationDateViewCell *cell = [tableView    dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
         
         Notification *item = [self.vehicleNotifications objectAtIndex:[indexPath row]-3];
         
         cell.licenceDateLabelField.text=item.licence.licenceName;
         NSDate *defaultDate = item.expireDate;
         
-        //
-        //cell.licenceDateLabelField.textColor = [UIColor redColor];
-        cell.notificateDateField.text = [self.dateFormatter stringFromDate:defaultDate];
         
+        cell.notificateDateField.text = [self.dateFormatter stringFromDate:defaultDate];
+       
+        NSComparisonResult result = [[NSDate date] compare:item.expireDate];
+        
+        if (result==NSOrderedDescending) {
+            cell.licenceDateLabelField.textColor = [UIColor redColor];
+        }
         
         [cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
         return cell;

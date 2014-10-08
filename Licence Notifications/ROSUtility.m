@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 home. All rights reserved.
 //
 #import "Notification.h"
+#import "Licence.h"
+#import "Driver.h"
+#import "Vehicle.h"
 #import "ROSUtility.h"
 
 @implementation ROSUtility
@@ -17,12 +20,25 @@
         // Schedule the notification
         UILocalNotification* localNotification = [[UILocalNotification alloc] init];
         localNotification.fireDate = notification.expireDate;
-        localNotification.alertBody = @"";
-        localNotification.alertAction = @"Show me the item";
+        NSString *bodyHead;
+        
+        if(notification.driver){
+            bodyHead=notification.driver.lastName;
+        }else {
+            bodyHead=notification.vehicle.model;
+        }
+        localNotification.alertBody =
+        [NSString stringWithFormat:@"%@ %@",bodyHead,
+         notification.licence.licenceName];
+        
         localNotification.timeZone = [NSTimeZone defaultTimeZone];
+        
         [localNotification setUserInfo:[NSDictionary dictionaryWithObject:notification.notificationRefId forKey:@"uid"]];
         
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+        
+        NSLog(@"Notification with id %@ created",notification.notificationRefId);
+    
     }
 }
 +(NSString *) createUUID {
