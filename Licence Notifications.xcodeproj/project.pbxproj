@@ -12,9 +12,17 @@
 		9A53526C19E5C41700CCDFBB /* Vehicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A53526B19E5C41700CCDFBB /* Vehicle.m */; };
 		9A53526F19E5C41700CCDFBB /* Licence.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A53526E19E5C41700CCDFBB /* Licence.m */; };
 		9A53527519E5C6D100CCDFBB /* ROSUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A53527419E5C6D100CCDFBB /* ROSUtility.m */; };
+		9A53527819E7072000CCDFBB /* ROSNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A53527719E7072000CCDFBB /* ROSNotificationsViewController.m */; };
+		9A53528319E70A0A00CCDFBB /* Notification.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A53528119E70A0A00CCDFBB /* Notification.png */; };
+		9A53528419E70A0A00CCDFBB /* Notification@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A53528219E70A0A00CCDFBB /* Notification@2x.png */; };
+		9A53528B19E713F600CCDFBB /* ROSNotificationViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A53528A19E713F600CCDFBB /* ROSNotificationViewCell.m */; };
+		9A5352A219E730BE00CCDFBB /* icon-upvote.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A5352A019E730BE00CCDFBB /* icon-upvote.png */; };
+		9A5352A319E730BE00CCDFBB /* icon-upvote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A5352A119E730BE00CCDFBB /* icon-upvote@2x.png */; };
+		9A5352AA19E734D500CCDFBB /* Vehicle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A5352A819E734D500CCDFBB /* Vehicle.png */; };
+		9A5352AB19E734D500CCDFBB /* Vehicle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A5352A919E734D500CCDFBB /* Vehicle@2x.png */; };
+		9A5352BA19E860B400CCDFBB /* Warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A5352B819E860B400CCDFBB /* Warning.png */; };
+		9A5352BB19E860B400CCDFBB /* Warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A5352B919E860B400CCDFBB /* Warning@2x.png */; };
 		9A766B6F19D7000B006FD3E4 /* ROSVehicleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A766B6E19D7000A006FD3E4 /* ROSVehicleCell.m */; };
-		9A766B7219D733B8006FD3E4 /* Vehicle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A766B7019D733B8006FD3E4 /* Vehicle.png */; };
-		9A766B7319D733B8006FD3E4 /* Vehicle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A766B7119D733B8006FD3E4 /* Vehicle@2x.png */; };
 		9A766B7A19D736B3006FD3E4 /* Driver.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A766B7819D736B3006FD3E4 /* Driver.png */; };
 		9A766B7B19D736B3006FD3E4 /* Driver@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A766B7919D736B3006FD3E4 /* Driver@2x.png */; };
 		9A766B7E19D7371D006FD3E4 /* Licence.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A766B7C19D7371D006FD3E4 /* Licence.png */; };
@@ -80,10 +88,20 @@
 		9A53526E19E5C41700CCDFBB /* Licence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Licence.m; sourceTree = "<group>"; };
 		9A53527319E5C6D100CCDFBB /* ROSUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROSUtility.h; sourceTree = "<group>"; };
 		9A53527419E5C6D100CCDFBB /* ROSUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROSUtility.m; sourceTree = "<group>"; };
+		9A53527619E7072000CCDFBB /* ROSNotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROSNotificationsViewController.h; sourceTree = "<group>"; };
+		9A53527719E7072000CCDFBB /* ROSNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROSNotificationsViewController.m; sourceTree = "<group>"; };
+		9A53528119E70A0A00CCDFBB /* Notification.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Notification.png; sourceTree = "<group>"; };
+		9A53528219E70A0A00CCDFBB /* Notification@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Notification@2x.png"; sourceTree = "<group>"; };
+		9A53528919E713F600CCDFBB /* ROSNotificationViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROSNotificationViewCell.h; sourceTree = "<group>"; };
+		9A53528A19E713F600CCDFBB /* ROSNotificationViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROSNotificationViewCell.m; sourceTree = "<group>"; };
+		9A5352A019E730BE00CCDFBB /* icon-upvote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-upvote.png"; sourceTree = "<group>"; };
+		9A5352A119E730BE00CCDFBB /* icon-upvote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-upvote@2x.png"; sourceTree = "<group>"; };
+		9A5352A819E734D500CCDFBB /* Vehicle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Vehicle.png; sourceTree = "<group>"; };
+		9A5352A919E734D500CCDFBB /* Vehicle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Vehicle@2x.png"; sourceTree = "<group>"; };
+		9A5352B819E860B400CCDFBB /* Warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Warning.png; sourceTree = "<group>"; };
+		9A5352B919E860B400CCDFBB /* Warning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Warning@2x.png"; sourceTree = "<group>"; };
 		9A766B6D19D7000A006FD3E4 /* ROSVehicleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROSVehicleCell.h; sourceTree = "<group>"; };
 		9A766B6E19D7000A006FD3E4 /* ROSVehicleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROSVehicleCell.m; sourceTree = "<group>"; };
-		9A766B7019D733B8006FD3E4 /* Vehicle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Vehicle.png; sourceTree = "<group>"; };
-		9A766B7119D733B8006FD3E4 /* Vehicle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Vehicle@2x.png"; sourceTree = "<group>"; };
 		9A766B7819D736B3006FD3E4 /* Driver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Driver.png; sourceTree = "<group>"; };
 		9A766B7919D736B3006FD3E4 /* Driver@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Driver@2x.png"; sourceTree = "<group>"; };
 		9A766B7C19D7371D006FD3E4 /* Licence.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Licence.png; sourceTree = "<group>"; };
@@ -219,6 +237,8 @@
 				9A9E090719E5B0EE00FD284E /* Shape.png */,
 				9A9E090819E5B0EE00FD284E /* Shape@2x.png */,
 				9A766B8319D893AE006FD3E4 /* ROSNotificationDateViewCell.h */,
+				9A53528919E713F600CCDFBB /* ROSNotificationViewCell.h */,
+				9A53528A19E713F600CCDFBB /* ROSNotificationViewCell.m */,
 				9A766B8419D893AE006FD3E4 /* ROSNotificationDateViewCell.m */,
 				9A766B8019D88745006FD3E4 /* ROSVehicleViewCell.h */,
 				9A53527319E5C6D100CCDFBB /* ROSUtility.h */,
@@ -234,10 +254,12 @@
 				9AC621B619CEF52200F51075 /* ROSAddButtonLicenceViewCell.h */,
 				9AC621B719CEF52200F51075 /* ROSAddButtonLicenceViewCell.m */,
 				9AC621B119CEF4E700F51075 /* ROSModelViewCell.m */,
+				9A5352A019E730BE00CCDFBB /* icon-upvote.png */,
+				9A5352A119E730BE00CCDFBB /* icon-upvote@2x.png */,
 				9A7C82AD19CA0E5700B14F14 /* ROSAddDriverViewController.h */,
-				9A766B7019D733B8006FD3E4 /* Vehicle.png */,
-				9A766B7119D733B8006FD3E4 /* Vehicle@2x.png */,
 				9A7C82AE19CA0E5700B14F14 /* ROSAddDriverViewController.m */,
+				9A53528119E70A0A00CCDFBB /* Notification.png */,
+				9A53528219E70A0A00CCDFBB /* Notification@2x.png */,
 				9A7C82AA19CA0E0700B14F14 /* ROSDriverViewController.h */,
 				9A7C82AB19CA0E0700B14F14 /* ROSDriverViewController.m */,
 				9ACCB06519CB654F009825D2 /* ROSEditDriverViewController.h */,
@@ -249,7 +271,11 @@
 				9AC621BA19CF19C000F51075 /* ROSPickLicenceViewController.m */,
 				9AE886EB19C629B200B519AA /* ROSTypePickerViewController.m */,
 				9A766B7C19D7371D006FD3E4 /* Licence.png */,
+				9A5352B819E860B400CCDFBB /* Warning.png */,
+				9A5352B919E860B400CCDFBB /* Warning@2x.png */,
 				9A766B7D19D7371D006FD3E4 /* Licence@2x.png */,
+				9A5352A819E734D500CCDFBB /* Vehicle.png */,
+				9A5352A919E734D500CCDFBB /* Vehicle@2x.png */,
 				9AE886CC19C61A6E00B519AA /* ROSEditLicenceViewController.h */,
 				9AE886CD19C61A6F00B519AA /* ROSEditLicenceViewController.m */,
 				9A7ED57A19C617AC009A132A /* ROSLicenceViewController.h */,
@@ -264,6 +290,8 @@
 				9A766B6E19D7000A006FD3E4 /* ROSVehicleCell.m */,
 				9AA8B1BB19C4569800FAAB30 /* ROSAddVehicleViewController.h */,
 				9AA8B1BC19C4569800FAAB30 /* ROSAddVehicleViewController.m */,
+				9A53527619E7072000CCDFBB /* ROSNotificationsViewController.h */,
+				9A53527719E7072000CCDFBB /* ROSNotificationsViewController.m */,
 				9ACA0D4419C5B99C00C9E41E /* ROSEditVehicleViewController.h */,
 				9ACA0D4519C5B99C00C9E41E /* ROSEditVehicleViewController.m */,
 				9AA8B19819C44CB300FAAB30 /* Images.xcassets */,
@@ -386,16 +414,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A5352BB19E860B400CCDFBB /* Warning@2x.png in Resources */,
 				9A9E090A19E5B0EE00FD284E /* Shape@2x.png in Resources */,
 				9A766B7F19D7371D006FD3E4 /* Licence@2x.png in Resources */,
 				9AA8B1B719C44D0300FAAB30 /* Main.storyboard in Resources */,
 				9A766B7E19D7371D006FD3E4 /* Licence.png in Resources */,
+				9A5352BA19E860B400CCDFBB /* Warning.png in Resources */,
 				9AA8B18E19C44CB300FAAB30 /* InfoPlist.strings in Resources */,
-				9A766B7219D733B8006FD3E4 /* Vehicle.png in Resources */,
 				9A766B7B19D736B3006FD3E4 /* Driver@2x.png in Resources */,
+				9A53528419E70A0A00CCDFBB /* Notification@2x.png in Resources */,
+				9A5352AB19E734D500CCDFBB /* Vehicle@2x.png in Resources */,
 				9A766B7A19D736B3006FD3E4 /* Driver.png in Resources */,
-				9A766B7319D733B8006FD3E4 /* Vehicle@2x.png in Resources */,
+				9A5352A219E730BE00CCDFBB /* icon-upvote.png in Resources */,
 				9AA8B19919C44CB300FAAB30 /* Images.xcassets in Resources */,
+				9A5352A319E730BE00CCDFBB /* icon-upvote@2x.png in Resources */,
+				9A53528319E70A0A00CCDFBB /* Notification.png in Resources */,
+				9A5352AA19E734D500CCDFBB /* Vehicle.png in Resources */,
 				9A9E090919E5B0EE00FD284E /* Shape.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -425,6 +459,7 @@
 				9AA8B19419C44CB300FAAB30 /* ROSAppDelegate.m in Sources */,
 				9A7ED57C19C617AC009A132A /* ROSLicenceViewController.m in Sources */,
 				9AA8B19719C44CB300FAAB30 /* Licence_Notifications.xcdatamodeld in Sources */,
+				9A53528B19E713F600CCDFBB /* ROSNotificationViewCell.m in Sources */,
 				9A53526619E5C41600CCDFBB /* Driver.m in Sources */,
 				9A7ED57919C614AB009A132A /* ROSAddLicenceViewController.m in Sources */,
 				9A7C82AF19CA0E5700B14F14 /* ROSAddDriverViewController.m in Sources */,
@@ -437,6 +472,7 @@
 				9AA8B1BD19C4569800FAAB30 /* ROSAddVehicleViewController.m in Sources */,
 				9ACCB06719CB654F009825D2 /* ROSEditDriverViewController.m in Sources */,
 				9A86168E19CF4F26005695EF /* ROSVehicleViewController.m in Sources */,
+				9A53527819E7072000CCDFBB /* ROSNotificationsViewController.m in Sources */,
 				9AC621BB19CF19C000F51075 /* ROSPickLicenceViewController.m in Sources */,
 				9A53526F19E5C41700CCDFBB /* Licence.m in Sources */,
 				9A53527519E5C6D100CCDFBB /* ROSUtility.m in Sources */,

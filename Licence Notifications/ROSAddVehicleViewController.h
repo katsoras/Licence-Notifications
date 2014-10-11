@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ROSAddVehicleLicenceEventViewController.h"
-@interface ROSAddVehicleViewController : UITableViewController<ROSLicencePickerViewControllerDelegate>
 
+@interface ROSAddVehicleViewController : UITableViewController<ROSLicencePickerViewControllerDelegate>
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @end

@@ -11,4 +11,6 @@
 @interface ROSVehicleViewCell : UITableViewCell
  @property (nonatomic, weak) IBOutlet UILabel *modelLabelField;
  @property (nonatomic, weak) IBOutlet UILabel *registerPlateLabelField;
+@property (nonatomic,weak) IBOutlet UIImageView * statusImage;
+
 @end

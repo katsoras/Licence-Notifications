@@ -57,7 +57,7 @@
     //self.licenceDates=[NSMutableDictionary dictionary];
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [self.dateFormatter setDateFormat:@"dd-MM-yyyy"];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -95,14 +95,15 @@
         //registration
         vehicle.registrationPlate=registrationPlate;
         
-        
-        
         //
         //link with record
         [vehicle addNotifications:
         [NSSet setWithArray:self.vehicleNotifications]];
         
-        NSError *error = nil;
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        /*NSError *error = nil;
         if ([self.managedObjectContext save:&error]) {
             
             [ROSUtility createLocalNotification:self.vehicleNotifications];
@@ -115,7 +116,7 @@
             }
             
             [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do could not be saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-        }
+        }*/
     } else {
         
         [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do needs a name." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
@@ -133,21 +134,27 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    static NSString *modelAVLIdentifier=@"modelAVLIdentifier";
+    static NSString *plateAVLIdentifier=@"plateAVLIdentifier";
+    static NSString *addAVLCellIdentifier=@"addAVLCellIdentifier";
+    static NSString *notficationAVLIdentifier=@"notficationAVLIdentifier";
+    
     if(indexPath.row==0){
-        ROSModelViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"modelAVLIdentifier"];
+        ROSModelViewCell *cell = [tableView dequeueReusableCellWithIdentifier:modelAVLIdentifier];
         return cell;
     }
     else if(indexPath.row==1){
-        ROSRegistrationPlateViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"plateAVLIdentifier"];
+        ROSRegistrationPlateViewCell *cell = [tableView dequeueReusableCellWithIdentifier:plateAVLIdentifier];
         return cell;
     }
     else if(indexPath.row==2){
-        ROSAddButtonLicenceViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"addAVLCellIdentifier"];
+        ROSAddButtonLicenceViewCell *cell = [tableView dequeueReusableCellWithIdentifier:addAVLCellIdentifier];
         return cell;
     }else {
         
         ROSNotificationDateViewCell *cell = [tableView
-dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
+dequeueReusableCellWithIdentifier:notficationAVLIdentifier];
         
         Notification *item = [self.vehicleNotifications objectAtIndex:[indexPath row]-3];
         cell.licenceDateLabelField.text=item.licence.licenceName;
@@ -192,6 +199,7 @@ dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
     unassociatedObject.notificationRefId=[ROSUtility createUUID];
     
     [self.vehicleNotifications addObject:unassociatedObject];
+    
     [self.tableView reloadData];
 }
 @end

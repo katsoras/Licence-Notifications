@@ -10,7 +10,7 @@
 #import "ROSVehicleViewController.h"
 #import "ROSLicenceViewController.h"
 #import "ROSDriverViewController.h"
-
+#import "ROSNotificationsViewController.h"
 @implementation ROSAppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -33,20 +33,18 @@
     (UINavigationController *)tabBarController.viewControllers[1];
     ROSDriverViewController *driverController = (ROSDriverViewController *)navigationControllerSecond.topViewController;
     driverController.managedObjectContext = self.managedObjectContext;
+    //
+    //set managedObject context to ROSNotification controller
     
+    /*ROSNotificationsViewController *notificationViewController = (ROSNotificationsViewController *)tabBarController.viewControllers[2];
+    notificationViewController.managedObjectContext=self.managedObjectContext;
+    */
     //
     //set managedObject context to ROSLicenceLicence controller.
     UINavigationController *navigationControllerThird=
     (UINavigationController *)tabBarController.viewControllers[2];
     ROSLicenceViewController *licenceController = (ROSLicenceViewController *)navigationControllerThird.topViewController;
     licenceController.managedObjectContext = self.managedObjectContext;
-    
-    
-    
-    
-    
-    
-    
     return YES;
 }
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -58,7 +56,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     [self saveContext];
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
@@ -81,19 +79,14 @@
 - (void)saveContext
 {
     NSError *error = nil;
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil) {
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-             // Replace this implementation with code to handle the error appropriately.
-             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        } 
+    if (![self.managedObjectContext save:&error]) {
+        if (error) {
+            NSLog(@"Unable to save changes.");
+            NSLog(@"%@, %@", error, error.localizedDescription);
+        }
     }
 }
-
 #pragma mark - Core Data stack
-
 // Returns the managed object context for the application.
 // If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
 - (NSManagedObjectContext *)managedObjectContext

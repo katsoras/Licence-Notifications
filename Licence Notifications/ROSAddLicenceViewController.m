@@ -68,10 +68,11 @@
             record.type=[NSNumber numberWithBool:YES];
         else
             record.type=[NSNumber numberWithBool:NO];
-       
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
         //
         // Save Record
-        NSError *error = nil;
+       /* NSError *error = nil;
         if ([self.managedObjectContext save:&error]) {
             // Dismiss View Controller
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -82,7 +83,7 @@
             }
             // Show Alert View
             [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do could not be saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-        }
+        }*/
     } else {
         // Show Alert View
         [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do needs a name." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];

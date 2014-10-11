@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ROSAddVehicleViewController.h"
+
 
 @interface ROSVehicleViewController : UITableViewController
+
+
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
 @end

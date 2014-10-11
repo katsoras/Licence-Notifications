@@ -10,7 +10,7 @@
 #import "ROSAddDriverViewController.h"
 #import "ROSEditDriverViewController.h"
 #import "Driver.h"
-
+#import "ROSUtility.h"
 #import "ROSDriverViewCell.h"
 
 
@@ -25,8 +25,6 @@ fetchedResultsController;
 
 
 @implementation ROSDriverViewController
-static NSString *CellIdentifier = @"Cell Identifier";
-
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -55,7 +53,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
     NSError *error = nil;
     [self.fetchedResultsController performFetch:&error];
     if (error) {
-        NSLog(@"Unable to perform fetch.");
+        NSLog(@"Unable to perform fetch...");
         NSLog(@"%@, %@", error, error.localizedDescription);
     }
 }
@@ -134,6 +132,8 @@ static NSString *CellIdentifier = @"Cell Identifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSString *CellIdentifier = @"Cell Identifier";
+    
     // Dequeue Reusable Cell
     ROSDriverViewCell *cell = [tableView
                              dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
@@ -151,6 +151,12 @@ static NSString *CellIdentifier = @"Cell Identifier";
     // Update Cell
     [cell.lastNameLabelField setText:record.lastName];
     [cell.firstNameLabelField setText:record.firstName];
+    
+    if([ROSUtility checkForNotificationsAllUpdated:record.notifications]){
+        cell.statusImage.image
+        =
+        [UIImage imageNamed:@"Warning.png"];
+    }
 }
 //
 //implementing table view delegate
@@ -164,6 +170,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
     // Perform Segue
     [self performSegueWithIdentifier:@"EditDriverLicenceViewController" sender:self];
 }
+
 //
 //prepare for segue and set properties to addVehicle and editVehicle controllers
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -173,6 +180,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
         UINavigationController *nc = (UINavigationController *)[segue destinationViewController];
         ROSAddDriverViewController *vc = (ROSAddDriverViewController *)[nc topViewController];
         // Configure View Controller
+        
         [vc setManagedObjectContext:self.managedObjectContext];
     }
     

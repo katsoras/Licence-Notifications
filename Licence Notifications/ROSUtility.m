@@ -12,7 +12,16 @@
 #import "ROSUtility.h"
 
 @implementation ROSUtility
-
++(BOOL)checkForNotificationsAllUpdated:(NSSet *) notifications{
+    
+    for (Notification *notification in notifications) {
+        NSComparisonResult result = [[NSDate date] compare:notification.expireDate];
+        if (result==NSOrderedDescending){
+            return YES;
+        }
+    }
+    return NO;
+}
 +(void) createLocalNotification:(NSMutableArray *) notifications{
     
     for(Notification *notification in notifications){

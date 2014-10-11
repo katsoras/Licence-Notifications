@@ -186,6 +186,7 @@ titleForHeaderInSection:(NSInteger)section
     
     // Update Cell
     [cell.textLabel setText:record.licenceName];
+    cell.textLabel.font=[cell.textLabel.font fontWithSize:18];
     [cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
 }
 
@@ -216,18 +217,17 @@ titleForHeaderInSection:(NSInteger)section
         NSLog(@"%@",[vc managedObjectContext]);
         // Configure View Controller
         [vc setManagedObjectContext:self.managedObjectContext];
+        
     }
     else if([segue.identifier isEqualToString:@"EditLicenceViewController"]){
         //
         // Obtain Reference to View Controller
         ROSEditLicenceViewController *vcEdit = (ROSEditLicenceViewController *)[segue destinationViewController];
-        
-        NSLog(@"%@",[vcEdit managedObjectContext]);
         //
         // Configure View Controller
         //[vc setManagedObjectContext:self.managedObjectContext];
         [vcEdit setManagedObjectContext:self.managedObjectContext];
-        
+       
         if (self.selection) {
             // Fetch Record
             Licence *record = [self.fetchedResultsController objectAtIndexPath:self.selection];
@@ -239,4 +239,5 @@ titleForHeaderInSection:(NSInteger)section
         }
     }
 }
+
 @end

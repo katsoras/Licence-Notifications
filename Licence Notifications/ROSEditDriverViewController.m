@@ -12,7 +12,6 @@
 #import "Notification.h"
 #import "ROSPickLicenceViewController.h"
 #import "ROSEditDriverViewController.h"
-#import "ROSDriverViewCell.h"
 
 @interface ROSEditDriverViewController ()
 @property (nonatomic, strong) ABPeoplePickerNavigationController *addressBookController;
@@ -32,7 +31,7 @@
 
 @end
 
-@implementation ROSEditDriverViewController{
+@implementation ROSEditDriverViewController {
     NSMutableArray *toDeleteNotifications;
     NSString *firstName;
     NSString *lastName;
@@ -56,20 +55,17 @@
         lastName=self.record.lastName;
     }
     self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [self.dateFormatter setDateFormat:@"dd-MM-yyyy"];
     toDeleteNotifications=[[NSMutableArray alloc]init];
 }
 - (IBAction)cancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)save:(id)sender {
-    ROSDriverViewCell * cell = (ROSDriverViewCell *)[self.tableView
-                                                     cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    NSString *firstNameLabelField = cell.firstNameLabelField.text;
-    NSString *lastNameLabelField=cell.lastNameLabelField.text;
     
-    if (firstNameLabelField && lastNameLabelField &&
-        firstNameLabelField.length && lastNameLabelField.length) {
+    
+    if (firstName && lastName &&
+        firstName.length && lastName.length) {
         
         //
         //set driver values
@@ -77,8 +73,8 @@
         
         //
         //
-        self.record.firstName=firstNameLabelField;
-        self.record.lastName=lastNameLabelField;
+        self.record.firstName=firstName;
+        self.record.lastName=lastName;
         
         //
         //log notification
@@ -97,7 +93,12 @@
         [self.record addNotifications:
          [NSSet setWithArray:self.driverNotifications]];
         
-        NSError *error = nil;
+        /*[self.delegate setManagedObject:(NSManagedObject *)
+         self.record forChangeType:NSFetchedResultsChangeUpdate];
+        */
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        /*NSError *error = nil;
         if ([self.managedObjectContext save:&error]) {
             [self dismissViewControllerAnimated:YES completion:nil];
         }
@@ -109,7 +110,7 @@
             }
             
             [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do could not be saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-        }
+        }*/
     }
     else {
         
@@ -187,33 +188,41 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSString *addContactCellIdentifier = @"addContactCellIdentifier";
+    static NSString *addAVLCellIdentifier=@"addAVLCellIdentifier";
+    static NSString *notficationAVLIdentifier=@"notficationAVLIdentifier";
+    
     if(indexPath.row==0){
-        
-        ROSDriverViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"addContactCellIdentifier"];
-        
-        
-        cell.lastNameLabelField.text=lastName;
-        cell.firstNameLabelField.text=firstName;
-        
+        UITableViewCell *cell =
+    [tableView dequeueReusableCellWithIdentifier:addContactCellIdentifier];
+        if(firstName && lastName){
+            cell.detailTextLabel.text=[NSString stringWithFormat:@"%@ %@", firstName, lastName];
+        }
         return cell;
     }
-    
     else if(indexPath.row==1){
-        ROSAddButtonLicenceViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"addAVLCellIdentifier"];
+        ROSAddButtonLicenceViewCell *cell = [tableView dequeueReusableCellWithIdentifier:addAVLCellIdentifier];
         return cell;
     }
-    
     else
     {
         ROSNotificationDateViewCell *cell = [tableView
-                                             dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
+        dequeueReusableCellWithIdentifier:notficationAVLIdentifier];
         
         Notification *item = [self.driverNotifications objectAtIndex:[indexPath row]-2];
         cell.licenceDateLabelField.text=item.licence.licenceName;
         
-        NSDate *defaultDate = item.expireDate;
         
-        cell.notificateDateField.text = [self.dateFormatter stringFromDate:defaultDate];
+        cell.notificateDateField.text = [self.dateFormatter stringFromDate:item.expireDate];
+        
+        NSComparisonResult result = [[NSDate date] compare:item.expireDate];
+        if (result==NSOrderedDescending) {
+            cell.licenceDateLabelField.textColor = [UIColor redColor];
+        }
+        else {
+            cell.licenceDateLabelField.textColor = [UIColor blackColor];
+        }
+        [cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
         return cell;
     }
 }

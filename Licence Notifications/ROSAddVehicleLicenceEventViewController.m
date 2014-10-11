@@ -22,7 +22,6 @@
     Licence * _licence;
 }
 
-//static NSString *CellIdentifier = @"LicenceCell";
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];

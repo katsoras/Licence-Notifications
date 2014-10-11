@@ -10,7 +10,6 @@
 #import "ROSAddButtonLicenceViewCell.h"
 #import "Driver.h"
 #import "ROSTypePickerViewController.h"
-#import "ROSDriverViewCell.h"
 @interface ROSAddDriverViewController ()
 @property (nonatomic, strong) ABPeoplePickerNavigationController *addressBookController;
 //@property (nonatomic, strong) NSMutableArray *arrContactsData;
@@ -43,7 +42,7 @@
     [super viewDidLoad];
     self.driverNotifications=[NSMutableArray array];
     self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [self.dateFormatter setDateFormat:@"dd-MM-yyyy"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,14 +56,10 @@
 }
 - (IBAction)save:(id)sender {
     
-    ROSDriverViewCell * cell = (ROSDriverViewCell *)[self.tableView
-                                                     cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    
-    NSString * firstNameLabelText = cell.firstNameLabelField.text;
-    NSString *lastNameLabelText=cell.lastNameLabelField.text;
     
     
-    if (firstNameLabelText && lastNameLabelText && firstNameLabelText.length && lastNameLabelText.length) {
+    
+    if (firstName && lastName && firstName.length && lastName.length) {
         
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"Driver" inManagedObjectContext:self.managedObjectContext];
         
@@ -72,15 +67,18 @@
         
         //
         //set driver values
-        driver.lastName=lastNameLabelText;
-        driver.firstName=firstNameLabelText;
+        driver.lastName=lastName;
+        driver.firstName=firstName;
         
         //
         //link with record
         [driver addNotifications:
          [NSSet setWithArray:self.driverNotifications]];
         
-        NSError *error = nil;
+        /*[self.delegate setManagedObject:(NSManagedObject *)driver
+                          forChangeType:NSFetchedResultsChangeInsert];*/
+        [self dismissViewControllerAnimated:YES completion:nil];
+        /*NSError *error = nil;
         if ([self.managedObjectContext save:&error]) {
             [self dismissViewControllerAnimated:YES completion:nil];
         } else {
@@ -89,9 +87,8 @@
                 NSLog(@"%@, %@", error, error.localizedDescription);
             }
             [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do could not be saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-        }
+        }*/
     } else {
-        
         [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do needs a name." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
     }
 }
@@ -166,29 +163,31 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    static NSString *addContactCellIdentifier = @"addContactCellIdentifier";
+    static NSString *addAVLCellIdentifier=@"addAVLCellIdentifier";
+    static NSString *notficationAVLIdentifier=@"notficationAVLIdentifier";
+    
     if(indexPath.row==0){
-        //NSDictionary *contactInfoDict = [_arrContactsData objectAtIndex:indexPath.row];
         
-        //firstName=[contactInfoDict objectForKey:@"firstName"];
-       // lastName=[contactInfoDict objectForKey:@"lastName"];
-        
-        ROSDriverViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"addContactCellIdentifier"];
-        
-        cell.lastNameLabelField.text=lastName;
-        cell.firstNameLabelField.text=firstName;
-        
+        UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:addContactCellIdentifier];
+        if(firstName && lastName){
+            cell.detailTextLabel.text=[NSString stringWithFormat:@"%@ %@", firstName, lastName];
+        }
         return cell;
     }
     else if(indexPath.row==1){
-        ROSAddButtonLicenceViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"addAVLCellIdentifier"];
+        ROSAddButtonLicenceViewCell *cell = [tableView dequeueReusableCellWithIdentifier:addAVLCellIdentifier];
         return cell;
     }
     else
     {
         ROSNotificationDateViewCell *cell = [tableView
-                                             dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
+                dequeueReusableCellWithIdentifier:notficationAVLIdentifier];
+        
         Notification *item = [self.driverNotifications objectAtIndex:[indexPath row]-2];
         cell.licenceDateLabelField.text=item.licence.licenceName;
+        
         NSDate *defaultDate = item.expireDate;
         cell.notificateDateField.text = [self.dateFormatter stringFromDate:defaultDate];
         return cell;

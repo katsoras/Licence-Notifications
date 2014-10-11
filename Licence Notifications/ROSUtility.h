@@ -11,4 +11,7 @@
 @interface ROSUtility : NSObject
 +(void) createLocalNotification:(NSMutableArray *)notifications;
 +(NSString *) createUUID;
++(BOOL) checkForNotificationsAllUpdated:(NSSet
+*) notifications;
+
 @end

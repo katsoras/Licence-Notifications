@@ -46,7 +46,7 @@
         self.vehicleNotifications = [NSMutableArray arrayWithArray:[self.record.notifications allObjects]];
     }
     self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [self.dateFormatter setDateFormat:@"dd-MM-yyyy"];
     
     toDeleteNotifications=[[NSMutableArray alloc]init];
 }
@@ -65,6 +65,7 @@
     NSString * model = cell.modelTextField.text;
     
     ROSRegistrationPlateViewCell * cell2 = (ROSRegistrationPlateViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    
     NSString * registrationPlate = cell2.registrationPlateTextField.text;
     if (model && registrationPlate &&
         model.length && registrationPlate.length) {
@@ -80,12 +81,6 @@
         self.record.registrationPlate=registrationPlate;
         
         //
-        //log notification
-        for(Notification * i in self.vehicleNotifications){
-            NSLog(@"Start to import notif %@",i.expireDate);
-        }
-        
-        //
         //delete removed notification
         for (Notification *managedObject in toDeleteNotifications) {
             [self.managedObjectContext deleteObject:managedObject];
@@ -96,11 +91,15 @@
         [self.record addNotifications:
          [NSSet setWithArray:self.vehicleNotifications]];
         
-        NSError *error = nil;
+      
         
-        if ([self.managedObjectContext save:&error]) {
+        ///NSError *error = nil;
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        /*if ([self.managedObjectContext save:&error]) {
             [self dismissViewControllerAnimated:YES completion:nil];
         }
+        
         else
         {
             if (error) {
@@ -109,7 +108,7 @@
             }
             
             [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do could not be saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-        }
+        }*/
     }
     else {
         
@@ -128,38 +127,44 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSString *modelAVLIdentifier=@"modelAVLIdentifier";
+    static NSString *plateAVLIdentifier=@"plateAVLIdentifier";
+    static NSString *addAVLCellIdentifier=@"addAVLCellIdentifier";
+    static NSString *notficationAVLIdentifier=@"notficationAVLIdentifier";
+    
     if(indexPath.row==0){
-        ROSModelViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"modelAVLIdentifier"];
+        ROSModelViewCell *cell = [tableView dequeueReusableCellWithIdentifier:modelAVLIdentifier];
        
         cell.modelTextField.text=self.record.model;
         return cell;
     }
-    
     else if(indexPath.row==1){
-        ROSRegistrationPlateViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"plateAVLIdentifier"];
+        ROSRegistrationPlateViewCell *cell = [tableView dequeueReusableCellWithIdentifier:plateAVLIdentifier];
         cell.registrationPlateTextField.text=self.record.registrationPlate;
         return cell;
     }
     else if(indexPath.row==2){
-        ROSAddButtonLicenceViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"addAVLCellIdentifier"];
+        ROSAddButtonLicenceViewCell *cell = [tableView dequeueReusableCellWithIdentifier:addAVLCellIdentifier];
         return cell;
     }else {
-        
-        
-        ROSNotificationDateViewCell *cell = [tableView    dequeueReusableCellWithIdentifier:@"notficationAVLIdentifier"];
+        ROSNotificationDateViewCell *cell = [tableView    dequeueReusableCellWithIdentifier:notficationAVLIdentifier];
         
         Notification *item = [self.vehicleNotifications objectAtIndex:[indexPath row]-3];
+       
+        
+        NSLog(@"Cell For Notification:%@ with expire date:%@",item.licence.licenceName,item.expireDate);
         
         cell.licenceDateLabelField.text=item.licence.licenceName;
-        NSDate *defaultDate = item.expireDate;
-        
-        
-        cell.notificateDateField.text = [self.dateFormatter stringFromDate:defaultDate];
+        cell.notificateDateField.text = [self.dateFormatter stringFromDate:item.expireDate];
        
         NSComparisonResult result = [[NSDate date] compare:item.expireDate];
         
         if (result==NSOrderedDescending) {
             cell.licenceDateLabelField.textColor = [UIColor redColor];
+        }
+        
+        else {
+             cell.licenceDateLabelField.textColor = [UIColor blackColor];
         }
         
         [cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
@@ -190,7 +195,6 @@
         //
         //delete notfication from data source
         Notification *toMoveNotification=[self.vehicleNotifications objectAtIndex:[indexPath row]-3];
-        
         //
         //add to array contains the objects to be deleted.
         [toDeleteNotifications addObject:toMoveNotification];
@@ -238,12 +242,14 @@
     }
 }
 -(void) eventPickerViewController:(UITableViewController *)controller didSelectType:(Licence *) licence andDate:(NSDate *)date andNotification:(Notification *)notification{
+    
     //
     //EDIT MODE value, populate notification pointer
     if(notification){
         notification.licence=licence;
         notification.expireDate=date;
     }
+    
     //ADD MODE
     else{
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"Notification" inManagedObjectContext:self.managedObjectContext];
