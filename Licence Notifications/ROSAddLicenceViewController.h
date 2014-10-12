@@ -11,6 +11,7 @@
 
 @interface ROSAddLicenceViewController : UITableViewController<ROSTypePickerViewControllerDelegate>
 
+
 @property (weak, nonatomic) IBOutlet UITextField *licenceNameTextField;
 @property (weak,nonatomic) IBOutlet UILabel *detailLabel;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

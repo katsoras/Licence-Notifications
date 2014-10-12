@@ -153,10 +153,6 @@ titleForHeaderInSection:(NSInteger)section
     }
 }
 
-
-
-
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [[self.fetchedResultsController sections]count];
@@ -214,15 +210,19 @@ titleForHeaderInSection:(NSInteger)section
         UINavigationController *nc = (UINavigationController *)[segue destinationViewController];
         
         ROSAddLicenceViewController *vc = (ROSAddLicenceViewController *)[nc topViewController];
-        NSLog(@"%@",[vc managedObjectContext]);
+        
         // Configure View Controller
         [vc setManagedObjectContext:self.managedObjectContext];
         
     }
     else if([segue.identifier isEqualToString:@"EditLicenceViewController"]){
+        
+        // Obtain Reference to View Controller
+        UINavigationController *nc = (UINavigationController *)[segue destinationViewController];
+        
         //
         // Obtain Reference to View Controller
-        ROSEditLicenceViewController *vcEdit = (ROSEditLicenceViewController *)[segue destinationViewController];
+        ROSEditLicenceViewController *vcEdit = (ROSEditLicenceViewController *)[nc topViewController];
         //
         // Configure View Controller
         //[vc setManagedObjectContext:self.managedObjectContext];

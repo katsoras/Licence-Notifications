@@ -89,7 +89,7 @@
         //
         //link with record
         [self.record addNotifications:
-         [NSSet setWithArray:self.vehicleNotifications]];
+        [NSSet setWithArray:self.vehicleNotifications]];
         
       
         
@@ -127,6 +127,7 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     static NSString *modelAVLIdentifier=@"modelAVLIdentifier";
     static NSString *plateAVLIdentifier=@"plateAVLIdentifier";
     static NSString *addAVLCellIdentifier=@"addAVLCellIdentifier";

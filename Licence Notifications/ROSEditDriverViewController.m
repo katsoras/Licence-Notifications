@@ -66,7 +66,6 @@
     
     if (firstName && lastName &&
         firstName.length && lastName.length) {
-        
         //
         //set driver values
         
@@ -113,7 +112,6 @@
         }*/
     }
     else {
-        
         [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do needs a name." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
     }
 }
@@ -121,8 +119,6 @@
 {
     [super didReceiveMemoryWarning];
 }
-
-
 //
 //ABPeoplePickerNavigationControllerDelegate methods
 
@@ -169,6 +165,7 @@
     return NO;
 }
 
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section ==0 && indexPath.row == 0)
@@ -176,6 +173,7 @@
         [self showAddressBook];
     }
 }
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -302,12 +300,14 @@
     }
     //ADD MODE
     else{
+        
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"Notification" inManagedObjectContext:self.managedObjectContext];
         
         Notification *unassociatedObject = [[Notification alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
         
         unassociatedObject.licence=licence;
         unassociatedObject.expireDate=date;
+        
         
         [self.driverNotifications addObject:unassociatedObject];
     }
