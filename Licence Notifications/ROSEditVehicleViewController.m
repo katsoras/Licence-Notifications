@@ -42,7 +42,6 @@
 
 - (void)viewDidLoad
 {
-    
     [super viewDidLoad];
     if(self.record){
         self.vehicleNotifications =
