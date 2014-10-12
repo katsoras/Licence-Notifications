@@ -9,7 +9,8 @@
 #import "ROSNotificationDateViewCell.h"
 #import "ROSAddButtonLicenceViewCell.h"
 #import "Driver.h"
-#import "ROSTypePickerViewController.h"
+
+
 @interface ROSAddDriverViewController ()
 @property (nonatomic, strong) ABPeoplePickerNavigationController *addressBookController;
 //@property (nonatomic, strong) NSMutableArray *arrContactsData;
@@ -76,18 +77,18 @@
          [NSSet setWithArray:self.driverNotifications]];
         
         /*[self.delegate setManagedObject:(NSManagedObject *)driver
-                          forChangeType:NSFetchedResultsChangeInsert];*/
+         forChangeType:NSFetchedResultsChangeInsert];*/
         [self dismissViewControllerAnimated:YES completion:nil];
         /*NSError *error = nil;
-        if ([self.managedObjectContext save:&error]) {
-            [self dismissViewControllerAnimated:YES completion:nil];
-        } else {
-            if (error) {
-                NSLog(@"Unable to save record.");
-                NSLog(@"%@, %@", error, error.localizedDescription);
-            }
-            [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do could not be saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-        }*/
+         if ([self.managedObjectContext save:&error]) {
+         [self dismissViewControllerAnimated:YES completion:nil];
+         } else {
+         if (error) {
+         NSLog(@"Unable to save record.");
+         NSLog(@"%@, %@", error, error.localizedDescription);
+         }
+         [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do could not be saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+         }*/
     } else {
         [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do needs a name." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
     }
@@ -183,7 +184,7 @@
     else
     {
         ROSNotificationDateViewCell *cell = [tableView
-                dequeueReusableCellWithIdentifier:notficationAVLIdentifier];
+                                             dequeueReusableCellWithIdentifier:notficationAVLIdentifier];
         
         Notification *item = [self.driverNotifications objectAtIndex:[indexPath row]-2];
         cell.licenceDateLabelField.text=item.licence.licenceName;
@@ -223,7 +224,15 @@
     unassociatedObject.licence=licence;
     unassociatedObject.expireDate=date;
     
-    [self.driverNotifications addObject:unassociatedObject];
+    NSUInteger newIndex = [self.driverNotifications
+                           indexOfObject:unassociatedObject
+                           inSortedRange:(NSRange){0, [self.driverNotifications count]}
+                                 options:NSBinarySearchingInsertionIndex
+                         usingComparator:^(Notification *obj1, Notification * obj2){
+        return [obj2.expireDate compare:obj1.expireDate];
+    }];
+    [self.driverNotifications insertObject:unassociatedObject
+                                   atIndex:newIndex];
     [self.tableView reloadData];
 }
 

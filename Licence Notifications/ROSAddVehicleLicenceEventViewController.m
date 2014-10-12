@@ -8,7 +8,7 @@
 
 #import "ROSAddVehicleLicenceEventViewController.h"
 #import "ROSPickLicenceViewController.h"
-#import "ROSTypePickerViewController.h"
+
 #define kDatePickerIndex 2
 #define kDatePickerCellHeight 164
 @interface ROSAddVehicleLicenceEventViewController ()

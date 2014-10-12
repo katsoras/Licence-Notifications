@@ -8,9 +8,7 @@
 
 #import "ROSEditLicenceViewController.h"
 #import "Licence.h"
-#import "ROSTypePickerViewController.h"
 @interface ROSEditLicenceViewController ()
-
 @end
 
 @implementation ROSEditLicenceViewController{
@@ -30,7 +28,7 @@
 }
 - (IBAction)save:(id)sender {
     NSString *licenceName = self.licenceNameTextField.text;
-    BOOL type=[_type isEqualToString:VEHICLE];
+    BOOL type=[_type isEqualToString:@"VEHICLE"];
     if (licenceName && licenceName.length) {
         //
         //set licence
@@ -53,11 +51,11 @@
     //set Licence record
     if(self.record){
         [self.licenceNameTextField setText: self.record.licenceName];
-        _type=VEHICLE;
+        _type=@"VEHICLE";
         BOOL type=[[self.record type] boolValue];
         
         if(!type){
-            _type=DRIVER;
+            _type=@"DRIVER";
         }
         //
         //set detail type

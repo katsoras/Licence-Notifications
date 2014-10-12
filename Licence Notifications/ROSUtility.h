@@ -14,4 +14,6 @@
 +(BOOL) checkForNotificationsAllUpdated:(NSSet
 *) notifications;
 
++(NSMutableArray *)compareNotificationByExpireDate:(NSMutableArray *)notifications;
+
 @end

@@ -17,8 +17,6 @@
 #import "ROSRegistrationPlateViewCell.h"
 #import "ROSModelViewCell.h"
 
-#import "ROSTypePickerViewController.h"
-
 @interface ROSAddVehicleViewController ()
 
 
@@ -197,9 +195,15 @@ dequeueReusableCellWithIdentifier:notficationAVLIdentifier];
     unassociatedObject.expireDate=date;
     
     unassociatedObject.notificationRefId=[ROSUtility createUUID];
-    
-    [self.vehicleNotifications addObject:unassociatedObject];
-    
+    NSUInteger newIndex = [self.vehicleNotifications
+                           indexOfObject:unassociatedObject
+                           inSortedRange:(NSRange){0, [self.vehicleNotifications count]}
+                           options:NSBinarySearchingInsertionIndex
+                           usingComparator:^(Notification *obj1, Notification * obj2){
+                               return [obj2.expireDate compare:obj1.expireDate];
+                           }];
+    [self.vehicleNotifications insertObject:unassociatedObject
+                                   atIndex:newIndex];
     [self.tableView reloadData];
 }
 @end

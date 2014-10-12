@@ -8,7 +8,6 @@
 
 #import "ROSAddLicenceViewController.h"
 #import "Licence.h"
-#import "ROSTypePickerViewController.h"
 @interface ROSAddLicenceViewController ()
 
 @end
@@ -34,8 +33,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder])) {
-        NSLog(@"init PlayerDetailsViewController");
-        _type = VEHICLE;
+        _type = @"VEHICLE";
     }
     return self;
 }
@@ -53,7 +51,7 @@
 - (IBAction)save:(id)sender {
     // Helpers
     NSString *licenceName = self.licenceNameTextField.text;
-    BOOL type=[_type isEqualToString:VEHICLE];
+    BOOL type=[_type isEqualToString:@"VEHICLE"];
     if (licenceName && licenceName.length) {
         //
         // Create Entity

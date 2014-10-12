@@ -145,11 +145,11 @@ titleForHeaderInSection:(NSInteger)section
     
     if ([[sectionInfo indexTitle] isEqualToString:@"1"])
     {
-        return VEHICLE;
+        return @"VEHICLE";
     }
     else
     {
-        return DRIVER;
+        return @"DRIVER";
     }
 }
 

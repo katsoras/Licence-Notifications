@@ -8,9 +8,6 @@
 
 #import "ROSTypePickerViewController.h"
 
-NSString * const VEHICLE = @"Vehicle";
-NSString * const DRIVER = @"Driver";
-
 @interface ROSTypePickerViewController ()
 
 @end
@@ -32,8 +29,8 @@ NSString * const DRIVER = @"Driver";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _types=@[VEHICLE,
-             DRIVER];
+    _types=@[@"VEHICLE",
+             @"DRIVER"];
     _selectedIndex = [_types indexOfObject:self.type];
 }
 

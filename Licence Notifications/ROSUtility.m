@@ -12,6 +12,20 @@
 #import "ROSUtility.h"
 
 @implementation ROSUtility
+
++(NSMutableArray *)compareNotificationByExpireDate:(NSMutableArray *)notifications{
+    NSSortDescriptor *sortDescriptor;
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"expireDate"
+                                            ascending:NO];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *sortedArray;
+    sortedArray = [notifications sortedArrayUsingDescriptors:sortDescriptors];
+    return [ROSUtility createMutableArray:sortedArray];
+}
++ (NSMutableArray *)createMutableArray:(NSArray *)array
+{
+    return [NSMutableArray arrayWithArray:array];
+}
 +(BOOL)checkForNotificationsAllUpdated:(NSSet *) notifications{
     
     for (Notification *notification in notifications) {

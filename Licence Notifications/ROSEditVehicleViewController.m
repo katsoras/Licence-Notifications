@@ -12,8 +12,9 @@
 #import "ROSEditVehicleViewController.h"
 #import "Licence.h"
 #import "Notification.h"
-#import "ROSPickLicenceViewController.h"
+#import "ROSUtility.h"
 @interface ROSEditVehicleViewController ()
+
 //
 //contains selected licences
 @property (strong) NSMutableArray *vehicleNotifications;
@@ -41,9 +42,12 @@
 
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
     if(self.record){
-        self.vehicleNotifications = [NSMutableArray arrayWithArray:[self.record.notifications allObjects]];
+        self.vehicleNotifications =
+        [ROSUtility compareNotificationByExpireDate:
+        [NSMutableArray arrayWithArray:[self.record.notifications allObjects]]];
     }
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setDateFormat:@"dd-MM-yyyy"];
@@ -259,8 +263,15 @@
         
         unassociatedObject.licence=licence;
         unassociatedObject.expireDate=date;
-        
-        [self.vehicleNotifications addObject:unassociatedObject];
+        NSUInteger newIndex = [self.vehicleNotifications
+                               indexOfObject:unassociatedObject
+                               inSortedRange:(NSRange){0, [self.vehicleNotifications count]}
+                               options:NSBinarySearchingInsertionIndex
+                               usingComparator:^(Notification *obj1, Notification * obj2){
+                                   return [obj2.expireDate compare:obj1.expireDate];
+                               }];
+        [self.vehicleNotifications insertObject:unassociatedObject
+                                       atIndex:newIndex];
     }
     [self.tableView reloadData];
 }

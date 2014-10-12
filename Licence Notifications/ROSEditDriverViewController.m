@@ -12,7 +12,7 @@
 #import "Notification.h"
 #import "ROSPickLicenceViewController.h"
 #import "ROSEditDriverViewController.h"
-
+#import "ROSUtility.h"
 @interface ROSEditDriverViewController ()
 @property (nonatomic, strong) ABPeoplePickerNavigationController *addressBookController;
 //@property (nonatomic, strong) NSMutableArray *arrContactsData;
@@ -50,10 +50,16 @@
 {
     [super viewDidLoad];
     if(self.record){
-        self.driverNotifications = [NSMutableArray arrayWithArray:[self.record.notifications allObjects]];
+        
+        self.driverNotifications =
+        
+        [ROSUtility compareNotificationByExpireDate:
+        [NSMutableArray arrayWithArray:[self.record.notifications allObjects]]];
+        
         firstName=self.record.firstName;
         lastName=self.record.lastName;
     }
+    
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setDateFormat:@"dd-MM-yyyy"];
     toDeleteNotifications=[[NSMutableArray alloc]init];
@@ -210,7 +216,6 @@
         Notification *item = [self.driverNotifications objectAtIndex:[indexPath row]-2];
         cell.licenceDateLabelField.text=item.licence.licenceName;
         
-        
         cell.notificateDateField.text = [self.dateFormatter stringFromDate:item.expireDate];
         
         NSComparisonResult result = [[NSDate date] compare:item.expireDate];
@@ -307,9 +312,17 @@
         
         unassociatedObject.licence=licence;
         unassociatedObject.expireDate=date;
+       //[self.driverNotifications addObject:unassociatedObject];
+        NSUInteger newIndex = [self.driverNotifications indexOfObject:unassociatedObject
+                               
+            inSortedRange:(NSRange){0, [self.driverNotifications count]}
+                options:NSBinarySearchingInsertionIndex
+                usingComparator:^(Notification *obj1, Notification * obj2)
+                {
+                    return [obj2.expireDate compare:obj1.expireDate];
+                }];
+        [self.driverNotifications insertObject:unassociatedObject atIndex:newIndex];
         
-        
-        [self.driverNotifications addObject:unassociatedObject];
     }
     [self.tableView reloadData];
 }

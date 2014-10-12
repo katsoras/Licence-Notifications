@@ -36,7 +36,6 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Licence"];
     
     NSPredicate *predicate=[NSPredicate predicateWithFormat:@"type == %@",self.type];
-    NSLog(@"%@ ----------",self.type);
     [fetchRequest setPredicate:predicate];
     self.licences = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     //
