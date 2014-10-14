@@ -38,6 +38,7 @@
         else
             self.record.type=[NSNumber numberWithBool:NO];
         [self dismissViewControllerAnimated:YES completion:nil];
+        
     }
     else {
         [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do needs a name." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];

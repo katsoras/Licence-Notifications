@@ -10,7 +10,6 @@
 #import "ROSAddButtonLicenceViewCell.h"
 #import "Driver.h"
 
-
 @interface ROSAddDriverViewController ()
 @property (nonatomic, strong) ABPeoplePickerNavigationController *addressBookController;
 //@property (nonatomic, strong) NSMutableArray *arrContactsData;
@@ -106,43 +105,27 @@
     {
         [self showAddressBook];
     }
-    
 }
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 2+self.driverNotifications.count;
 }
-
-//
-//ABPeoplePickerNavigationControllerDelegate methods
--(void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker{
-    [_addressBookController dismissViewControllerAnimated:YES completion:nil];
-}
--(BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier{
-    return NO;
-}
-
--(BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person{
-    
+- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController*)peoplePicker didSelectPerson:(ABRecordRef)person;
+{
     NSMutableDictionary *contactInfoDict = [[NSMutableDictionary alloc]
                                             initWithObjects:@[@"", @"", @""]
                                             forKeys:@[@"firstName", @"lastName", @"mobileNumber"]];
-    
-    
     CFTypeRef generalCFObject;
     generalCFObject = ABRecordCopyValue(person, kABPersonFirstNameProperty);
     if (generalCFObject) {
-        
         [contactInfoDict setObject:(__bridge NSString *)generalCFObject forKey:@"firstName"];
         CFRelease(generalCFObject);
-        
     }
+    
     generalCFObject = ABRecordCopyValue(person, kABPersonLastNameProperty);
     
     if (generalCFObject) {
@@ -159,7 +142,7 @@
     
     [self.tableView reloadData];
     [_addressBookController dismissViewControllerAnimated:YES completion:nil];
-    return NO;
+    //return NO;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

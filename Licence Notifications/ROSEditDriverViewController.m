@@ -133,28 +133,19 @@
     [_addressBookController setPeoplePickerDelegate:self];
     [self presentViewController:_addressBookController animated:YES completion:nil];
 }
--(void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker{
-    [_addressBookController dismissViewControllerAnimated:YES completion:nil];
-}
--(BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier{
-    return NO;
-}
 
--(BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person{
+- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController*)peoplePicker didSelectPerson:(ABRecordRef)person;
+{
     NSMutableDictionary *contactInfoDict = [[NSMutableDictionary alloc]
                                             initWithObjects:@[@"", @"", @""]
-                                            
                                             forKeys:@[@"firstName", @"lastName", @"mobileNumber"]];
     CFTypeRef generalCFObject;
     generalCFObject = ABRecordCopyValue(person, kABPersonFirstNameProperty);
     if (generalCFObject) {
-        
         [contactInfoDict setObject:(__bridge NSString *)generalCFObject forKey:@"firstName"];
         CFRelease(generalCFObject);
-        
     }
     generalCFObject = ABRecordCopyValue(person, kABPersonLastNameProperty);
-    
     if (generalCFObject) {
         
         [contactInfoDict setObject:(__bridge NSString *)generalCFObject forKey:@"lastName"];
@@ -168,7 +159,6 @@
     
     [self.tableView reloadData];
     [_addressBookController dismissViewControllerAnimated:YES completion:nil];
-    return NO;
 }
 
 

@@ -22,9 +22,10 @@
 @property (strong, nonatomic) NSIndexPath *selection;
 @end
 
-@implementation ROSVehicleViewController
-static NSString *CellIdentifier = @"Cell Identifier";
 
+@implementation ROSVehicleViewController{
+    NSMutableArray *searchResults;
+}
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -61,6 +62,26 @@ static NSString *CellIdentifier = @"Cell Identifier";
     
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 62;
+}
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    [searchResults removeAllObjects];
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"registrationPlate contains[c] %@", searchText];
+    
+    searchResults = [NSMutableArray arrayWithArray:[self.fetchedResultsController.fetchedObjects filteredArrayUsingPredicate:resultPredicate]];
+}
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString
+                               scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
+                                      objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+    
+    return YES;
+}
+
 //
 //implement NSFetchedResultsControllerDelegate
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
@@ -86,7 +107,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
             break;
         }
         case NSFetchedResultsChangeUpdate: {
-            [self configureCell:(ROSVehicleViewCell *)[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            [self configureCell:(ROSVehicleViewCell *)[self.tableView cellForRowAtIndexPath:indexPath] tableView:self.tableView atIndexPath:indexPath];
             break;
         }
         case NSFetchedResultsChangeMove: {
@@ -120,43 +141,58 @@ static NSString *CellIdentifier = @"Cell Identifier";
         }
     }
 }
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [[self.fetchedResultsController sections]count];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSArray *sections=[self.fetchedResultsController sections];
-    id<NSFetchedResultsSectionInfo> sectionInfo=[sections objectAtIndex:section];
-    return [sectionInfo numberOfObjects];
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return [searchResults count];
+        
+    }else{
+        NSArray *sections=[self.fetchedResultsController sections];
+        id<NSFetchedResultsSectionInfo> sectionInfo=[sections objectAtIndex:section];
+        return [sectionInfo numberOfObjects];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Dequeue Reusable Cell
-    ROSVehicleViewCell *cell = [tableView
-    dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"Cell";
     
     //
+    // Dequeue Reusable Cell
+    ROSVehicleViewCell *cell = [self.tableView
+                                dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    //
+    // Configure the cell...
+    if (cell == nil) {
+        cell = [[ROSVehicleViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    //
     // Configure Table View Cell
-    [self configureCell:cell atIndexPath:indexPath];
+    [self configureCell:cell tableView:tableView atIndexPath:indexPath];
     return cell;
 }
-
-- (void)configureCell:(ROSVehicleViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    
+- (void)configureCell:(ROSVehicleViewCell *)cell tableView:(UITableView *) tableView atIndexPath:(NSIndexPath *)indexPath {
     // Fetch Record
-    Vehicle *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    Vehicle *record;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        record = [searchResults objectAtIndex:indexPath.row];
+    }
     
+    else {
+        record= [self.fetchedResultsController objectAtIndexPath:indexPath];
+    }
+    
+    //
     // Update Cell
     [cell.registerPlateLabelField setText:record.registrationPlate];
     [cell.modelLabelField setText:record.model];
-    
     if([ROSUtility checkForNotificationsAllUpdated:record.notifications]){
-        cell.statusImage.image
-        =
-        [UIImage imageNamed:@"Warning.png"];
+        cell.statusImage.image=[UIImage imageNamed:@"Warning.png"];
     }
 }
 //
@@ -174,28 +210,35 @@ static NSString *CellIdentifier = @"Cell Identifier";
 //
 //prepare for segue and set properties to addVehicle and editVehicle controllers
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
     if ([segue.identifier isEqualToString:@"AddVehicleLicenceViewController"]) {
         // Obtain Reference to View Controller
         UINavigationController *nc = (UINavigationController *)[segue destinationViewController];
         ROSAddVehicleViewController *vc = (ROSAddVehicleViewController *)[nc topViewController];
         // Configure View Controller
         [vc setManagedObjectContext:self.managedObjectContext];
-       
+        
     }
     else if([segue.identifier isEqualToString:@"EditVehicleLicenceViewController"]){
         // Obtain Reference to View Controller
         UINavigationController *nc = (UINavigationController *)[segue destinationViewController];
-        
         ROSEditVehicleViewController *vc = (ROSEditVehicleViewController *)[nc topViewController];
         //
         // Configure View Controller
         [vc setManagedObjectContext:self.managedObjectContext];
-        if (self.selection) {
-            // Fetch Record
-            Vehicle *record = [self.fetchedResultsController objectAtIndexPath:self.selection];
+        if(self.selection){
+            Vehicle *record =nil;
+            if(self.searchDisplayController.active){
+                record = [searchResults objectAtIndex:self.selection.row];
+            }
+            else {
+                record = [self.fetchedResultsController objectAtIndexPath:self.selection];
+            }
+            
             if (record) {
                 [vc setRecord:record];
             }
+            
             // Reset Selection
             [self setSelection:nil];
         }

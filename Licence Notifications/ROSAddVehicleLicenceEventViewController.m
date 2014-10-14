@@ -71,7 +71,6 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%d",indexPath.row);
     CGFloat height = self.tableView.rowHeight;
     
     if (indexPath.row == kDatePickerIndex){

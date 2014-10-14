@@ -22,9 +22,10 @@ fetchedResultsController;
 @property (strong, nonatomic) NSIndexPath *selection;
 
 @end
+@implementation ROSDriverViewController{
+    NSMutableArray *searchResults;
+}
 
-
-@implementation ROSDriverViewController
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -57,7 +58,24 @@ fetchedResultsController;
         NSLog(@"%@, %@", error, error.localizedDescription);
     }
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 62;
+}
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    [searchResults removeAllObjects];
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"lastName contains[c] %@", searchText];
+    
+    searchResults = [NSMutableArray arrayWithArray:[self.fetchedResultsController.fetchedObjects filteredArrayUsingPredicate:resultPredicate]];
+}
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString
+        scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
+        objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+    return YES;
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -90,7 +108,7 @@ fetchedResultsController;
             break;
         }
         case NSFetchedResultsChangeUpdate: {
-            [self configureCell:(ROSDriverViewCell *)[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            [self configureCell:(ROSDriverViewCell *)[self.tableView cellForRowAtIndexPath:indexPath] tableView:self.tableView atIndexPath:indexPath];
             break;
         }
         case NSFetchedResultsChangeMove: {
@@ -125,37 +143,48 @@ fetchedResultsController;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSArray *sections=[self.fetchedResultsController sections];
-    id<NSFetchedResultsSectionInfo> sectionInfo=[sections objectAtIndex:section];
-    return [sectionInfo numberOfObjects];
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return [searchResults count];
+    }else{
+        NSArray *sections=[self.fetchedResultsController sections];
+        id<NSFetchedResultsSectionInfo> sectionInfo=[sections objectAtIndex:section];
+        return [sectionInfo numberOfObjects];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell Identifier";
-    
+    //
     // Dequeue Reusable Cell
-    ROSDriverViewCell *cell = [tableView
-                             dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    ROSDriverViewCell *cell = [self.tableView
+                                dequeueReusableCellWithIdentifier:CellIdentifier];
+    //
+    // Configure the cell...
+    if (cell == nil) {
+        cell = [[ROSDriverViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
     //
     // Configure Table View Cell
-    [self configureCell:cell atIndexPath:indexPath];
+    [self configureCell:cell tableView:tableView atIndexPath:indexPath];
     return cell;
 }
-- (void)configureCell:(ROSDriverViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    
+- (void)configureCell:(ROSDriverViewCell *)cell tableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath {
     
     // Fetch Record
-    Driver *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    Driver *record=nil;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        record = [searchResults objectAtIndex:indexPath.row];
+    }else{
+        record= [self.fetchedResultsController objectAtIndexPath:indexPath];
+    }
     
     // Update Cell
     [cell.lastNameLabelField setText:record.lastName];
     [cell.firstNameLabelField setText:record.firstName];
     
     if([ROSUtility checkForNotificationsAllUpdated:record.notifications]){
-        cell.statusImage.image
-        =
-        [UIImage imageNamed:@"Warning.png"];
+        cell.statusImage.image=[UIImage imageNamed:@"Warning.png"];
     }
 }
 //
@@ -189,20 +218,27 @@ fetchedResultsController;
         UINavigationController *nc = (UINavigationController *)[segue destinationViewController];
         
         ROSEditDriverViewController *vc = (ROSEditDriverViewController *)[nc topViewController];
-        
         //
         // Configure View Controller
         [vc setManagedObjectContext:self.managedObjectContext];
         
-        if (self.selection) {
-            // Fetch Record
-            Driver *record = [self.fetchedResultsController objectAtIndexPath:self.selection];
+        if(self.selection){
+            Driver * record=nil;
+            if(self.searchDisplayController.active){
+                record = [searchResults objectAtIndex:self.selection.row];
+            }
+            else {
+                record = [self.fetchedResultsController objectAtIndexPath:self.selection];
+            }
+            
             if (record) {
                 [vc setRecord:record];
             }
+            
             // Reset Selection
             [self setSelection:nil];
         }
+
     }
 }
 @end

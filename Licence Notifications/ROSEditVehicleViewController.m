@@ -50,7 +50,6 @@
     }
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setDateFormat:@"dd-MM-yyyy"];
-    
     toDeleteNotifications=[[NSMutableArray alloc]init];
 }
 
@@ -66,7 +65,6 @@
     ROSModelViewCell * cell = (ROSModelViewCell *)[self.tableView
                                                    cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     NSString * model = cell.modelTextField.text;
-    
     ROSRegistrationPlateViewCell * cell2 = (ROSRegistrationPlateViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     
     NSString * registrationPlate = cell2.registrationPlateTextField.text;
@@ -155,7 +153,6 @@
         
         Notification *item = [self.vehicleNotifications objectAtIndex:[indexPath row]-3];
        
-        
         NSLog(@"Cell For Notification:%@ with expire date:%@",item.licence.licenceName,item.expireDate);
         
         cell.licenceDateLabelField.text=item.licence.licenceName;
