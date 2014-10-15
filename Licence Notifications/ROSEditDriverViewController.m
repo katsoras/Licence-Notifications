@@ -49,15 +49,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //
+    //init exists driver
     if(self.record){
-        
-        self.driverNotifications =
-        
-        [ROSUtility compareNotificationByExpireDate:
-        [NSMutableArray arrayWithArray:[self.record.notifications allObjects]]];
-        
+        self.driverNotifications =[ROSUtility compareNotificationByExpireDate:
+                                [NSMutableArray arrayWithArray:[self.record.notifications allObjects]]];
         firstName=self.record.firstName;
         lastName=self.record.lastName;
+    }
+    //
+    //New driver
+    else{
+        self.driverNotifications=[NSMutableArray array];
     }
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
@@ -69,53 +72,47 @@
 }
 - (IBAction)save:(id)sender {
     
-    
     if (firstName && lastName &&
         firstName.length && lastName.length) {
         //
         //set driver values
         
+        //
+        //edit driver
+        if(self.record){
+            self.record.firstName=firstName;
+            self.record.lastName=lastName;
         
-        //
-        //
-        self.record.firstName=firstName;
-        self.record.lastName=lastName;
+            //
+            //delete removed notification
+            for (Notification *managedObject in toDeleteNotifications) {
+                [self.managedObjectContext deleteObject:managedObject];
+            }
         
-        //
-        //log notification
-        for(Notification * i in self.driverNotifications){
-            NSLog(@"Start to import notif %@",i.expireDate);
+            //
+            //link with record
+            [self.record addNotifications:[NSSet setWithArray:self.driverNotifications]];
+        
         }
-        
         //
-        //delete removed notification
-        for (Notification *managedObject in toDeleteNotifications) {
-            [self.managedObjectContext deleteObject:managedObject];
-        }
-        
-        //
-        //link with record
-        [self.record addNotifications:
-         [NSSet setWithArray:self.driverNotifications]];
-        
-        /*[self.delegate setManagedObject:(NSManagedObject *)
-         self.record forChangeType:NSFetchedResultsChangeUpdate];
-        */
-        [self dismissViewControllerAnimated:YES completion:nil];
-        
-        /*NSError *error = nil;
-        if ([self.managedObjectContext save:&error]) {
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
+        //Add driver
         else
         {
-            if (error) {
-                NSLog(@"Unable to save record.");
-                NSLog(@"%@, %@", error, error.localizedDescription);
-            }
+            NSEntityDescription *entity = [NSEntityDescription entityForName:@"Driver" inManagedObjectContext:self.managedObjectContext];
             
-            [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do could not be saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-        }*/
+            Driver *driver = [[Driver alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
+            
+            //
+            //set driver values
+            driver.lastName=lastName;
+            driver.firstName=firstName;
+            
+            //
+            //link with record
+            [driver addNotifications:[NSSet setWithArray:self.driverNotifications]];
+        }
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
     else {
         [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your to-do needs a name." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
@@ -189,6 +186,7 @@
     if(indexPath.row==0){
         UITableViewCell *cell =
     [tableView dequeueReusableCellWithIdentifier:addContactCellIdentifier];
+        
         if(firstName && lastName){
             cell.detailTextLabel.text=[NSString stringWithFormat:@"%@ %@", firstName, lastName];
         }
@@ -269,7 +267,6 @@
         //
         //
         vc.type =[NSNumber numberWithInt:0];
-        
         //
         // Configure View Controller
         [vc setManagedObjectContext:self.managedObjectContext];
@@ -288,12 +285,12 @@
 }
 -(void) eventPickerViewController:(UITableViewController *)controller didSelectType:(Licence *) licence andDate:(NSDate *)date andNotification:(Notification *)notification{
     //
-    //EDIT MODE value, populate notification pointer
+    //Edit Notification
     if(notification){
         notification.licence=licence;
         notification.expireDate=date;
     }
-    //ADD MODE
+    //Add Notification
     else{
         
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"Notification" inManagedObjectContext:self.managedObjectContext];

@@ -11,7 +11,6 @@
 #import "Driver.h"
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
-#import "ROSAddVehicleViewController.h"
 @interface ROSEditDriverViewController : UITableViewController
 <ROSLicencePickerViewControllerDelegate,ABPeoplePickerNavigationControllerDelegate>
 

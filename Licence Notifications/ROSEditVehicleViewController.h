@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "ROSAddVehicleLicenceEventViewController.h"
-#import "ROSAddVehicleViewController.h"
 #import "Vehicle.h"
 
 @interface ROSEditVehicleViewController : UITableViewController<ROSLicencePickerViewControllerDelegate>

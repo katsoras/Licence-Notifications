@@ -28,13 +28,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    
     // Fetch the devices from persistent data store
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Licence"];
-    
     NSPredicate *predicate=[NSPredicate predicateWithFormat:@"type == %@",self.type];
     [fetchRequest setPredicate:predicate];
     self.licences = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];

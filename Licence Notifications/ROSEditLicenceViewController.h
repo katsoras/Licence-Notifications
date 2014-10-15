@@ -5,7 +5,7 @@
 //  Created by rose on 14/9/14.
 //  Copyright (c) 2014 home. All rights reserved.
 //
-#import "ROSAddVehicleViewController.h"
+
 #import "ROSTypePickerViewController.h"
 
 #import <UIKit/UIKit.h>

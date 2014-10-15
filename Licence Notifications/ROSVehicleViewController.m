@@ -7,7 +7,6 @@
 //
 
 #import "ROSVehicleViewController.h"
-#import "ROSAddVehicleViewController.h"
 #import "ROSVehicleViewCell.h"
 #import "ROSEditVehicleViewController.h"
 #import "Vehicle.h"
@@ -21,7 +20,6 @@
 //holds selected index path
 @property (strong, nonatomic) NSIndexPath *selection;
 @end
-
 
 @implementation ROSVehicleViewController{
     NSMutableArray *searchResults;
@@ -70,7 +68,6 @@
 {
     [searchResults removeAllObjects];
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"registrationPlate contains[c] %@", searchText];
-    
     searchResults = [NSMutableArray arrayWithArray:[self.fetchedResultsController.fetchedObjects filteredArrayUsingPredicate:resultPredicate]];
 }
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
@@ -202,27 +199,31 @@
 //notify when the detailed disclosure button is tapped
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
     [self setSelection:indexPath];
+    
     //
     // Perform Segue
     [self performSegueWithIdentifier:@"EditVehicleLicenceViewController" sender:self];
 }
 
+- (IBAction)sequeAdd:(id)sender {
+    [self performSegueWithIdentifier:@"EditVehicleLicenceViewController" sender:self];
+}
 //
 //prepare for segue and set properties to addVehicle and editVehicle controllers
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:@"AddVehicleLicenceViewController"]) {
+    /*if ([segue.identifier isEqualToString:@"AddVehicleLicenceViewController"]) {
         // Obtain Reference to View Controller
         UINavigationController *nc = (UINavigationController *)[segue destinationViewController];
         ROSAddVehicleViewController *vc = (ROSAddVehicleViewController *)[nc topViewController];
         // Configure View Controller
         [vc setManagedObjectContext:self.managedObjectContext];
-        
-    }
-    else if([segue.identifier isEqualToString:@"EditVehicleLicenceViewController"]){
+    }*/
+    if([segue.identifier isEqualToString:@"EditVehicleLicenceViewController"]){
         // Obtain Reference to View Controller
         UINavigationController *nc = (UINavigationController *)[segue destinationViewController];
         ROSEditVehicleViewController *vc = (ROSEditVehicleViewController *)[nc topViewController];
+        
         //
         // Configure View Controller
         [vc setManagedObjectContext:self.managedObjectContext];
@@ -234,7 +235,6 @@
             else {
                 record = [self.fetchedResultsController objectAtIndexPath:self.selection];
             }
-            
             if (record) {
                 [vc setRecord:record];
             }

@@ -7,7 +7,7 @@
 //
 
 #import "ROSDriverViewController.h"
-#import "ROSAddDriverViewController.h"
+
 #import "ROSEditDriverViewController.h"
 #import "Driver.h"
 #import "ROSUtility.h"
@@ -62,6 +62,10 @@ fetchedResultsController;
 {
     return 62;
 }
+- (IBAction)sequeAdd:(id)sender {
+    [self performSegueWithIdentifier:@"EditDriverLicenceViewController" sender:self];
+}
+
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
 {
     [searchResults removeAllObjects];
@@ -204,16 +208,16 @@ fetchedResultsController;
 //prepare for segue and set properties to addVehicle and editVehicle controllers
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:@"AddDriverViewController"]) {
+    /*if ([segue.identifier isEqualToString:@"AddDriverViewController"]) {
         // Obtain Reference to View Controller
         UINavigationController *nc = (UINavigationController *)[segue destinationViewController];
         ROSAddDriverViewController *vc = (ROSAddDriverViewController *)[nc topViewController];
         // Configure View Controller
         
         [vc setManagedObjectContext:self.managedObjectContext];
-    }
+    }*/
     
-    else if([segue.identifier isEqualToString:@"EditDriverLicenceViewController"]){
+    if([segue.identifier isEqualToString:@"EditDriverLicenceViewController"]){
         // Obtain Reference to View Controller
         UINavigationController *nc = (UINavigationController *)[segue destinationViewController];
         
