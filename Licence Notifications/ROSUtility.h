@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface ROSUtility : NSObject
-+(void) createLocalNotification:(NSMutableArray *)notifications;
++(void) createLocalNotifications:(NSMutableArray *)notifications;
 +(NSString *) createUUID;
 +(BOOL) checkForNotificationsAllUpdated:(NSSet
 *) notifications;
-
++(void) cancelLocalNotication:(Notification *) notification;
 +(NSMutableArray *)compareNotificationByExpireDate:(NSMutableArray *)notifications;
 
 @end

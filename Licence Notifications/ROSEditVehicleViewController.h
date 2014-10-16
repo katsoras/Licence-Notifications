@@ -11,7 +11,6 @@
 #import "Vehicle.h"
 
 @interface ROSEditVehicleViewController : UITableViewController<ROSLicencePickerViewControllerDelegate>
-
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) Vehicle *record;
 @end

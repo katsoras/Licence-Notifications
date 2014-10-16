@@ -16,18 +16,18 @@
 +(NSMutableArray *)compareNotificationByExpireDate:(NSMutableArray *)notifications{
     NSSortDescriptor *sortDescriptor;
     sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"expireDate"
-                                            ascending:NO];
+                                                 ascending:NO];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     NSArray *sortedArray;
     sortedArray = [notifications sortedArrayUsingDescriptors:sortDescriptors];
     return [ROSUtility createMutableArray:sortedArray];
 }
+
 + (NSMutableArray *)createMutableArray:(NSArray *)array
 {
     return [NSMutableArray arrayWithArray:array];
 }
 +(BOOL)checkForNotificationsAllUpdated:(NSSet *) notifications{
-    
     for (Notification *notification in notifications) {
         NSComparisonResult result = [[NSDate date] compare:notification.expireDate];
         if (result==NSOrderedDescending){
@@ -36,7 +36,25 @@
     }
     return NO;
 }
-+(void) createLocalNotification:(NSMutableArray *) notifications{
++(void) cancelLocalNotication:(Notification *) notification{
+    
+    UIApplication *app = [UIApplication sharedApplication];
+    NSArray *eventArray = [app scheduledLocalNotifications];
+    for (int i=0; i<[eventArray count]; i++)
+    {
+        UILocalNotification* oneEvent = [eventArray objectAtIndex:i];
+        NSDictionary *userInfoCurrent = oneEvent.userInfo;
+        NSString *uid=[NSString stringWithFormat:@"%@",[userInfoCurrent valueForKey:@"uid"]];
+        if ([uid isEqualToString:notification.notificationRefId])
+        {
+            //Cancelling local notification
+            [app cancelLocalNotification:oneEvent];
+            break;
+        }
+        
+    }
+}
++(void) createLocalNotifications:(NSMutableArray *) notifications{
     
     for(Notification *notification in notifications){
         //
@@ -50,18 +68,17 @@
         }else {
             bodyHead=notification.vehicle.model;
         }
+        localNotification.soundName=UILocalNotificationDefaultSoundName;
         localNotification.alertBody =
         [NSString stringWithFormat:@"%@ %@",bodyHead,
          notification.licence.licenceName];
         
         localNotification.timeZone = [NSTimeZone defaultTimeZone];
-        
         [localNotification setUserInfo:[NSDictionary dictionaryWithObject:notification.notificationRefId forKey:@"uid"]];
-        
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
         
         NSLog(@"Notification with id %@ created",notification.notificationRefId);
-    
+        
     }
 }
 +(NSString *) createUUID {

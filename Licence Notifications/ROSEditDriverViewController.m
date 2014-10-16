@@ -86,13 +86,13 @@
             //
             //delete removed notification
             for (Notification *managedObject in toDeleteNotifications) {
+                [ROSUtility cancelLocalNotication:managedObject];
                 [self.managedObjectContext deleteObject:managedObject];
             }
         
             //
             //link with record
             [self.record addNotifications:[NSSet setWithArray:self.driverNotifications]];
-        
         }
         //
         //Add driver
@@ -111,7 +111,9 @@
             //link with record
             [driver addNotifications:[NSSet setWithArray:self.driverNotifications]];
         }
-        
+        //
+        //register notifications
+        [ROSUtility createLocalNotifications:self.driverNotifications];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     else {
@@ -234,17 +236,16 @@
 }
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete){
+        
         //
         //delete notfication from data source
         Notification *toMoveNotification=[self.driverNotifications objectAtIndex:[indexPath row]-2];
-        //
-        //add to array contains the objects to be deleted.
-        [toDeleteNotifications addObject:toMoveNotification];
-        NSLog(@"%@",toMoveNotification.expireDate);
-        
-        [self.driverNotifications
-         removeObjectAtIndex:[indexPath row]-2];
-        
+        if(self.record){
+            //
+            //add to array contains the objects to be deleted.
+            [toDeleteNotifications addObject:toMoveNotification];
+        }
+        [self.driverNotifications removeObjectAtIndex:[indexPath row]-2];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }

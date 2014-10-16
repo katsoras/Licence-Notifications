@@ -45,6 +45,11 @@
     (UINavigationController *)tabBarController.viewControllers[2];
     ROSLicenceViewController *licenceController = (ROSLicenceViewController *)navigationControllerThird.topViewController;
     licenceController.managedObjectContext = self.managedObjectContext;
+    
+    
+    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]){
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+    }
     return YES;
 }
 - (void)applicationWillResignActive:(UIApplication *)application

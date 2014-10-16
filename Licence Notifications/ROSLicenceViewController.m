@@ -10,6 +10,7 @@
 #import "ROSAddLicenceViewController.h"
 #import "ROSEditLicenceViewController.h"
 #import "ROSTypePickerViewController.h"
+#import "ROSLicenceViewCell.h"
 
 @interface ROSLicenceViewController ()<NSFetchedResultsControllerDelegate>
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -35,17 +36,15 @@ static NSString *CellIdentifier = @"Cell Identifier";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"%@",self.managedObjectContext);
     
     //
     // Initialize Fetch Request
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Licence"];
-    
    [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"type" ascending:YES]]];
     
     //
     // Initialize Fetched Results Controller
-    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"type" cacheName:nil];
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     
     // Configure Fetched Results Controller
     [self.fetchedResultsController setDelegate:self];
@@ -57,8 +56,6 @@ static NSString *CellIdentifier = @"Cell Identifier";
         NSLog(@"Unable to perform fetch.");
         NSLog(@"%@, %@", error, error.localizedDescription);
     }
-    
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,7 +89,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
             break;
         }
         case NSFetchedResultsChangeUpdate: {
-            [self configureCell:(UITableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            [self configureCell:(ROSLicenceViewCell *)[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
         }
         case NSFetchedResultsChangeMove: {
@@ -100,7 +97,6 @@ static NSString *CellIdentifier = @"Cell Identifier";
             [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             
             [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            
             break;
         }
     }
@@ -111,6 +107,7 @@ static NSString *CellIdentifier = @"Cell Identifier";
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -118,23 +115,6 @@ static NSString *CellIdentifier = @"Cell Identifier";
         if (record) {
             [self.fetchedResultsController.managedObjectContext deleteObject:record];
         }
-    }
-}
-
-- (NSString *)tableView:(UITableView *)tableView
-titleForHeaderInSection:(NSInteger)section
-{
-    id <NSFetchedResultsSectionInfo> sectionInfo =
-    [[self.fetchedResultsController sections]
-     objectAtIndex:section];
-    
-    if ([[sectionInfo indexTitle] isEqualToString:@"1"])
-    {
-        return @"VEHICLE";
-    }
-    else
-    {
-        return @"DRIVER";
     }
 }
 
@@ -150,27 +130,32 @@ titleForHeaderInSection:(NSInteger)section
     return [sectionInfo numberOfObjects];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+
+- (ROSLicenceViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Dequeue Reusable Cell
-    UITableViewCell *cell = [tableView
+    ROSLicenceViewCell *cell = [tableView
                              dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    //
+    //
+
     //
     // Configure Table View Cell
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    
+
+- (void)configureCell:(ROSLicenceViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    //
     // Fetch Record
     Licence *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    // Update Cell
-    [cell.textLabel setText:record.licenceName];
-    cell.textLabel.font=[cell.textLabel.font fontWithSize:18];
+    [cell.licenceNameLabel setText:record.licenceName];
+     [cell.licenceTypeLabel setText:@"Vehicle"];
+    if(![record.type boolValue]){
+        [cell.licenceTypeLabel setText:@"Driver"];
+    }
     [cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
 }
-
 
 //
 //implementing table view delegate
@@ -180,7 +165,6 @@ titleForHeaderInSection:(NSInteger)section
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
     
     [self setSelection:indexPath];
-    
     //
     // Perform Segue
     [self performSegueWithIdentifier:@"EditLicenceViewController" sender:self];

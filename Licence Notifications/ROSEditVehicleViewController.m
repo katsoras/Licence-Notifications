@@ -13,6 +13,7 @@
 #import "Licence.h"
 #import "Notification.h"
 #import "ROSUtility.h"
+
 @interface ROSEditVehicleViewController ()
 //
 //contains selected licences
@@ -28,6 +29,9 @@
 
 @implementation ROSEditVehicleViewController{
     NSMutableArray *toDeleteNotifications;
+    NSString *model;
+    NSString *registrationPlate;
+    
 }
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -37,7 +41,6 @@
     }
     return self;
 }
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -45,7 +48,10 @@
     //init exist vehicle
     if(self.record){
         self.vehicleNotifications =[ROSUtility compareNotificationByExpireDate:
+    
                                     [NSMutableArray arrayWithArray:[self.record.notifications allObjects]]];
+        model=self.record.model;
+        registrationPlate=self.record.registrationPlate;
     }
     else{
         //init add new vehicle
@@ -65,18 +71,22 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)save:(id)sender {
-    ROSModelViewCell * cell = (ROSModelViewCell *)[self.tableView
-                                                   cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    
+    ROSModelViewCell * cell = (ROSModelViewCell *)
+    [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    
     //
     //model
-    NSString * model = cell.modelTextField.text;
+    model = cell.modelTextField.text;
+    
     ROSRegistrationPlateViewCell * cell2 = (ROSRegistrationPlateViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     
     //
     //registration plate
-    NSString * registrationPlate = cell2.registrationPlateTextField.text;
-    if (model && registrationPlate &&
-        model.length && registrationPlate.length) {
+    registrationPlate = cell2.registrationPlateTextField.text;
+    
+    if (model && registrationPlate && model.length && registrationPlate.length)
+    {
         //
         //edit exists vehicle
         if(self.record){
@@ -88,6 +98,7 @@
             //
             //delete removed notification
             for (Notification *managedObject in toDeleteNotifications) {
+                [ROSUtility cancelLocalNotication:managedObject];
                 [self.managedObjectContext deleteObject:managedObject];
             }
             //
@@ -105,15 +116,11 @@
             //
             //registration
             vehicle.registrationPlate=registrationPlate;
-            
-            //
-            //delete removed notification
-            for (Notification *managedObject in toDeleteNotifications) {
-                [self.managedObjectContext deleteObject:managedObject];
-            }
-            
             [vehicle addNotifications:[NSSet setWithArray:self.vehicleNotifications]];
         }
+        //
+        //register notifications
+        [ROSUtility createLocalNotifications:self.vehicleNotifications];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     else {
@@ -138,37 +145,33 @@
     static NSString *plateAVLIdentifier=@"plateAVLIdentifier";
     static NSString *addAVLCellIdentifier=@"addAVLCellIdentifier";
     static NSString *notficationAVLIdentifier=@"notficationAVLIdentifier";
-    
     if(indexPath.row==0){
         ROSModelViewCell *cell = [tableView dequeueReusableCellWithIdentifier:modelAVLIdentifier];
-        cell.modelTextField.text=self.record.model;
+        cell.modelTextField.text=model;
         return cell;
     }
     else if(indexPath.row==1){
         ROSRegistrationPlateViewCell *cell = [tableView dequeueReusableCellWithIdentifier:plateAVLIdentifier];
-        cell.registrationPlateTextField.text=self.record.registrationPlate;
+        cell.registrationPlateTextField.text=registrationPlate;
         return cell;
     }
     else if(indexPath.row==2){
         ROSAddButtonLicenceViewCell *cell = [tableView dequeueReusableCellWithIdentifier:addAVLCellIdentifier];
         return cell;
     }else {
-        
         ROSNotificationDateViewCell *cell = [tableView    dequeueReusableCellWithIdentifier:notficationAVLIdentifier];
-        
         Notification *item = [self.vehicleNotifications objectAtIndex:[indexPath row]-3];
-       
-        NSLog(@"Cell For Notification:%@ with expire date:%@",item.licence.licenceName,item.expireDate);
-        
         cell.licenceDateLabelField.text=item.licence.licenceName;
         cell.notificateDateField.text = [self.dateFormatter stringFromDate:item.expireDate];
         NSComparisonResult result = [[NSDate date] compare:item.expireDate];
         if (result==NSOrderedDescending) {
             cell.licenceDateLabelField.textColor = [UIColor redColor];
         }
+        
         else {
              cell.licenceDateLabelField.textColor = [UIColor blackColor];
         }
+        
         [cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
         return cell;
     }
@@ -182,7 +185,6 @@
         return 44;
     }
 }
-
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.row>2)
         return YES;
@@ -191,16 +193,16 @@
 }
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         //
         //delete notfication from data source
         Notification *toMoveNotification=[self.vehicleNotifications objectAtIndex:[indexPath row]-3];
-        //
-        //add to array contains the objects to be deleted.
-        [toDeleteNotifications addObject:toMoveNotification];
-        
+        if(self.record){
+            //
+            //add to array contains the objects to be deleted.
+            [toDeleteNotifications addObject:toMoveNotification];
+        }
         [self.vehicleNotifications removeObjectAtIndex:[indexPath row]-3];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
@@ -213,9 +215,25 @@
     // Perform Segue
     [self performSegueWithIdentifier:@"AddLicenceEvent" sender:self];
 }
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"AddLicenceEvent"]) {
+        ROSModelViewCell * cell = (ROSModelViewCell *)
+        [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        //
+        //model
+        model = cell.modelTextField.text;
+        
+        ROSRegistrationPlateViewCell * cell2 = (ROSRegistrationPlateViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        
+        //
+        //registration plate
+        registrationPlate = cell2.registrationPlateTextField.text;
+        
+        
+        
+        
+        
+        
         //
         // Obtain Reference to View Controller
         ROSAddVehicleLicenceEventViewController *vc = (ROSAddVehicleLicenceEventViewController *)[segue destinationViewController];
@@ -250,12 +268,14 @@
     }
     //Add notification
     else{
+        
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"Notification" inManagedObjectContext:self.managedObjectContext];
         
         Notification *unassociatedObject = [[Notification alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
         
         unassociatedObject.licence=licence;
         unassociatedObject.expireDate=date;
+        unassociatedObject.notificationRefId=[ROSUtility createUUID];
         NSUInteger newIndex = [self.vehicleNotifications
                                indexOfObject:unassociatedObject
                                inSortedRange:(NSRange){0, [self.vehicleNotifications count]}
@@ -263,6 +283,7 @@
                                usingComparator:^(Notification *obj1, Notification * obj2){
                                    return [obj2.expireDate compare:obj1.expireDate];
                                }];
+        
         [self.vehicleNotifications insertObject:unassociatedObject
                                        atIndex:newIndex];
     }

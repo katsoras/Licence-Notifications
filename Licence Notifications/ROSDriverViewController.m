@@ -13,7 +13,6 @@
 #import "ROSUtility.h"
 #import "ROSDriverViewCell.h"
 
-
 @interface ROSDriverViewController ()<NSFetchedResultsControllerDelegate>
 @property (strong, nonatomic) NSFetchedResultsController *
 fetchedResultsController;
@@ -207,15 +206,6 @@ fetchedResultsController;
 //
 //prepare for segue and set properties to addVehicle and editVehicle controllers
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    /*if ([segue.identifier isEqualToString:@"AddDriverViewController"]) {
-        // Obtain Reference to View Controller
-        UINavigationController *nc = (UINavigationController *)[segue destinationViewController];
-        ROSAddDriverViewController *vc = (ROSAddDriverViewController *)[nc topViewController];
-        // Configure View Controller
-        
-        [vc setManagedObjectContext:self.managedObjectContext];
-    }*/
     
     if([segue.identifier isEqualToString:@"EditDriverLicenceViewController"]){
         // Obtain Reference to View Controller

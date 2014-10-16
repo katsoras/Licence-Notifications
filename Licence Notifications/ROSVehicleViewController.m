@@ -78,7 +78,6 @@
     
     return YES;
 }
-
 //
 //implement NSFetchedResultsControllerDelegate
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
@@ -179,7 +178,6 @@
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         record = [searchResults objectAtIndex:indexPath.row];
     }
-    
     else {
         record= [self.fetchedResultsController objectAtIndexPath:indexPath];
     }
@@ -188,6 +186,7 @@
     // Update Cell
     [cell.registerPlateLabelField setText:record.registrationPlate];
     [cell.modelLabelField setText:record.model];
+    
     if([ROSUtility checkForNotificationsAllUpdated:record.notifications]){
         cell.statusImage.image=[UIImage imageNamed:@"Warning.png"];
     }
@@ -195,11 +194,9 @@
 //
 //implementing table view delegate
 
-//
 //notify when the detailed disclosure button is tapped
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
     [self setSelection:indexPath];
-    
     //
     // Perform Segue
     [self performSegueWithIdentifier:@"EditVehicleLicenceViewController" sender:self];
@@ -212,13 +209,6 @@
 //prepare for segue and set properties to addVehicle and editVehicle controllers
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    /*if ([segue.identifier isEqualToString:@"AddVehicleLicenceViewController"]) {
-        // Obtain Reference to View Controller
-        UINavigationController *nc = (UINavigationController *)[segue destinationViewController];
-        ROSAddVehicleViewController *vc = (ROSAddVehicleViewController *)[nc topViewController];
-        // Configure View Controller
-        [vc setManagedObjectContext:self.managedObjectContext];
-    }*/
     if([segue.identifier isEqualToString:@"EditVehicleLicenceViewController"]){
         // Obtain Reference to View Controller
         UINavigationController *nc = (UINavigationController *)[segue destinationViewController];
