@@ -580,6 +580,31 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="RhY-IG-Ygt" detailTextLabel="Dmr-L8-exg" rowHeight="44" style="IBUITableViewCellStyleValue1" id="J8r-aQ-AnZ">
+                                        <rect key="frame" x="0.0" y="88" width="320" height="163"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J8r-aQ-AnZ" id="67B-SV-eS9">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Alert" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RhY-IG-Ygt">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="notifyLabel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dmr-L8-exg">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="vUF-dl-ff3" kind="push" identifier="PickAlert" id="FYN-Mx-8HW"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -596,6 +621,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="alertLabel" destination="Dmr-L8-exg" id="E2q-4S-ZbW"/>
                         <outlet property="datePicker" destination="Qxj-4i-YV9" id="ig1-ez-O1R"/>
                         <outlet property="expireDateLabel" destination="oqQ-FZ-Bqi" id="feH-8x-dSI"/>
                         <outlet property="licenceNameLabel" destination="mb9-sS-zBs" id="Lnb-rt-ENm"/>
@@ -604,6 +630,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PHQ-1S-mLp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="329" y="-185"/>
+        </scene>
+        <!--Alert Picker View Controller-->
+        <scene sceneID="0kO-2Y-n4a">
+            <objects>
+                <tableViewController id="vUF-dl-ff3" customClass="ROSAlertPickerViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="R8a-OD-qpu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlertCell" textLabel="VcQ-IT-v9B" style="IBUITableViewCellStyleDefault" id="7Lz-jr-Cnt">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Lz-jr-Cnt" id="ouG-DQ-ThF">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VcQ-IT-v9B">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="vUF-dl-ff3" id="rNd-uP-u2y"/>
+                            <outlet property="delegate" destination="vUF-dl-ff3" id="dEd-oQ-wHG"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="qYL-z0-jU6"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oVj-C3-r9d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="852" y="153"/>
         </scene>
         <!--Pick Licence View Controller-->
         <scene sceneID="7Qj-4x-Tfo">
@@ -642,7 +703,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="al6-d5-esH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="774" y="-190"/>
+            <point key="canvasLocation" x="858" y="-492"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IEe-4m-vDQ">

@@ -284,12 +284,13 @@
         }
     }
 }
--(void) eventPickerViewController:(UITableViewController *)controller didSelectType:(Licence *) licence andDate:(NSDate *)date andNotification:(Notification *)notification{
+-(void) eventPickerViewController:(UITableViewController *)controller didSelectType:(Licence *) licence andDate:(NSDate *)date andNotify:(NSNumber *) notify andNotification:(Notification *)notification{
     //
     //Edit Notification
     if(notification){
         notification.licence=licence;
         notification.expireDate=date;
+        notification.notify=notify;
     }
     //Add Notification
     else{

@@ -60,9 +60,17 @@
         //
         // Schedule the notification
         UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-        localNotification.fireDate = notification.expireDate;
-        NSString *bodyHead;
         
+        
+        localNotification.fireDate=notification.expireDate;
+        if(notification.expireDate){
+            NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+            [dateComponents setDay:- [notification.notify integerValue]];
+            
+            NSDate *sevenDaysAgo = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:notification.expireDate options:0];
+            localNotification.fireDate = sevenDaysAgo;
+        }
+        NSString *bodyHead;
         if(notification.driver){
             bodyHead=notification.driver.lastName;
         }else {
@@ -90,5 +98,38 @@
         [randomListName appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
     }
     return randomListName;
+}
++(NSString *) getAlertTypeLabelFromNumber:(NSNumber *)numberA{
+    int num=[numberA intValue];
+    NSString *alertType=nil;
+    
+    switch (num) {
+        case 0:{
+            alertType=[ROSUtility alertTypes][0];
+            break;
+        }
+        case 1:{
+            alertType=[ROSUtility alertTypes][1];
+            break;
+        }
+        case 2:{
+            alertType=[ROSUtility alertTypes][2];
+            break;
+        }case 3:{
+            alertType=[ROSUtility alertTypes][3];
+            break;
+        }case 4:{
+            alertType=[ROSUtility alertTypes][4];
+            break;
+        }
+        default:{
+            alertType=[ROSUtility alertTypes][5];
+            break;
+        }
+    }
+    return alertType;
+}
++(NSArray *) alertTypes{
+    return @[@"None", @"1 week before", @"2 weeks before", @"3 weeks before", @"4 weeks before"];
 }
 @end

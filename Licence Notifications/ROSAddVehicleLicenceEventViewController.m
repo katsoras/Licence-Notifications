@@ -8,7 +8,8 @@
 
 #import "ROSAddVehicleLicenceEventViewController.h"
 #import "ROSPickLicenceViewController.h"
-
+#import "ROSUtility.h"
+#import "ROSAlertPickerViewController.h"
 #define kDatePickerIndex 2
 #define kDatePickerCellHeight 164
 @interface ROSAddVehicleLicenceEventViewController ()
@@ -20,6 +21,7 @@
 
 @implementation ROSAddVehicleLicenceEventViewController{
     Licence * _licence;
+    NSNumber *_alert;
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -33,27 +35,32 @@
 
 - (void)viewDidLoad
 {
-    
     [super viewDidLoad];
     //
     //EDIT MODE: extract notification values
     if(self.notification){
         _licence=self.notification.licence;
+        _alert=self.notification.notify;
         self.licenceNameLabel.text=_licence.licenceName;
+        self.alertLabel.text=[ROSUtility getAlertTypeLabelFromNumber:_alert];
         self.selectedExpireDate=self.notification.expireDate;
     }
     //
     //add mode
     else {
+        _alert=[NSNumber numberWithInt:0];
+        self.alertLabel.text=[ROSUtility getAlertTypeLabelFromNumber:_alert];
         self.selectedExpireDate=[NSDate date];
     }
     [self setupExpireDate];
     [self hideDatePickerCell];
 }
-
 - (IBAction) done{
+    
     [self.delegate eventPickerViewController:self
-                               didSelectType: _licence andDate:self.selectedExpireDate andNotification:self.notification];
+                             didSelectType: _licence andDate:self.selectedExpireDate andNotify:_alert
+                             andNotification:self.notification];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)setupExpireDate {
@@ -124,21 +131,30 @@
         ROSPickLicenceViewController *typePickerViewController = segue.destinationViewController;
         
         typePickerViewController.managedObjectContext=self.managedObjectContext;
-        
         typePickerViewController.delegate = self;
-        //
-        //
         if(_licence){
             typePickerViewController.licence=_licence;
         }
         typePickerViewController.type = self.type;
     }
+    else if([segue.identifier isEqualToString:@"PickAlert"]){
+        ROSAlertPickerViewController *alertPickerViewController = segue.destinationViewController;
+        alertPickerViewController.delegate = self;
+        if(_alert){
+            alertPickerViewController.alertType=[ROSUtility getAlertTypeLabelFromNumber:_alert];
+        }
+    }
 }
 
--(void) eventPickerViewController:(UITableViewController *)controller didSelectType:(Licence *) licence andDate:(NSDate *)date andNotification:(Notification *)notification{
-    
+-(void) eventPickerViewController:(UITableViewController *)controller didSelectType:(Licence *) licence andDate:(NSDate *)date andNotify:(NSNumber *)notify andNotification:(Notification *)notification{
     _licence=licence;
     self.licenceNameLabel.text =licence.licenceName;
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)alertPickerViewController:(ROSAlertPickerViewController *)controller didSelectAlert:(NSNumber *)alert{
+    _alert=alert;
+    self.alertLabel.text =[ROSUtility getAlertTypeLabelFromNumber:alert];
     [self.navigationController popViewControllerAnimated:YES];
 }
 @end

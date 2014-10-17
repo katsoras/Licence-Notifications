@@ -228,16 +228,10 @@
         //
         //registration plate
         registrationPlate = cell2.registrationPlateTextField.text;
-        
-        
-        
-        
-        
-        
         //
         // Obtain Reference to View Controller
         ROSAddVehicleLicenceEventViewController *vc = (ROSAddVehicleLicenceEventViewController *)[segue destinationViewController];
-        
+    
         vc.delegate = self;
         //
         //
@@ -259,12 +253,13 @@
         }
     }
 }
--(void) eventPickerViewController:(UITableViewController *)controller didSelectType:(Licence *) licence andDate:(NSDate *)date andNotification:(Notification *)notification{
+-(void) eventPickerViewController:(UITableViewController *)controller didSelectType:(Licence *) licence andDate:(NSDate *)date andNotify:(NSNumber *)notify andNotification:(Notification *)notification{
     //
     //Edit notification
     if(notification){
         notification.licence=licence;
         notification.expireDate=date;
+        notification.notify=notify;
     }
     //Add notification
     else{
@@ -272,7 +267,7 @@
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"Notification" inManagedObjectContext:self.managedObjectContext];
         
         Notification *unassociatedObject = [[Notification alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
-        
+        unassociatedObject.notify=notify;
         unassociatedObject.licence=licence;
         unassociatedObject.expireDate=date;
         unassociatedObject.notificationRefId=[ROSUtility createUUID];

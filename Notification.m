@@ -2,7 +2,7 @@
 //  Notification.m
 //  Licence Notifications
 //
-//  Created by rose on 8/10/14.
+//  Created by rose on 17/10/14.
 //  Copyright (c) 2014 home. All rights reserved.
 //
 
@@ -16,6 +16,7 @@
 
 @dynamic expireDate;
 @dynamic notificationRefId;
+@dynamic notify;
 @dynamic driver;
 @dynamic licence;
 @dynamic vehicle;

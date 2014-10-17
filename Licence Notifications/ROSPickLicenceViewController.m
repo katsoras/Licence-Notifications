@@ -102,6 +102,6 @@
     //
     //make callback
     [self.delegate eventPickerViewController:self
-                               didSelectType: licence andDate:nil andNotification:nil];
+                               didSelectType: licence andDate:nil andNotify:nil andNotification:nil];
 }
 @end

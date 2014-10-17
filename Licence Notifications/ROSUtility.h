@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Notification.h"
 @interface ROSUtility : NSObject
 +(void) createLocalNotifications:(NSMutableArray *)notifications;
 +(NSString *) createUUID;
-+(BOOL) checkForNotificationsAllUpdated:(NSSet
-*) notifications;
-+(void) cancelLocalNotication:(Notification *) notification;
-+(NSMutableArray *)compareNotificationByExpireDate:(NSMutableArray *)notifications;
++(BOOL) checkForNotificationsAllUpdated:(NSSet *) notifications;
 
++(NSMutableArray *)compareNotificationByExpireDate:(NSMutableArray *)notifications;
++(NSArray *) alertTypes;
++(NSString *) getAlertTypeLabelFromNumber:(NSNumber *)numberA;
++(void) cancelLocalNotication:(Notification *) notification;
 @end
