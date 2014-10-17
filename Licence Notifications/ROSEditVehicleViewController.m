@@ -94,16 +94,24 @@
             //
             //registration
             self.record.registrationPlate=registrationPlate;
-        
+            
             //
             //delete removed notification
             for (Notification *managedObject in toDeleteNotifications) {
                 [ROSUtility cancelLocalNotication:managedObject];
                 [self.managedObjectContext deleteObject:managedObject];
             }
+            
             //
             //link with record
             [self.record addNotifications:[NSSet setWithArray:self.vehicleNotifications]];
+            
+            //
+            //recreate local notifications for edited notifications
+            for (Notification *managedObject in self.vehicleNotifications) {
+                [ROSUtility cancelLocalNotication:managedObject];
+                [ROSUtility createLocalNotification:managedObject];
+            }
         }else {
             //
             //add vehicle

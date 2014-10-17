@@ -56,13 +56,12 @@
     [self hideDatePickerCell];
 }
 - (IBAction) done{
-    
     [self.delegate eventPickerViewController:self
                              didSelectType: _licence andDate:self.selectedExpireDate andNotify:_alert
                              andNotification:self.notification];
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 - (void)setupExpireDate {
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
@@ -85,6 +84,7 @@
     }
     return height;
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 1){
         if (self.datePickerIsShowing){

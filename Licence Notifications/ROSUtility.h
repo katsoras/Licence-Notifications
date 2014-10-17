@@ -10,9 +10,10 @@
 #import "Notification.h"
 @interface ROSUtility : NSObject
 +(void) createLocalNotifications:(NSMutableArray *)notifications;
+
 +(NSString *) createUUID;
 +(BOOL) checkForNotificationsAllUpdated:(NSSet *) notifications;
-
++(void) createLocalNotification:(Notification *)notification;
 +(NSMutableArray *)compareNotificationByExpireDate:(NSMutableArray *)notifications;
 +(NSArray *) alertTypes;
 +(NSString *) getAlertTypeLabelFromNumber:(NSNumber *)numberA;

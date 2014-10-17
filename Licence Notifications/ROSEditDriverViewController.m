@@ -89,10 +89,16 @@
                 [ROSUtility cancelLocalNotication:managedObject];
                 [self.managedObjectContext deleteObject:managedObject];
             }
-        
             //
             //link with record
             [self.record addNotifications:[NSSet setWithArray:self.driverNotifications]];
+            
+            //
+            //recreate local notifications for edited notifications
+            for (Notification *managedObject in self.driverNotifications) {
+                [ROSUtility cancelLocalNotication:managedObject];
+                [ROSUtility createLocalNotification:managedObject];
+            }
         }
         //
         //Add driver

@@ -36,6 +36,40 @@
     }
     return NO;
 }
++(void) createLocalNotifications:(NSMutableArray *) notifications{
+    for(Notification *notification in notifications){
+        [ROSUtility createLocalNotification:notification];
+    }
+}
++(void) createLocalNotification:(Notification *)notification{
+    //
+    // Schedule the notification
+    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+    localNotification.fireDate=notification.expireDate;
+    if(notification.expireDate){
+        NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+        [dateComponents setDay:- [notification.notify integerValue]];
+        
+        NSDate *sevenDaysAgo = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:notification.expireDate options:0];
+        localNotification.fireDate = sevenDaysAgo;
+    }
+    NSString *bodyHead;
+    if(notification.driver){
+        bodyHead=notification.driver.lastName;
+    }else {
+        bodyHead=notification.vehicle.model;
+    }
+    localNotification.soundName=UILocalNotificationDefaultSoundName;
+    localNotification.alertBody =
+    [NSString stringWithFormat:@"%@ %@",bodyHead,
+     notification.licence.licenceName];
+    
+    localNotification.timeZone = [NSTimeZone defaultTimeZone];
+    [localNotification setUserInfo:[NSDictionary dictionaryWithObject:notification.notificationRefId forKey:@"uid"]];
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    
+    NSLog(@"Notification with id %@ created",notification.notificationRefId);
+}
 +(void) cancelLocalNotication:(Notification *) notification{
     
     UIApplication *app = [UIApplication sharedApplication];
@@ -51,41 +85,6 @@
             [app cancelLocalNotification:oneEvent];
             break;
         }
-        
-    }
-}
-+(void) createLocalNotifications:(NSMutableArray *) notifications{
-    
-    for(Notification *notification in notifications){
-        //
-        // Schedule the notification
-        UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-        
-        
-        localNotification.fireDate=notification.expireDate;
-        if(notification.expireDate){
-            NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-            [dateComponents setDay:- [notification.notify integerValue]];
-            
-            NSDate *sevenDaysAgo = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:notification.expireDate options:0];
-            localNotification.fireDate = sevenDaysAgo;
-        }
-        NSString *bodyHead;
-        if(notification.driver){
-            bodyHead=notification.driver.lastName;
-        }else {
-            bodyHead=notification.vehicle.model;
-        }
-        localNotification.soundName=UILocalNotificationDefaultSoundName;
-        localNotification.alertBody =
-        [NSString stringWithFormat:@"%@ %@",bodyHead,
-         notification.licence.licenceName];
-        
-        localNotification.timeZone = [NSTimeZone defaultTimeZone];
-        [localNotification setUserInfo:[NSDictionary dictionaryWithObject:notification.notificationRefId forKey:@"uid"]];
-        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-        
-        NSLog(@"Notification with id %@ created",notification.notificationRefId);
         
     }
 }
