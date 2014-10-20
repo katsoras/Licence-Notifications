@@ -109,8 +109,11 @@
             //
             //recreate local notifications for edited notifications
             for (Notification *managedObject in self.vehicleNotifications) {
-                [ROSUtility cancelLocalNotication:managedObject];
-                [ROSUtility createLocalNotification:managedObject];
+                NSDictionary *dict=[managedObject changedValues];
+                if([dict objectForKey:@"expireDate"]!=nil){
+                    [ROSUtility cancelLocalNotication:managedObject];
+                    [ROSUtility scheduleLocalNotification:managedObject];
+                }
             }
         }else {
             //
@@ -128,7 +131,7 @@
         }
         //
         //register notifications
-        [ROSUtility createLocalNotifications:self.vehicleNotifications];
+        [ROSUtility scheduleLocalNotifications:self.vehicleNotifications];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     else {
@@ -279,6 +282,7 @@
         unassociatedObject.licence=licence;
         unassociatedObject.expireDate=date;
         unassociatedObject.notificationRefId=[ROSUtility createUUID];
+        
         NSUInteger newIndex = [self.vehicleNotifications
                                indexOfObject:unassociatedObject
                                inSortedRange:(NSRange){0, [self.vehicleNotifications count]}

@@ -132,8 +132,11 @@ fetchedResultsController;
 }
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if(editingStyle == UITableViewCellEditingStyleDelete) {
-        NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        Driver *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
         if (record) {
+            //
+            //first cancel each local notification
+            [ROSUtility cancelLocalNotifications:record.notifications];
             [self.fetchedResultsController.managedObjectContext deleteObject:record];
         }
     }

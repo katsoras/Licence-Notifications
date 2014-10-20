@@ -89,6 +89,7 @@
                 [ROSUtility cancelLocalNotication:managedObject];
                 [self.managedObjectContext deleteObject:managedObject];
             }
+            
             //
             //link with record
             [self.record addNotifications:[NSSet setWithArray:self.driverNotifications]];
@@ -96,8 +97,11 @@
             //
             //recreate local notifications for edited notifications
             for (Notification *managedObject in self.driverNotifications) {
-                [ROSUtility cancelLocalNotication:managedObject];
-                [ROSUtility createLocalNotification:managedObject];
+                NSDictionary *dict=[managedObject changedValues];
+                if([dict objectForKey:@"expireDate"]!=nil){
+                    [ROSUtility cancelLocalNotication:managedObject];
+                    [ROSUtility scheduleLocalNotification:managedObject];
+                }
             }
         }
         //
@@ -117,9 +121,10 @@
             //link with record
             [driver addNotifications:[NSSet setWithArray:self.driverNotifications]];
         }
+        
         //
         //register notifications
-        [ROSUtility createLocalNotifications:self.driverNotifications];
+        [ROSUtility scheduleLocalNotifications:self.driverNotifications];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     else {
@@ -307,6 +312,7 @@
         
         unassociatedObject.licence=licence;
         unassociatedObject.expireDate=date;
+        unassociatedObject.notificationRefId=[ROSUtility createUUID];
        //[self.driverNotifications addObject:unassociatedObject];
         NSUInteger newIndex = [self.driverNotifications indexOfObject:unassociatedObject
                                

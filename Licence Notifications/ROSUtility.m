@@ -36,20 +36,20 @@
     }
     return NO;
 }
-+(void) createLocalNotifications:(NSMutableArray *) notifications{
++(void) scheduleLocalNotifications:(NSMutableArray *) notifications{
     for(Notification *notification in notifications){
-        [ROSUtility createLocalNotification:notification];
+        [ROSUtility scheduleLocalNotification:notification];
     }
 }
-+(void) createLocalNotification:(Notification *)notification{
+
++(void) scheduleLocalNotification:(Notification *)notification{
     //
     // Schedule the notification
     UILocalNotification* localNotification = [[UILocalNotification alloc] init];
     localNotification.fireDate=notification.expireDate;
     if(notification.expireDate){
         NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-        [dateComponents setDay:- [notification.notify integerValue]];
-        
+        [dateComponents setDay:- [notification.notify integerValue]*7];
         NSDate *sevenDaysAgo = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:notification.expireDate options:0];
         localNotification.fireDate = sevenDaysAgo;
     }
@@ -66,9 +66,15 @@
     
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
     [localNotification setUserInfo:[NSDictionary dictionaryWithObject:notification.notificationRefId forKey:@"uid"]];
+    //
+    //scedule local notification
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-    
     NSLog(@"Notification with id %@ created",notification.notificationRefId);
+}
++(void) cancelLocalNotifications:(NSSet *) notifications{
+    for (id notification in notifications) {
+        [ROSUtility cancelLocalNotication:notification];
+    }
 }
 +(void) cancelLocalNotication:(Notification *) notification{
     
@@ -83,9 +89,9 @@
         {
             //Cancelling local notification
             [app cancelLocalNotification:oneEvent];
+            NSLog(@"Cancel Notification with id %@",notification.notificationRefId);
             break;
         }
-        
     }
 }
 +(NSString *) createUUID {
